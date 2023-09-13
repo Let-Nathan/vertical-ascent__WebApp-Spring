@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.webapp.verticalascent.VerticalAscentApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-09-12T16:39:41" hostname="DESKTOP-VE7SJOE" time="0.598">
+<testsuite name="com.webapp.verticalascent.VerticalAscentApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-09-13T12:34:54" hostname="DESKTOP-VE7SJOE" time="0.796">
   <properties/>
-  <testcase name="contextLoads()" classname="com.webapp.verticalascent.VerticalAscentApplicationTests" time="0.598"/>
-  <system-out><![CDATA[18:39:40.013 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.webapp.verticalascent.VerticalAscentApplicationTests]: VerticalAscentApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-18:39:40.081 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.webapp.verticalascent.VerticalAscentApplication for test class com.webapp.verticalascent.VerticalAscentApplicationTests
+  <testcase name="contextLoads()" classname="com.webapp.verticalascent.VerticalAscentApplicationTests" time="0.796"/>
+  <system-out><![CDATA[14:34:52.906 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.webapp.verticalascent.VerticalAscentApplicationTests]: VerticalAscentApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:34:52.999 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.webapp.verticalascent.VerticalAscentApplication for test class com.webapp.verticalascent.VerticalAscentApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -13,9 +13,9 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.1.3)
 
-2023-09-12T18:39:40.351+02:00  INFO 4804 --- [    Test worker] c.w.v.VerticalAscentApplicationTests     : Starting VerticalAscentApplicationTests using Java 19.0.2 with PID 4804 (started by Nathan in C:\Users\Nathan\Desktop\Licence\vertical-ascent)
-2023-09-12T18:39:40.352+02:00  INFO 4804 --- [    Test worker] c.w.v.VerticalAscentApplicationTests     : No active profile set, falling back to 1 default profile: "default"
-2023-09-12T18:39:41.155+02:00  INFO 4804 --- [    Test worker] c.w.v.VerticalAscentApplicationTests     : Started VerticalAscentApplicationTests in 0.969 seconds (process running for 1.783)
+2023-09-13T14:34:53.319+02:00  INFO 17996 --- [    Test worker] c.w.v.VerticalAscentApplicationTests     : Starting VerticalAscentApplicationTests using Java 19.0.2 with PID 17996 (started by Nathan in C:\Users\Nathan\Desktop\Licence\vertical-ascent)
+2023-09-13T14:34:53.321+02:00  INFO 17996 --- [    Test worker] c.w.v.VerticalAscentApplicationTests     : No active profile set, falling back to 1 default profile: "default"
+2023-09-13T14:34:54.146+02:00  INFO 17996 --- [    Test worker] c.w.v.VerticalAscentApplicationTests     : Started VerticalAscentApplicationTests in 0.983 seconds (process running for 1.975)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
