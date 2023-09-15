@@ -25,12 +25,26 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-configuration-processor'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'mysql:mysql-connector-java:8.0.28'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+task copyProperties(type : Copy) {
+	from 'serc/main/ressources'
+	into 'build/ressources/main'
+
+	if(project.hasProperty('heroku')) {
+		include 'application-heroku.properties'
+		println 'Running: ==> heroku configuration'
+		rename 'application-heroku.properties', 'application.properties'
+	} else {
+		include 'application-local.properties'
+		println 'Running: ==> local configuration'
+		rename 'application-local.properties', 'application.properties'
+	}
+
 }

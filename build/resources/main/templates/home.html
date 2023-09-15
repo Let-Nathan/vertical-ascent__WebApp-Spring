@@ -6,5 +6,12 @@
 </head>
 <body>
     <p th:text="${grettings}"></p>
+    <ul>
+        <li th:each="user : ${users}">
+            <p th:text="${user.firstName}"></p>
+            <p th:text="${user.lastName}"></p>
+            <p th:text="${user.id}"></p>
+        </li>
+    </ul>
 </body>
 </html>
