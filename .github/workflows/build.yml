@@ -18,6 +18,9 @@ jobs:
         with:
           java-version: 17
 
+      - name: Copy application-heroku.properties to application.properties
+        run: ./copy_properties.sh
+
       - name: Build with Gradle
         run: ./gradlew build -heroku
 
@@ -36,5 +39,3 @@ jobs:
           CLEARDB_PASSWORD: ${{ secrets.CLEARDB_PASSWORD }}
           CLEARDB_DATABASE: cleardb-lively-02738
 
-      - name: Copy application-heroku.properties to application.properties
-        run: ./copy_properties.sh
