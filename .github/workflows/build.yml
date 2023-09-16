@@ -20,19 +20,3 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew build -heroku
-
-      - name: Export Schema
-        run: ./export_schema.sh
-        env:
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_NAME: your_local_database_name
-
-      - name: Execute SQL on ClearDB
-        run: ./execute_sql.sh
-        env:
-          CLEARDB_HOST: cleardb-lively-02738
-          CLEARDB_USER: ${{ secrets.CLEARDB_USER }}
-          CLEARDB_PASSWORD: ${{ secrets.CLEARDB_PASSWORD }}
-          CLEARDB_DATABASE: cleardb-lively-02738
-
