@@ -8,9 +8,6 @@ import org.springframework.core.env.Environment;
 public class VerticalAscentApplication {
 
 	public static void main(String[] args) {
-		SpringApplication app = new SpringApplication(VerticalAscentApplication.class);
-		Environment env = app.run(args).getEnvironment();
-		int port = Integer.parseInt(env.getProperty("PORT", "420"));
-		System.setProperty("server.port", String.valueOf(port));
+		SpringApplication.run(VerticalAscentApplication.class, args);
 	}
 }
