@@ -35,3 +35,6 @@ jobs:
           CLEARDB_USER: ${{ secrets.CLEARDB_USER }}
           CLEARDB_PASSWORD: ${{ secrets.CLEARDB_PASSWORD }}
           CLEARDB_DATABASE: cleardb-lively-02738
+
+      - name: Copy application-heroku.properties to application.properties
+        run: ./copy_properties.sh
