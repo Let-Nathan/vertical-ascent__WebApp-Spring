@@ -18,9 +18,6 @@ jobs:
         with:
           java-version: 17
 
-      - name: Copy application-heroku.properties to application.properties
-        run: ./copy_properties.sh
-
       - name: Build with Gradle
         run: ./gradlew build -heroku
 
