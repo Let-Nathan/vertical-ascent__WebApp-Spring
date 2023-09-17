@@ -18,7 +18,7 @@ public class HomeController {
 
     @GetMapping("/")
     public final String home(Model model){
-        model.addAttribute("grettings", "Hello world Modele View");
+        model.addAttribute("grettings", "Hello world Model View");
         model.addAttribute("users", userRep.findAll());
         return "home";
     }
