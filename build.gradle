@@ -24,7 +24,8 @@ repositories {
 }
 
 checkstyle {
-	toolVersion = "10.12.3" //
+	configFile file("${rootProject.projectDir}/config/checkstyle/checkstyle.xml")
+	toolVersion = "10.12.3"
 }
 
 
