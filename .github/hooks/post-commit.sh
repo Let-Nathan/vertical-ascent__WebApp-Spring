@@ -1,1 +1,1 @@
-mysqldump -u root -p vertical_ascent > backup.sql
+mysqldump -u root -p vertical_ascent >  backup.sql
