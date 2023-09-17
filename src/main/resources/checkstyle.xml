@@ -1,0 +1,39 @@
+<module name="Checker">
+    <module name="TreeWalker">
+        <module name="EmptyBlock"/>
+        <module name="AvoidStarImport"/>
+        <module name="FileTabCharacter">
+            <property name="eachLine" value="true"/>
+        </module>
+        <property name="message"
+                  value="Consider using special escape sequence instead of octal value or Unicode escaped value."/>
+    </module>
+    <module name="AvoidEscapedUnicodeCharacters">
+        <property name="allowEscapesForControlCharacters" value="true"/>
+        <property name="allowByTailComment" value="true"/>
+        <property name="allowNonPrintableEscapes" value="true"/>
+    </module>
+    <module name="LineLength">
+        <property name="fileExtensions" value="java"/>
+        <property name="max" value="100"/>
+        <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
+        <property name="eachLine" value="true"/>
+    </module>
+    <module name="NoLineWrap">
+        <property name="tokens" value="PACKAGE_DEF, IMPORT, STATIC_IMPORT"/>
+    </module>
+    <module name="EmptyBlock">
+        <property name="option" value="TEXT"/>
+        <property name="tokens"
+                  value="LITERAL_TRY, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, LITERAL_SWITCH"/>
+    </module>
+    <module name="OneTopLevelClass"/>
+    <module name="NoLineWrap">
+        <property name="tokens" value="PACKAGE_DEF, IMPORT, STATIC_IMPORT"/>
+    </module>
+    <module name="Indentation">
+        <property name="basicOffset" value="2"/>
+    </module>
+    <module name="PackageName"/>
+
+</module>
