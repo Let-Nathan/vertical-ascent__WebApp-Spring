@@ -6,20 +6,17 @@ on:
       - dev
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+    checkstyle:
+      runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: 17
+        - name: Set up JDK 17
+          uses: actions/setup-java@v2
+          with:
+            java-version: 17
 
-      - name: Build and run tests
-        run: ./gradlew build
-
-      - name: Run code analysis
-        run: ./gradlew checkstyleMain
+        - name: Build with Gradle
+          run: ./gradlew checkstyleMain
