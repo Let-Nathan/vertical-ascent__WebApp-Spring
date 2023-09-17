@@ -2,7 +2,6 @@ package com.webapp.verticalascent;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.core.env.Environment;
 
 /**
  * Application class for Vertical Ascent.
