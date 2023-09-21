@@ -11,8 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class VerticalAscentApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(VerticalAscentApplication.class, args);
-	}
+	
+    public static void main(String[] args) {
+        SpringApplication.run(VerticalAscentApplication.class, args);
+    }
 }

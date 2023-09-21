@@ -17,23 +17,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     private final UserRepository userRep;
-
+	
     /**
-     * Dependency injection for userRepository ==> @Todo to userDTO.
-     *
-     * @param userRep (User repository)
-     */
+    * Dependency injection for userRepository ==> @Todo to userDTO.
+    *
+    * @param userRep (User repository)
+    */
     @Autowired
     public HomeController(final UserRepository userRep) {
         this.userRep = userRep;
     }
-
+	
     /**
-     * Default home path ==> @Todo Router config file.
-     *
-     * @param model (Model injection to view variable)
-     * @return The view name
-     */
+    * Default home path ==> @Todo Router config file.
+    *
+    * @param model (Model injection to view variable)
+    * @return The view name
+    *
+    */
     @GetMapping("/")
     public final String home(Model model) {
         model.addAttribute("grettings", "Hello world Model View");
