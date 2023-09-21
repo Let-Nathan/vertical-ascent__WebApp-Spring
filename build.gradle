@@ -13,7 +13,11 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.3'
 	id 'checkstyle'
 	id 'org.liquibase.gradle' version '2.0.4'
+
 }
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.liquibase.gradle'
 
 group = 'com.webapp'
@@ -24,6 +28,7 @@ java {
 }
 
 configurations {
+	liquibaseRuntime.extendsFrom runtimeClasspath
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
@@ -38,12 +43,16 @@ checkstyle {
 	toolVersion = "10.12.3"
 }
 
+
+
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-configuration-processor'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'mysql:mysql-connector-java:8.0.28'
+	liquibaseRuntime sourceSets.main.output
 	liquibaseRuntime 'org.liquibase:liquibase-core:4.8.0'
 	liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl:2.1.1'
 	compileOnly 'org.projectlombok:lombok'
@@ -51,7 +60,6 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
-
 
 
 
