@@ -21,3 +21,20 @@ jobs:
 
         - name: Build with Gradle
           run: bash gradlew checkstyleMain
+
+        - name: Install Node.js
+          uses: actions/setup-node@v2
+          with:
+            node-version: '14'
+
+        - name: Install Stylelint
+          run: npm install -g stylelint stylelint-config-standard
+
+        - name: Lint CSS with Stylelint
+          run: stylelint '**/*.css'
+
+        - name: Install HTMLHint
+          run: npm install -g htmlhint
+
+        - name: Lint HTML with HTMLHint
+          run: htmlhint '**/*.html'
