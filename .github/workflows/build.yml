@@ -20,4 +20,4 @@ jobs:
             distribution: 'adopt'
 
         - name: Build with Gradle
-          run: ./gradlew checkstyle
+          run: bash gradlew checkstyle
