@@ -9,5 +9,4 @@ class VerticalAscentApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
