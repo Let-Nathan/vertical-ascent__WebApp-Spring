@@ -5,7 +5,13 @@
     "extends": "eslint:recommended",
     "rules": {
       "semi": "error",
-      "indent": ["error", 4]
+      "indent": [
+        "error",
+        4
+      ]
     }
+  },
+  "devDependencies": {
+    "eslint": "^8.50.0"
   }
 }
