@@ -31,17 +31,13 @@ jobs:
           run: npm install -g stylelint stylelint-config-standard
 
         - name: Lint CSS with Stylelint
-          run: stylelint
-          with:
-            file: src/main/resources/css/style.css
+          run: stylelint 'src/main/resources/css/style.css'
 
         - name: Install HTMLHint
           run: npm install -g htmlhint
 
         - name: Lint HTML with HTMLHint
-          run: htmlhint
-          with:
-            file: src/main/resources/templates/*.html
+          run: htmlhint 'src/main/resources/templates/*.html'
 
         - name: Run ESLint
           run: eslint . --ext .js
