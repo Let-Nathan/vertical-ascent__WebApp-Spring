@@ -13,6 +13,9 @@ jobs:
         - name: Checkout code
           uses: actions/checkout@v2
 
+        - name: Eslint checkout
+          uses: stefanoeb/eslint-action@1.0.2
+
         - name: Set up JDK 17
           uses: actions/setup-java@v2
           with:
@@ -33,4 +36,3 @@ jobs:
         - name: Lint HTML with HTMLHint
           run: htmlhint 'src/main/resources/templates/*.html'
 
- 
