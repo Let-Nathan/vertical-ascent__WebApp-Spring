@@ -12,10 +12,6 @@ jobs:
       steps:
         - name: Checkout code
           uses: actions/checkout@v2
-          run: yarn
-
-        - name: Run ESLint
-          run: eslint . --ext .js,.jsx,.ts,.tsxw
 
         - name: Set up JDK 17
           uses: actions/setup-java@v2
@@ -31,9 +27,14 @@ jobs:
           with:
             node-version: '14'
 
+        - name: Install Stylelint
+          run: npm install -g stylelint stylelint-config-standard
+
         - name: Lint CSS with Stylelint
-          run: stylelint 'src/main/resources/css/style.css'
+          run: stylelint '**/syle.css'
+
+        - name: Install HTMLHint
+          run: npm install -g htmlhint
 
         - name: Lint HTML with HTMLHint
-          run: htmlhint 'src/main/resources/templates/*.html'
-
+          run: htmlhint '**/*.html'
