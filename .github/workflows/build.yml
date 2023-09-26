@@ -75,4 +75,4 @@ jobs:
         run: npm install eslint --save-dev
 
       - name: Lint JS with ESLint
-        run: eslint 'src/main/resources/js/static/**/*.js'
+        run: eslint 'src/main/resources/static/javascript/webapp-js/**/*.js'
