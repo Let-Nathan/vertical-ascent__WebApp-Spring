@@ -24,6 +24,7 @@ jobs:
 
         - name: Install Node.js
           uses: actions/setup-node@v2
+          run: yarn
           with:
             node-version: '14'
 
@@ -31,10 +32,19 @@ jobs:
           run: npm install -g stylelint stylelint-config-standard
 
         - name: Lint CSS with Stylelint
-          run: stylelint '**/style.css'
+          run: stylelint
+          with:
+            file: src/main/resources/css/style.css
 
         - name: Install HTMLHint
           run: npm install -g htmlhint
 
         - name: Lint HTML with HTMLHint
-          run: htmlhint '**/*.html'
+          run: htmlhint
+          with:
+            file: src/main/resources/templates/*.html
+
+        - name: Run ESLint
+          run: eslint . --ext .js
+          with:
+            file: src/main/resources/*.js
