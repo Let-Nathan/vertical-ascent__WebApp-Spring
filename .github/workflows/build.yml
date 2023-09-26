@@ -40,6 +40,4 @@ jobs:
           run: htmlhint 'src/main/resources/templates/*.html'
 
         - name: Run ESLint
-          run: eslint . --ext .js
-          with:
-            file: src/main/resources/*.js
+          run: eslint . --ext .js 'src/main/resources/*.js'
