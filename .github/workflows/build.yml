@@ -29,7 +29,7 @@ jobs:
 
         - name: Install Stylelint
           uses: actions-hub/stylelint@master
-          run: npm install -g stylelint stylelint-config-standard
+#          run: npm install -g stylelint stylelint-config-standard
 
         - name: Lint CSS with Stylelint
           run: stylelint 'src/main/resources/css/style.css'
