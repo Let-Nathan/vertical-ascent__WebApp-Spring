@@ -27,9 +27,9 @@ jobs:
           with:
             node-version: '14'
 
-        - name: Install Stylelint
-          uses: actions-hub/stylelint@master
-#          run: npm install -g stylelint stylelint-config-standard
+#        - name: Install Stylelint
+#          uses: actions-hub/stylelint@master
+##          run: npm install -g stylelint stylelint-config-standard
 
         - name: Lint CSS with Stylelint
           run: stylelint 'src/main/resources/css/style.css'
