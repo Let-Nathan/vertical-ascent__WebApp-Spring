@@ -1,0 +1,11 @@
+{
+  "name": "vertical-ascent",
+  "version": "1.0.0",
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "rules": {
+      "semi": "error",
+      "indent": ["error", 4]
+    }
+  }
+}

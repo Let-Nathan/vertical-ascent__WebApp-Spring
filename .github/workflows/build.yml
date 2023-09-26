@@ -6,6 +6,7 @@ on:
       - dev
 
 jobs:
+
   checkstyle:
     runs-on: ubuntu-latest
 
@@ -57,3 +58,21 @@ jobs:
 
       - name: Lint HTML with HTMLHint
         run: htmlhint 'src/main/**/*.html'
+
+  eslint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install ESLint
+        run: npm install eslint --save-dev
+
+      - name: Lint JS with ESLint
+        run: eslint 'src/main/resources/js/**/*.js'
