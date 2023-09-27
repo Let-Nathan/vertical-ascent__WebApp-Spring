@@ -72,7 +72,7 @@ jobs:
           node-version: '14'
 
       - name: Install ESLint
-        run: npm install eslint --save-dev
+        run: npm install
 
       - name: Lint JS with ESLint
-        run: eslint 'src/main/resources/static/javascript/webapp-js/*.js'
+        run: npx eslint 'src/main/resources/static/javascript/webapp-js/*.js'
