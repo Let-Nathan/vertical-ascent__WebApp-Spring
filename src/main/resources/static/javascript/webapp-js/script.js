@@ -6,6 +6,6 @@
  * @return {boolean} This is a description.
  */
 function esLinttes(a, b) {
-	return a === b;
+    return a === b;
 }
-	esLinttes(1, 1);
+esLinttes(1, 1);

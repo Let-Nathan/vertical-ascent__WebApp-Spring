@@ -8,13 +8,15 @@
           "error",
           "always"
         ],
-        "indent": [
-          "error",
-          "tab"
-        ],
         "linebreak-style": [
           "error",
           "windows"
+        ],
+        "no-tabs": [
+          "error",
+          {
+            "allowIndentationTabs": true
+          }
         ],
         "quotes": [
           "error",
