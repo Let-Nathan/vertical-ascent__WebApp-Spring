@@ -3,7 +3,7 @@ module.exports = {
         "browser": true,
         "es2021": true
     },
-    "extends": "google",
+    "extends": ["eslint:recommended", "google"],
     "overrides": [
         {
             "env": {
@@ -18,8 +18,9 @@ module.exports = {
         }
     ],
     "parserOptions": {
-        "ecmaVersion": "latest"
+        ecmaVersion: 12,
     },
     "rules": {
+        "indent" : "off"
     }
 }
