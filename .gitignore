@@ -1,7 +1,8 @@
 ### Project files ###
 HELP.md
-.gradle
+/.gradle
 gradle.properties
+node_modules
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
