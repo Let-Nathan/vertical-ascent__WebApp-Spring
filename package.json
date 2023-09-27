@@ -1,17 +1,28 @@
-{
-  "name": "vertical-ascent",
-  "version": "1.0.0",
-  "eslintConfig": {
-    "extends": "eslint:recommended",
-    "rules": {
-      "semi": "error",
-      "indent": [
-        "error",
-        4
-      ]
+  {
+    "name": "vertical-ascent",
+    "version": "1.0.0",
+    "eslintConfig": {
+      "extends": "eslint:recommended",
+      "rules": {
+        "semi": [
+          "error",
+          "always"
+        ],
+        "indent": [
+          "error",
+          "tab"
+        ],
+        "linebreak-style": [
+          "error",
+          "windows"
+        ],
+        "quotes": [
+          "error",
+          "single"
+        ]
+      }
+    },
+    "devDependencies": {
+      "eslint": "^8.50.0"
     }
-  },
-  "devDependencies": {
-    "eslint": "^8.50.0"
   }
-}
