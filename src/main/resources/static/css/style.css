@@ -1,3 +1,14 @@
+@media (min-width: 320px) and (max-width: 767px) {
+
+    .nav-menu {
+        font-size: 1rem;
+    }
+
+    .icon-nav {
+        height: 27px;
+    }
+}
+
 body {
     font-size: 1rem;
     font-family: Arial, sans-serif;
@@ -9,16 +20,5 @@ body {
 .navbar {
     background-color: white;
     border-bottom: 1px solid #adb5bd;
-}
-
-@media screen and (max-width: 414px) {
-
-    .nav-menu {
-        font-size: 1rem;
-    }
-
-    .icon-nav {
-        height: 27px;
-    }
 }
 
