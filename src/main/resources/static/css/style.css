@@ -1,4 +1,5 @@
 @media (320px <= width <= 767px) {
+
     .nav-menu {
         font-size: 1rem;
     }
@@ -7,6 +8,7 @@
         height: 27px;
     }
 }
+
 body {
     font-size: 1rem;
     font-family: Arial, sans-serif;
