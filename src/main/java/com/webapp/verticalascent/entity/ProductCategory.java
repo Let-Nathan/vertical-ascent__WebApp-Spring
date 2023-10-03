@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
+
  * Todo --> Add relation into product
  * Object representation of product table.
  *
@@ -19,23 +20,27 @@ import lombok.Setter;
 @Entity
 @Table(name = "product_category")
 public class ProductCategory {
-
+    
     @Id
     @GeneratedValue
     private Long id;
-
+    
     @Column(nullable = false)
     private String name;
-
+    
     @Column(
-            nullable = false,
-            columnDefinition = "TEXT"
+        nullable = false,
+        columnDefinition = "TEXT"
     )
     private String description;
+    
+    @Column
+    private int quantity;
     
     @Column(nullable = false)
     private double price;
     
     @Column(nullable = false)
-    private String image;
+    private boolean isAvailable;
+    
 }
