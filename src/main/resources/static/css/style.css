@@ -7,7 +7,22 @@
         height: 27px;
     }
 }
+@media (width >= 767px) {
+    .nav-menu {
+        font-size: 1rem;
+    }
 
+    .navbar-toggler-icon {
+        padding: 2rem;
+    }
+
+    .navbar-toggler {
+        width: 30%;
+    }
+    .icon-nav {
+        height: 35px;
+    }
+}
 body {
     font-size: 1rem;
     font-family: Arial, sans-serif;
