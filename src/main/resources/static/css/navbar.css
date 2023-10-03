@@ -1,0 +1,43 @@
+@media (320px <= width <= 768px) {
+    .nav-menu {
+        font-size: 1rem;
+    }
+
+    .icon-nav {
+        height: 27px;
+    }
+
+    #nav-search {
+        display: none;
+    }
+
+}
+@media (width >= 768px) {
+    .nav-menu {
+        font-size: 1rem;
+    }
+
+    .navbar-toggler-icon {
+        padding: 2rem;
+    }
+
+    .navbar-toggler {
+        width: 30%;
+    }
+    .icon-nav {
+        height: 35px;
+        width: 50%
+    }
+
+    .nav-search {
+
+    }
+
+    #nav-search-icon {
+        display: none;
+    }
+}
+.navbar {
+    background-color: white;
+    border-bottom: 1px solid #adb5bd;
+}
