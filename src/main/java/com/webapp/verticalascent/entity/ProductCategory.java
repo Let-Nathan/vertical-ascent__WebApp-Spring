@@ -40,7 +40,6 @@ public class ProductCategory {
     private double price;
     
     @Column(nullable = false)
-
     private boolean isAvailable;
     
 }
