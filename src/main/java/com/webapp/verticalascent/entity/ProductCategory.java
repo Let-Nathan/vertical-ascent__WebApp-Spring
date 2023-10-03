@@ -32,7 +32,7 @@ public class ProductCategory {
         columnDefinition = "TEXT"
     )
     private String description;
-
+    
     @Column
     private int quantity;
     
