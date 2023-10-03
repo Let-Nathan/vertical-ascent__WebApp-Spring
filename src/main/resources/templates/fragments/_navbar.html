@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <header class="navbar">
-    <div class="container-fluid row container-xxl">
+    <div class="container-fluid row container-xxl col">
     <!-- Burger icon with text -->
-    <div class="burger-icon col-2 v-flex text-center">
-        <p class="nav-menu m-0 p-0">MENU</p>
-        <button class="navbar-toggler m-0 p-0 w-100 " type="button" data-bs-toggle="collapse" data-bs-target="#MainNav" aria-controls="MainNav" aria-expanded="false" aria-label="Toggle navigation">
+    <div class="burger-icon col-2 d-flex flex-column align-content-center">
+        <p class="nav-menu m-0 text-center">MENU</p>
+        <button class="navbar-toggler d-flex justify-content-center" type="button" data-bs-toggle="collapse" data-bs-target="#MainNav" aria-controls="MainNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon p-3"></span>
         </button>
     </div>
     <!-- WebSite title navbar -->
-    <div class="col-6">
-        <p class="nav-title display-3 text-center">Vertical Ascent</p>
+    <div class="col-6 text-center">
+        <p class="nav-title display-6 m-0 p-0">Vertical Ascent</p>
     </div>
     <!-- Search and cart icon -->
-    <div class="search-and-cart--icon col-2 d-flex justify-content-between">
-        <img src="/images/icon/search.svg" alt="search icon" class="icon-nav">
-        <img src="/images/icon/cart.svg" alt="shipping cart icon" class="icon-nav">
-    </div>
+    <!--<div class="search-and-cart&#45;&#45;icon col-4 d-flex justify-content-around">-->
+        <img src="/images/icon/search.svg" alt="search icon" class="icon-nav col-2">
+        <img src="/images/icon/cart.svg" alt="shipping cart icon" class="icon-nav col-2">
+    <!--</div>-->
 
     <div class="collapse navbar-collapse" id="MainNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
