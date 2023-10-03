@@ -17,24 +17,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
     
     private final ProductCategoryService productCategoryService;
-	
+
     /**
-    * Dependency injection for userRepository ==> @Todo to userDTO.
-    *
-    * @param productCategoryService (ProductCategoryService)
-    */
+     * Dependency injection for userRepository ==> @Todo to userDTO.
+     *
+     * @param productCategoryService (ProductCategoryService)
+     */
     @Autowired
     public HomeController(final ProductCategoryService productCategoryService) {
         this.productCategoryService = productCategoryService;
+
     }
     
     /**
-    * Default home path ==> @Todo Router config file.
-    *
-    * @param model (Model injection to view variable)
-    * @return The view name
-    *
-    */
+     * Default home path ==> @Todo Router config file.
+     *
+     * @param model (Model injection to view variable)
+     * @return The view name
+     *
+     */
     @GetMapping("/")
     public final String home(Model model) {
         return "home";
