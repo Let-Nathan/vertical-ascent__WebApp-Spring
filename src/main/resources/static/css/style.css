@@ -1,9 +1,22 @@
+@media (320px <= width <= 767px) {
+    .nav-menu {
+        font-size: 1rem;
+    }
 
-.nav-phone {
-    height: 3rem;
-    position: absolute;
+    .icon-nav {
+        height: 27px;
+    }
 }
 
-.nav-title {
-    font-size: 2rem;
+body {
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.navbar {
+    background-color: white;
+    border-bottom: 1px solid #adb5bd;
 }

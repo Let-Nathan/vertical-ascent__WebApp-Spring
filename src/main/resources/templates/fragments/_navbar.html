@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <header class="navbar">
-    <div class="container row">
+    <div class="container-fluid row container-xxl col">
+    <!-- Burger icon with text -->
+    <div class="burger-icon col-2 d-flex flex-column align-content-center">
+        <p class="nav-menu m-0 text-center">MENU</p>
+        <button class="navbar-toggler d-flex justify-content-center" type="button" data-bs-toggle="collapse" data-bs-target="#MainNav" aria-controls="MainNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon p-3"></span>
+        </button>
+    </div>
+    <!-- WebSite title navbar -->
+    <div class="col-6 text-center">
+        <p class="nav-title display-6 m-0 p-0">Vertical Ascent</p>
+    </div>
+    <!-- Search and cart icon -->
+    <img src="/images/icon/search.svg" alt="search icon" class="icon-nav col-2">
+    <img src="/images/icon/cart.svg" alt="shipping cart icon" class="icon-nav col-2">
+    <div class="collapse navbar-collapse" id="MainNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-        <div class="burger-icon col ">
-          <button class="navbar-toggler col" type="button" data-bs-toggle="collapse" data-bs-target="#MainNav" aria-controls="MainNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-
-
-        <div class="col">
-            <p class="nav-title h2 w-100">Vertical Ascent</p>
-        </div>
-
-        <div class="collapse navbar-collapse" id="MainNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <form role="search">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-            </form>
-        </div>
-
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </li>
+        </ul>
+        <form role="search">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        </form>
+    </div>
     </div>
 </header>
 </html>
