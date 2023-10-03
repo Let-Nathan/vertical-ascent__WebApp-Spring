@@ -1,5 +1,6 @@
 package com.webapp.verticalascent.controller;
 
+import com.webapp.verticalascent.repository.ProductCategoryRepository;
 import com.webapp.verticalascent.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     private final UserRepository userRep;
+    
+    private final ProductCategoryRepository productCategoryRepository;
 	
     /**
     * Dependency injection for userRepository ==> @Todo to userDTO.
@@ -24,10 +27,14 @@ public class HomeController {
     * @param userRep (User repository)
     */
     @Autowired
-    public HomeController(final UserRepository userRep) {
+    public HomeController(
+            final UserRepository userRep,
+            final ProductCategoryRepository productCategoryRep
+            ) {
         this.userRep = userRep;
+        this.productCategoryRepository = productCategoryRep;
     }
-	
+    
     /**
     * Default home path ==> @Todo Router config file.
     *
@@ -37,8 +44,6 @@ public class HomeController {
     */
     @GetMapping("/")
     public final String home(Model model) {
-        model.addAttribute("grettings", "Hello world Model View");
-        model.addAttribute("users", userRep.findAll());
         return "home";
     }
 }
