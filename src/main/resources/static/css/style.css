@@ -1,4 +1,4 @@
-@media (320px >= width <= 767px) {
+@media (320px <= width <= 767px) {
     .nav-menu {
         font-size: 1rem;
     }
