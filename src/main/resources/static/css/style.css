@@ -8,6 +8,7 @@
     }
 }
 
+<<<<<<< HEAD
 body {
     font-size: 1rem;
     font-family: Arial, sans-serif;
@@ -19,4 +20,25 @@ body {
 .navbar {
     background-color: white;
     border-bottom: 1px solid #adb5bd;
+=======
+.nav-title {
+    font-size: 2rem;
+}
+
+.icon-nav {
+    width: 25%;
+    height: 25%;
+}
+
+.navbar {
+    background-color: blue;
+}
+
+.navbar-toggler-icon {
+    font-size: 4rem;
+}
+
+.nav-menu {
+    font-size: 2rem;
+>>>>>>> c6d0f14 (Create: Burger icone & Menu text)
 }
