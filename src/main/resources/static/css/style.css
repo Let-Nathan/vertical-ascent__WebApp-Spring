@@ -1,26 +1,24 @@
-
-.nav-phone {
-    height: 3rem;
-    position: absolute;
-}
-
-.nav-title {
-    font-size: 2rem;
-}
-
-.icon-nav {
-    width: 25%;
-    height: 25%;
+body {
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
 }
 
 .navbar {
-    background-color: blue;
+    background-color: white;
+    border-bottom: 1px solid #adb5bd;
 }
 
-.navbar-toggler-icon {
-    font-size: 4rem;
+@media screen and (max-width: 414px) {
+
+    .nav-menu {
+        font-size: 1rem;
+    }
+
+    .icon-nav {
+        height: 27px;
+    }
 }
 
-.nav-menu {
-    font-size: 2rem;
-}
