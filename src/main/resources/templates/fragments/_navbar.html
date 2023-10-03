@@ -1,37 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
-<header class="navbar">
-    <div class="container-fluid row container-xxl col">
-    <!-- Burger icon with text -->
-    <div class="burger-icon col-2 d-flex flex-column align-content-center">
-        <p class="nav-menu m-0 text-center">MENU</p>
-        <button class="navbar-toggler d-flex justify-content-center" type="button" data-bs-toggle="collapse" data-bs-target="#MainNav" aria-controls="MainNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon p-3 p-sm-3 p-lg-3"></span>
-        </button>
-    </div>
-    <!-- WebSite title navbar -->
-    <div class="col-6 text-center">
-        <p class="nav-title display-6 m-0 p-0">Vertical Ascent</p>
-    </div>
-    <!-- Search and cart icon -->
-    <img src="/images/icon/search.svg" alt="search icon" class="icon-nav col-2">
-    <img src="/images/icon/cart.svg" alt="shipping cart icon" class="icon-nav col-2">
-    <div class="collapse navbar-collapse" id="MainNav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <header class="navbar container-fluid d-flex justify-content-around">
+        <!-- Burger icon with text -->
+        <div class="burger-icon col-2 col-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-center justify-content-lg-center">
+            <p class="nav-menu m-0">MENU</p>
+            <button class="navbar-toggler d-flex justify-content-center p-lg-12" type="button" data-bs-toggle="collapse" data-bs-target="#MainNav" aria-controls="MainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon p-md-3 p-lg-12"></span>
+            </button>
+        </div>
+        <!-- WebSite title navbar -->
+        <p class="nav-title display-6 m-0 p-0 col-6 col-lg-4 text-center">Vertical Ascent</p>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </li>
-        </ul>
-        <form role="search">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-        </form>
-    </div>
-    </div>
-</header>
+        <!-- Search input screen width > 767px -->
+        <div id="nav-search" class="col-lg-6">
+            <form class="form-inline" >
+                <input class="form-control w-100" type="search" placeholder="Search" aria-label="Search">
+            </form>
+        </div>
+        <!-- Container Icon -->
+        <div class="d-flex justify-content-around col-4 col-lg-1">
+            <!-- Search icon -->
+            <img class="icon-nav col-md-4" id="nav-search-icon" src="/images/icon/search.svg" alt="search icon">
+            <!-- Cart icon -->
+            <img class="icon-nav col-4-md-4 col-lg-6" src="/images/icon/cart.svg" alt="shipping cart icon">
+            <!-- Account icon -->
+            <img class="icon-nav col-md-4 col-lg-6" id="icon-account" src="/images/icon/person-circle.svg" alt="account icon">
+        </div>
+        <!-- Open burger menu-->
+        <div class="collapse navbar-collapse" id="MainNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form role="search">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            </form>
+        </div>
+    </header>
 </html>
