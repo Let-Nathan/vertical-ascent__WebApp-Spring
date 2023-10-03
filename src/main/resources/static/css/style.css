@@ -1,11 +1,13 @@
-@media (min-width >= 320px) and (max-width <= 767px) {
+@media (320px >= width <= 767px) {
     .nav-menu {
         font-size: 1rem;
     }
+
     .icon-nav {
         height: 27px;
     }
 }
+
 body {
     font-size: 1rem;
     font-family: Arial, sans-serif;
@@ -13,8 +15,8 @@ body {
     margin: 0;
     min-height: 100vh;
 }
+
 .navbar {
     background-color: white;
     border-bottom: 1px solid #adb5bd;
 }
-
