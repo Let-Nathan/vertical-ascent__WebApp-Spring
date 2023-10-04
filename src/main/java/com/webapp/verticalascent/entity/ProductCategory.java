@@ -9,6 +9,9 @@ import lombok.Setter;
  * Todo --> Add relation into product
  * Object representation of product table.
  *
+ * @author Nathan L
+ * @version 1.0
+ *
  */
 @Getter
 @Setter

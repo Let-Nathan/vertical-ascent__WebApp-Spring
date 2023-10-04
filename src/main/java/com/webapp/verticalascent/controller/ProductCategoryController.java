@@ -1,27 +1,33 @@
 package com.webapp.verticalascent.controller;
 
 import com.webapp.verticalascent.entity.ProductCategory;
-import com.webapp.verticalascent.repository.ProductCategoryRepository;
+import com.webapp.verticalascent.service.ProductCategoryService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
+/**
+* API REST Product Categories
+*
+* @author Nathan L
+* @version 1.0
+*
+*/
 @RestController
 @RequestMapping("/api/product-categories")
 public class ProductCategoryController {
+ 
+	private final ProductCategoryService productCategoryService;
 	
-	private final ProductCategoryRepository productCategoryRepository;
-	
-	@Autowired
-	public ProductCategoryController(ProductCategoryRepository productCategoryRepository) {
-		this.productCategoryRepository = productCategoryRepository;
+    @Autowired
+    public ProductCategoryController(ProductCategoryService productCategoryService) {
+	    this.productCategoryService = productCategoryService;
 	}
 	
-	@GetMapping
-	public List<ProductCategory> getAllCategories() {
-		return productCategoryRepository.findAll();
+    @GetMapping
+    public List<ProductCategory> getAllCategories() {
+	    return productCategoryService.getAllProductCategory();
 	}
 }

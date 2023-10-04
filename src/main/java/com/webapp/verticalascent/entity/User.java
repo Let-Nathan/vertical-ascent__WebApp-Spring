@@ -13,6 +13,8 @@ import lombok.Setter;
 
 /**
  * Object representation of user table.
+ * @author Nathan L
+ * @version 1.0
  */
 @Getter
 @Setter
