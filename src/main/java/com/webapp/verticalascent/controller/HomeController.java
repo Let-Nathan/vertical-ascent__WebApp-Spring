@@ -40,4 +40,14 @@ public class HomeController {
     public final String home(Model model) {
         return "home";
     }
+    
+    /**
+     * todo --> Delete after uses
+     *
+     *
+     */
+    @GetMapping("/categories")
+    public final String categories(Model model) {
+        return "/fragments/_menu-category";
+    }
 }
