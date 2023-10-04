@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
     
     private final ProductCategoryService productCategoryService;
-
+    
     /**
      * Dependency injection for userRepository ==> @Todo to userDTO.
      *
@@ -26,7 +26,7 @@ public class HomeController {
     @Autowired
     public HomeController(final ProductCategoryService productCategoryService) {
         this.productCategoryService = productCategoryService;
-
+        
     }
     
     /**
