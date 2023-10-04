@@ -1,7 +1,6 @@
 package com.webapp.verticalascent.controller;
 
-import com.webapp.verticalascent.repository.ProductCategoryRepository;
-import com.webapp.verticalascent.repository.UserRepository;
+import com.webapp.verticalascent.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,23 +15,17 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class HomeController {
-
-    private final UserRepository userRep;
     
-    private final ProductCategoryRepository productCategoryRepository;
+    private final ProductCategoryService productCategoryService;
 	
     /**
     * Dependency injection for userRepository ==> @Todo to userDTO.
     *
-    * @param userRep (User repository)
+    * @param productCategoryService (ProductCategoryService)
     */
     @Autowired
-    public HomeController(
-            final UserRepository userRep,
-            final ProductCategoryRepository productCategoryRep
-            ) {
-        this.userRep = userRep;
-        this.productCategoryRepository = productCategoryRep;
+    public HomeController(final ProductCategoryService productCategoryService) {
+        this.productCategoryService = productCategoryService;
     }
     
     /**

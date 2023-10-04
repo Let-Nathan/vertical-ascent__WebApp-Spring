@@ -11,6 +11,10 @@ import lombok.Setter;
 
 /**
  * Object representation of product table.
+ *
+ * @author Nathan L
+ * @version 1.0
+ *
  */
 @Getter
 @Setter
