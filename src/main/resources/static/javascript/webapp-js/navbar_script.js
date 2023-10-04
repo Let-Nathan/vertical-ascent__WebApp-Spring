@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * Fetch api product categories to create category navbar menu
  */
