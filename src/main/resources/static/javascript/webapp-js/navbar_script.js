@@ -2,23 +2,27 @@
  * Fetch api product categories to create category navbar menu
  */
 fetch('api/product-categories')
-    .then(response => {
+    .then((response) => {
         if (!response.ok) {
             throw new Error('Unable to obtain response from API' + err);
         }
         return response.json();
     })
-    .then(data => {
-        data.forEach(item => {
-           menuContainer(item);
+    .then((data) => {
+        data.forEach(productCategory => {
+           menuContainer(productCategory);
         })
     })
-    .catch(err => {
-        console.error('Error while get data ==>' + err);
+    .catch((err) => {
+        console.error('An error occurs while retrieving data ==>' + err);
     });
 
-
-function menuContainer(item) {
+/**
+ * Create dynamically each product category container
+ *
+ * @param productCategory
+ */
+function menuContainer(productCategory) {
 
     // Init whole list / container for menu //
     const ulSelector = document.querySelector('.menu-categories');
@@ -29,11 +33,11 @@ function menuContainer(item) {
     // -------------------------------- //
 
     // <list> element //
-    listElement.className = "category " + item.name + " nav-menu-list";
+    listElement.className = "category " + productCategory.name + " nav-menu-list";
     // -------------------------------- //
 
     // <a> element make container clickable //
-    aElement.href = "product-category/" + item.id;
+    aElement.href = "product-category/" + productCategory.id;
     aElement.class = "aElement";
     aElement.style.textDecoration = "none";
     // -------------------------------- //
@@ -48,7 +52,7 @@ function menuContainer(item) {
     // -------------------------------- //
 
     // <span> element with category name
-    spanCategoryTitle.textContent = item.name;
+    spanCategoryTitle.textContent = productCategory.name;
     spanCategoryTitle.className = "fs-6 fw-bold text-light text-uppercase col-4";
     // -------------------------------- //
 
