@@ -41,3 +41,27 @@
     background-color: white;
     border-bottom: 1px solid #adb5bd;
 }
+
+.nav-images-categories {
+
+    width: 100%;
+}
+
+.nav-menu-container {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    margin-top: 20px;
+}
+
+.nav-menu-list {
+    list-style-type: none;
+
+}
+
+.menu-link-style {
+    text-decoration: none;
+}
+
+
+
