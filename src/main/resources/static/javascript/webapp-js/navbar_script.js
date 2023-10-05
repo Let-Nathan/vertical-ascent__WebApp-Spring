@@ -9,7 +9,7 @@ fetch('api/product-categories')
         return response.json();
     })
     .then((data) => {
-        data.forEach(productCategory => {
+        data.forEach((productCategory) => {
            menuContainer(productCategory);
         })
     })
@@ -20,7 +20,7 @@ fetch('api/product-categories')
 /**
  * Create dynamically each product category container
  *
- * @param productCategory
+ * @param {Object} productCategory - Product category data from fetch api
  */
 function menuContainer(productCategory) {
 
