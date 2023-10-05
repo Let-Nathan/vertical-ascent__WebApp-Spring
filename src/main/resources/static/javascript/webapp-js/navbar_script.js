@@ -4,7 +4,9 @@
 fetch('api/product-categories')
     .then((response) => {
         if (!response.ok) {
-            throw new Error('Unable to obtain response from API' + response.statusText);
+            throw new Error(
+                'Unable to obtain response from API' + response.statusText
+            );
         }
         return response.json();
     })
@@ -45,7 +47,7 @@ function menuContainer(productCategory) {
     // <div> element with background image //
     divContainer.className =
         'nav-menu-container shadow-sm p-2 mb-2 container-fluid';
-    //Todo replace image name by item.name
+    // Todo replace image name by item.name
     divContainer.style.backgroundImage =
         'url("../images/navbar_category/randonnee-bivouac.jpg")';
     divContainer.style.backgroundRepeat = 'no-repeat';
