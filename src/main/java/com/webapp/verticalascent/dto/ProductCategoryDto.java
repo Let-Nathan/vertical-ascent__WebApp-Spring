@@ -10,7 +10,7 @@ import lombok.Data;
  *
  */
 @Data
-public class ProductCategoryDTO {
+public class ProductCategoryDto {
 	private Long id;
 	private String name;
 	private String description;
