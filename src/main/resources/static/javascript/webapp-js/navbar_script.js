@@ -13,7 +13,7 @@ fetch('api/product-categories')
     .then((data) => {
         data.forEach((productCategory) => {
            menuContainer(productCategory);
-        })
+        });
     })
     .catch((err) => {
         console.error('An error occurs while retrieving data ==>' + err);
