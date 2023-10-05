@@ -4,6 +4,7 @@ import com.webapp.verticalascent.entity.ProductCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
+ *
  * Access and manage "Product Category" data
  *
  * @author Nathan L
