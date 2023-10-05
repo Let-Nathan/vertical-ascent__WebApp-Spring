@@ -2,10 +2,9 @@ package com.webapp.verticalascent.service;
 
 import com.webapp.verticalascent.entity.ProductCategory;
 import com.webapp.verticalascent.repository.ProductCategoryRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Service implementation with logic for ProductCategory
@@ -25,13 +24,13 @@ public class ProductCategoryService {
 	*
 	*/
 	@Autowired
-	public ProductCategoryService (ProductCategoryRepository productCategoryRepository) {
+	public ProductCategoryService(ProductCategoryRepository productCategoryRepository) {
 		this.productCategoryRepository = productCategoryRepository;
 	}
 	
 	/**
 	*
-	* @return List<ProductCategory>
+	* @return ProductCategory
 	*/
 	public List<ProductCategory> getAllProductCategory() {
 		return productCategoryRepository.findAll();

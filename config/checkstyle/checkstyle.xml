@@ -245,19 +245,6 @@
             <message key="ws.notPreceded"
                      value="GenericWhitespace ''{0}'' is not preceded with whitespace."/>
         </module>
-        <module name="Indentation">
-            <property name="basicOffset" value="4"/>
-            <property name="braceAdjustment" value="0"/>
-            <property name="caseIndent" value="4"/>
-            <property name="throwsIndent" value="4"/>
-            <property name="lineWrappingIndentation" value="4"/>
-            <property name="arrayInitIndent" value="4"/>
-        </module>
-        <module name="RegexpSinglelineJava">
-            <property name="format" value="^\t* "/>
-            <property name="message" value="Indent must use tab characters"/>
-            <property name="ignoreComments" value="true"/>
-        </module>
         <module name="AbbreviationAsWordInName">
             <property name="ignoreFinal" value="false"/>
             <property name="allowedAbbreviationLength" value="0"/>
