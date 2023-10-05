@@ -4,14 +4,14 @@
 fetch('api/product-categories')
     .then((response) => {
         if (!response.ok) {
-            throw new Error('Unable to obtain response from API' + err);
+            throw new Error('Unable to obtain response from API' + response.statusText);
         }
         return response.json();
     })
     .then((data) => {
         data.forEach((productCategory) => {
            menuContainer(productCategory);
-        })
+        });
     })
     .catch((err) => {
         console.error('An error occurs while retrieving data ==>' + err);
@@ -23,7 +23,6 @@ fetch('api/product-categories')
  * @param {Object} productCategory - Product category data from fetch api
  */
 function menuContainer(productCategory) {
-
     // Init whole list / container for menu //
     const ulSelector = document.querySelector('.menu-categories');
     const listElement = document.createElement('li');
@@ -40,7 +39,7 @@ function menuContainer(productCategory) {
     // <a> element make container clickable //
     aElement.href = 'product-category/' + productCategory.id;
     aElement.class = 'aElement';
-    aElement.style.textDecoration = "none";
+    aElement.style.textDecoration = 'none';
     // -------------------------------- //
 
     // <div> element with background image //
