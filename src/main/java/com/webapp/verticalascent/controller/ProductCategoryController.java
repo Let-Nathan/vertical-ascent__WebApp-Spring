@@ -1,13 +1,18 @@
 package com.webapp.verticalascent.controller;
 
 import com.webapp.verticalascent.entity.ProductCategory;
+<<<<<<< HEAD
 import com.webapp.verticalascent.service.ProductCategoryService;
 import java.util.List;
+=======
+import com.webapp.verticalascent.repository.ProductCategoryRepository;
+>>>>>>> f5ea99b (WIP: Impl Product Category API)
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+<<<<<<< HEAD
 /**
 * API REST Product Categories
 *
