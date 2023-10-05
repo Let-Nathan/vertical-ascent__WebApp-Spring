@@ -46,7 +46,8 @@ function menuContainer(productCategory) {
 
     // <div> element with background image //
     divContainer.className =
-        'nav-menu-container shadow-sm p-2 mb-3 flex-row col-lg-12 shadow-lg bg-body';
+        'nav-menu-container shadow-sm p-2 mb-3 ' +
+        'flex-row col-lg-12 shadow-lg bg-body';
     // Todo replace image name by item.name
     divContainer.style.backgroundImage =
         'url("../images/navbar_category/randonnee-bivouac.jpg")';
@@ -55,7 +56,9 @@ function menuContainer(productCategory) {
     // <span> element with category name
     spanCategoryTitle.textContent = productCategory.name;
     spanCategoryTitle.className =
-        'span-menu-text fw-bold text-light text-uppercase col-4 col-md-1 d-flex flex-column align-items-start justify-content-center';
+        'span-menu-text fw-bold text-light text-uppercase col-4 ' +
+        'col-md-1 d-flex flex-column align-items-start ' +
+        'justify-content-center';
     // -------------------------------- //
 
     // Assembly of elements  //
