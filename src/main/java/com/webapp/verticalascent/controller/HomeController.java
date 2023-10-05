@@ -26,7 +26,6 @@ public class HomeController {
     @Autowired
     public HomeController(final ProductCategoryService productCategoryService) {
         this.productCategoryService = productCategoryService;
-        
     }
     
     /**
