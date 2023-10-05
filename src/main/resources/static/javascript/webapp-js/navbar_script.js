@@ -50,8 +50,6 @@ function menuContainer(productCategory) {
     // Todo replace image name by item.name
     divContainer.style.backgroundImage =
         'url("../images/navbar_category/randonnee-bivouac.jpg")';
-    divContainer.style.backgroundRepeat = 'no-repeat';
-    divContainer.style.backgroundPosition = 'center';
     divContainer.style.boxShadow = '-10px 0px 10px -5px rgba(0,0,0,0.3)';
     // -------------------------------- //
 
