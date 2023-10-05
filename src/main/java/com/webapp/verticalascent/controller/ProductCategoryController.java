@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
-* API REST Product Categories
-*
-* @author Nathan L
-* @version 1.0
-*
-*/
+ * API REST Product Categories
+ *
+ * @author Nathan L
+ * @version 1.0
+ *
+ */
 @RestController
 @RequestMapping("/api/product-categories")
 public class ProductCategoryController {
