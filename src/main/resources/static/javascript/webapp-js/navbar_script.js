@@ -67,4 +67,3 @@ function menuContainer(productCategory) {
     ulSelector.append(listElement);
     // -------------------------------- //
 }
-
