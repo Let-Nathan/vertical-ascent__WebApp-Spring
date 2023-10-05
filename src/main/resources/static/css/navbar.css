@@ -15,10 +15,18 @@
         display: flex;
         flex-direction: column;
         align-content: space-around;
-        margin-top: 20px;
+        margin-top: 15px;
         background-position: center;
         background-repeat: no-repeat;
+        width: 100%;
     }
+
+    .nav-menu-container span {
+        height: 50px;
+
+    }
+
+
 }
 @media (width >= 768px) {
     .nav-menu {
@@ -48,6 +56,13 @@
         margin-top: 20px;
         background-position: left;
         background-repeat: no-repeat;
+        background-size: 100%;
+        border-radius: 0 5px 5px 0;
+    }
+
+    .nav-menu-container span {
+        height: 60px;
+        font-size: 20px;
     }
 
 }
@@ -68,3 +83,4 @@
 .menu-link-style {
     text-decoration: none;
 }
+
