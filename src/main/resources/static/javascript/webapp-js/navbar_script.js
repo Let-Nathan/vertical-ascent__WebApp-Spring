@@ -23,7 +23,6 @@ fetch('api/product-categories')
  * @param productCategory
  */
 function menuContainer(productCategory) {
-
     // Init whole list / container for menu //
     const ulSelector = document.querySelector('.menu-categories');
     const listElement = document.createElement('li');
