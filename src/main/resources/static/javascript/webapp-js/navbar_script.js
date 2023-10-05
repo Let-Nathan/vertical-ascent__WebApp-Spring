@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Fetch api product categories to create category navbar menu
  */
@@ -70,3 +69,4 @@ function menuContainer(productCategory) {
     ulSelector.append(listElement);
     // -------------------------------- //
 }
+
