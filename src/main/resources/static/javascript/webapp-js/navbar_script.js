@@ -33,27 +33,31 @@ function menuContainer(productCategory) {
     // -------------------------------- //
 
     // <list> element //
-    listElement.className = "category " + productCategory.name + " nav-menu-list";
+    listElement.className =
+        'category ' + productCategory.name + ' nav-menu-list';
     // -------------------------------- //
 
     // <a> element make container clickable //
-    aElement.href = "product-category/" + productCategory.id;
-    aElement.class = "aElement";
+    aElement.href = 'product-category/' + productCategory.id;
+    aElement.class = 'aElement';
     aElement.style.textDecoration = "none";
     // -------------------------------- //
 
     // <div> element with background image //
-    divContainer.className = "nav-menu-container shadow-sm p-2 mb-2 container-fluid";
+    divContainer.className =
+        'nav-menu-container shadow-sm p-2 mb-2 container-fluid';
     //Todo replace image name by item.name
-    divContainer.style.backgroundImage = 'url("../images/navbar_category/randonnee-bivouac.jpg")';
-    divContainer.style.backgroundRepeat = "no-repeat";
-    divContainer.style.backgroundPosition = "center";
-    divContainer.style.boxShadow = "-10px 0px 10px -5px rgba(0,0,0,0.3)";
+    divContainer.style.backgroundImage =
+        'url("../images/navbar_category/randonnee-bivouac.jpg")';
+    divContainer.style.backgroundRepeat = 'no-repeat';
+    divContainer.style.backgroundPosition = 'center';
+    divContainer.style.boxShadow = '-10px 0px 10px -5px rgba(0,0,0,0.3)';
     // -------------------------------- //
 
     // <span> element with category name
     spanCategoryTitle.textContent = productCategory.name;
-    spanCategoryTitle.className = "fs-6 fw-bold text-light text-uppercase col-4";
+    spanCategoryTitle.className =
+        'fs-6 fw-bold text-light text-uppercase col-4';
     // -------------------------------- //
 
     // Assembly of elements  //
