@@ -59,7 +59,6 @@ function menuContainer(productCategory) {
     spanCategoryTitle.textContent = productCategory.name;
     spanCategoryTitle.className =
         'fs-6 fw-bold text-light text-uppercase col-4';
-
     // -------------------------------- //
 
     // Assembly of elements  //
@@ -69,4 +68,3 @@ function menuContainer(productCategory) {
     ulSelector.append(listElement);
     // -------------------------------- //
 }
-
