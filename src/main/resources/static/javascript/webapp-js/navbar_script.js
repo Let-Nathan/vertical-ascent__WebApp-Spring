@@ -5,7 +5,7 @@ fetch('api/product-categories')
     .then((response) => {
         if (!response.ok) {
             throw new Error(
-                'Unable to obtain response from API' + response.statusText
+                'Unable to obtain response from API : ' + response.statusText,
             );
         }
         return response.json();
