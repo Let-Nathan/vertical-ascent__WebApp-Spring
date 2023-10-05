@@ -23,6 +23,7 @@ fetch('api/product-categories')
  * @param productCategory
  */
 function menuContainer(productCategory) {
+
     // Init whole list / container for menu //
     const ulSelector = document.querySelector('.menu-categories');
     const listElement = document.createElement('li');
@@ -57,6 +58,7 @@ function menuContainer(productCategory) {
     spanCategoryTitle.textContent = productCategory.name;
     spanCategoryTitle.className =
         'fs-6 fw-bold text-light text-uppercase col-4';
+
     // -------------------------------- //
 
     // Assembly of elements  //
