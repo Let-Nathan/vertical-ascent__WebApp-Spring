@@ -17,12 +17,7 @@ public class ProductCategoryService {
 	
 	private final ProductCategoryRepository productCategoryRepository;
 	
-	/**
-	* Dependency injection for userRepository
-	*
-	* @param productCategoryRepository (Data access)
-	*
-	*/
+	
 	@Autowired
 	public ProductCategoryService(ProductCategoryRepository productCategoryRepository) {
 		this.productCategoryRepository = productCategoryRepository;
