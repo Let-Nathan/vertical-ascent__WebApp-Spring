@@ -31,7 +31,6 @@ public class HomeController {
     /**
      * Default home path ==> @Todo Router config file.
      *
-     * @param model (Model injection to view variable)
      * @return The view name
      *
      */
