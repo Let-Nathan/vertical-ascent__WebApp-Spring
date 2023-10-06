@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * Controller class for Home path
+ * Controller class for Home path.
  *
  * @author Nathan L.
  * @version 1.0
@@ -36,17 +36,8 @@ public class HomeController {
      *
      */
     @GetMapping("/")
-    public final String home(Model model) {
+    public final String home() {
         return "home";
     }
     
-    /**
-     * todo --> Delete after uses
-     *
-     *
-     */
-    @GetMapping("/categories")
-    public final String categories(Model model) {
-        return "/fragments/_menu-category";
-    }
 }

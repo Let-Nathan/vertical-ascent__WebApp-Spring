@@ -4,7 +4,7 @@ import com.webapp.verticalascent.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Access and manage "User" data
+ * Access and manage "User" data.
  *
  * @author Nathan L
  * @version 1.0
