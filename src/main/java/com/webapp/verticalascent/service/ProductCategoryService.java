@@ -1,8 +1,8 @@
 package com.webapp.verticalascent.service;
 
 import com.webapp.verticalascent.entity.ProductCategory;
-import com.webapp.verticalascent.repository.ProductCategoryRepository;
 import java.util.List;
+import com.webapp.verticalascent.repository.ProductCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +15,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductCategoryService {
 	
-	private final ProductCategoryRepository productCategoryRepository;
-	
+	private final ProductCategoryRepository ProductCategoryRepository;
 	
 	@Autowired
 	public ProductCategoryService(ProductCategoryRepository productCategoryRepository) {
-		this.productCategoryRepository = productCategoryRepository;
+		this.ProductCategoryRepository = productCategoryRepository;
 	}
 	
 	/**
@@ -28,7 +27,7 @@ public class ProductCategoryService {
 	* @return ProductCategory
 	*/
 	public List<ProductCategory> getAllProductCategory() {
-		return productCategoryRepository.findAll();
+		return ProductCategoryRepository.findAll();
 	}
 	
 }
