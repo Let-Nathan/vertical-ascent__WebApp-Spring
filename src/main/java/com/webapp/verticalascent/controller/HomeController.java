@@ -39,4 +39,9 @@ public class HomeController {
         return "home";
     }
     
+    @GetMapping("/dino")
+    public final String game() {
+        return "fragments/_dino-game";
+    }
+    
 }
