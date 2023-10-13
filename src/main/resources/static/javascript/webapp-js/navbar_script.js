@@ -50,7 +50,8 @@ function menuContainer(productCategory) {
         'flex-row col-lg-12 shadow-lg bg-body';
     // Todo replace image name by item.name
     divContainer.style.backgroundImage =
-        'url("../images/navbar_category/randonnee-bivouac.jpg")';
+        `url("../images/navbar_category/${productCategory.name}.jpg")`;
+    console.log(productCategory.name);
     // -------------------------------- //
 
     // <span> element with category name
