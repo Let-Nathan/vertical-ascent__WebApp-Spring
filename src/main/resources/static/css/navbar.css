@@ -16,6 +16,7 @@
         flex-direction: column;
         align-content: space-around;
 <<<<<<< HEAD
+<<<<<<< HEAD
         margin-top: 15px;
         background-position: center;
         background-repeat: no-repeat;
@@ -30,10 +31,24 @@
 
 =======
         margin-top: 20px;
+=======
+        margin-top: 15px;
+>>>>>>> 6b77a51 (Fix: Responsive labtop menu display)
         background-position: center;
         background-repeat: no-repeat;
+        width: 100%;
     }
+<<<<<<< HEAD
 >>>>>>> 7f7bee9 (Fix: Navbar menu responsive wip (todo: height and width))
+=======
+
+    .nav-menu-container span {
+        height: 50px;
+
+    }
+
+
+>>>>>>> 6b77a51 (Fix: Responsive labtop menu display)
 }
 @media (width >= 768px) {
     .nav-menu {
@@ -63,7 +78,6 @@
         margin-top: 20px;
         background-position: left;
         background-repeat: no-repeat;
-<<<<<<< HEAD
         background-size: 100%;
         border-radius: 0 5px 5px 0;
     }
@@ -71,8 +85,6 @@
     .nav-menu-container span {
         height: 60px;
         font-size: 20px;
-=======
->>>>>>> 7f7bee9 (Fix: Navbar menu responsive wip (todo: height and width))
     }
 
 }
@@ -93,7 +105,3 @@
 .menu-link-style {
     text-decoration: none;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 7f7bee9 (Fix: Navbar menu responsive wip (todo: height and width))
