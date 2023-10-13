@@ -63,7 +63,7 @@ function menuContainer(productCategory) {
         'justify-content-center';
     // -------------------------------- //
 
-    // Assembly of elements  //
+    //  Elements Assembly  //
     divContainer.append(spanCategoryTitle);
     aElement.append(divContainer);
     listElement.append(aElement);
