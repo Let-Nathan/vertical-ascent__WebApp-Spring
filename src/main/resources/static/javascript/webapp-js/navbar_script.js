@@ -48,9 +48,11 @@ function menuContainer(productCategory) {
     divContainer.className =
         'nav-menu-container shadow-sm p-2 mb-3 ' +
         'flex-row col-lg-12 shadow-lg bg-body';
-    // Todo replace image name by item.name
+
+    // Todo implement an image collection
+    //  (images name != category name = empty container)
     divContainer.style.backgroundImage =
-        'url("../images/navbar_category/randonnee-bivouac.jpg")';
+        `url("../images/navbar_category/${productCategory.name}.jpg")`;
     // -------------------------------- //
 
     // <span> element with category name
@@ -69,3 +71,17 @@ function menuContainer(productCategory) {
     // -------------------------------- //
 }
 
+/**
+ * Event listener to close the open navbar-menu when a click occurs
+ * outside the div.
+ */
+window.addEventListener('click', function(event) {
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    const menuCategories = document.querySelector('.menu-categories');
+    // Show is a class name added by bootstrap aria controls
+    if (navbarCollapse.classList.contains('show')) {
+        if (!menuCategories.contains(event.target)) {
+            navbarCollapse.classList.remove('show');
+        }
+    }
+});
