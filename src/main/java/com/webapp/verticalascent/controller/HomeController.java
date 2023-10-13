@@ -1,10 +1,13 @@
 package com.webapp.verticalascent.controller;
 
+import com.webapp.verticalascent.entity.ProductCategory;
 import com.webapp.verticalascent.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 /**
  * Controller class for Home path.
@@ -35,7 +38,9 @@ public class HomeController {
      *
      */
     @GetMapping("/")
-    public final String home() {
+    public final String home(Model model) {
+        List<ProductCategory> productCategories = productCategoryService.getAllProductCategory();
+        model.addAttribute("productCategories", productCategories);
         return "home";
     }
     
