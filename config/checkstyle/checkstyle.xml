@@ -21,7 +21,7 @@
 
     <property name="charset" value="UTF-8"/>
 
-    <property name="severity" value="warning"/>
+    <property name="severity" value="error"/>
 
     <property name="fileExtensions" value="java, properties, xml"/>
     <!-- Excludes all 'module-info.java' files              -->
@@ -302,10 +302,10 @@
         <module name="NonEmptyAtclauseDescription"/>
         <module name="InvalidJavadocPosition"/>
         <module name="JavadocTagContinuationIndentation"/>
-<!--        <module name="SummaryJavadoc">-->
-<!--            <property name="forbiddenSummaryFragments"-->
-<!--                      value="^@return the *|^This method returns |^A [{]@code [a-zA-Z0-9]+[}]( is a )"/>-->
-<!--        </module>-->
+        <module name="SummaryJavadoc">
+            <property name="forbiddenSummaryFragments"
+                      value="^@return the *|^This method returns |^A [{]@code [a-zA-Z0-9]+[}]( is a )"/>
+        </module>
         <module name="JavadocParagraph"/>
         <module name="RequireEmptyLineBeforeBlockTagGroup"/>
         <module name="AtclauseOrder">

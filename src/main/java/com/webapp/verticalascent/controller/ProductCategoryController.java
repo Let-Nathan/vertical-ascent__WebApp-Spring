@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * API REST Product Categories
+ * API REST Product Categories.
  *
  * @author Nathan L
  * @version 1.0

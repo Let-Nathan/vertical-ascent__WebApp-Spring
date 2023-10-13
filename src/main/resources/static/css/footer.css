@@ -1,0 +1,13 @@
+.footer-menu {
+    background-color: #ced4da;
+}
+
+.footer-title-category {
+    font-weight: bold;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
