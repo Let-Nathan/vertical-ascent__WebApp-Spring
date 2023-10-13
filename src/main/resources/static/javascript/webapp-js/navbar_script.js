@@ -48,7 +48,8 @@ function menuContainer(productCategory) {
     divContainer.className =
         'nav-menu-container shadow-sm p-2 mb-3 ' +
         'flex-row col-lg-12 shadow-lg bg-body';
-    // Todo implement an image collection (images name != category name = empty container)
+    // Todo implement an image collection
+    //  (images name != category name = empty container)
     divContainer.style.backgroundImage =
         `url("../images/navbar_category/${productCategory.name}.jpg")`;
     // -------------------------------- //
@@ -70,7 +71,8 @@ function menuContainer(productCategory) {
 }
 
 /**
- * Event listener to close the open navbar-menu when a click occurs outside the div.
+ * Event listener to close the open navbar-menu when a click occurs
+ * outside the div.
  */
 window.addEventListener('click', function(event) {
     const navbarCollapse = document.querySelector('.navbar-collapse');
