@@ -1,0 +1,9 @@
+@media (width >= 768px ) {
+    .container-image-categories {
+        width: 100%;
+        max-height: 168px;
+        display: block;
+        object-fit: cover;
+        object-position: center;
+    }
+}
