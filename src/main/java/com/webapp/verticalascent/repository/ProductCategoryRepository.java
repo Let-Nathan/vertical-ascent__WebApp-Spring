@@ -5,8 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Access and manage "Product Category" data.
 =======
+=======
+>>>>>>> f674c7f (fixing some checksytles errors)
  * Access and manage "Product Category" data
 >>>>>>> f674c7f (fixing some checksytles errors)
  *
