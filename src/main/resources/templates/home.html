@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,10 +13,10 @@
 <body>
     <div th:replace="fragments/_navbar.html"></div>
     <div th:include="fragments/_container-category"></div>
+    <footer>
+        <div th:replace="fragments/_footer.html"></div>
+    </footer>
 </body>
-<footer>
-    <div th:replace="fragments/_footer.html"></div>
-</footer>
 
 <script src="/javascript/bootstrap/bootstrap.min.js"></script>
 </html>
