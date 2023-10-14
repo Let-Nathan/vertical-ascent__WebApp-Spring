@@ -11,8 +11,10 @@
     <link rel="stylesheet" href="/css/categories-container.css">
 </head>
 <body>
-    <div th:replace="fragments/_navbar.html"></div>
-    <div th:include="fragments/_container-category"></div>
+    <div class="main-content-container">
+        <div th:replace="fragments/_navbar.html"></div>
+        <div th:include="fragments/_container-category"></div>
+    </div>
     <footer>
         <div th:replace="fragments/_footer.html"></div>
     </footer>
