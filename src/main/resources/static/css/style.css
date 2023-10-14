@@ -12,9 +12,18 @@ body {
     margin: 0;
     font-size: 1rem;
     font-family: Arial, sans-serif;
-    padding: 0;
+    padding: 0 0 100px 0;
+
 }
 
 footer {
     bottom: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 0;
 }
+
+.navbar-collapse {
+    z-index: 1;
+}
+

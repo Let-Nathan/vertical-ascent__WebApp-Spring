@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
-    <div class="container-fluid">
-        <ul class="menu-categories row shadow-sm container-fluid d-flex list-unstyled">
-            <li th:each="category: ${productCategories}" class="col-6 col-sm-4 col-lg-3 p-lg-4 p-2 h-50">
-                <div class="modal-content rounded-4 shadow">
-                    <p class="fw-bold mb-0 p-2 text-center" th:text="${category.name}"></p>
-                    <div class="img-container">
-                        <img class="container-image-categories img-fluid card-img" th:src="@{'images/navbar_category/'
-                        + ${category.name} + '.jpg'}" th:alt="${category.name}">
+<div class="container container-categories">
+    <div class="row">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Navigation switch button -->
+            <p class="carousel-control-prev sr-only text-black text-end carousel-control-prev text-end" role="button" data-slide="prev" href="#myCarousel">Previous</p>
+            <p class="carousel-control-next sr-only text-black" href="#myCarousel" role="button" data-slide="next">Next</p>
+            <!-- Slide Wrapper -->
+            <div class="carousel-inner">
+                <div th:each="category, iterStat : ${productCategories}"
+                     class="carousel-item"
+                     th:classappend="${iterStat.index == 0} ? 'active' : ''">
+                    <div class="container d-flex justify-content-center">
+                        <div class="modal-content rounded-4 mt-4 mb-5 shadow-sm">
+                            <p class="fw-bold mb-0 p-2 text-center container-category-name" th:text="${category.name}"></p>
+                            <div class="img-container">
+                                <img class="container-image-categories img-fluid card-img rounded-bottom-4 mt-2"
+                                     th:src="@{'images/navbar_category/'+ ${category.name} + '.jpg'}"
+                                     th:alt="${category.name}">
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </li>
-        </ul>
+            </div>
+        </div>
+
     </div>
+</div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </html>
