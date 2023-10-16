@@ -13,7 +13,12 @@
 <body>
     <div class="main-content-container">
         <div th:replace="fragments/_navbar.html"></div>
-        <div th:include="fragments/_container-category"></div>
+        <section id="category-carousel-section">
+            <div th:include="fragments/_container-category.html"></div>
+        </section>
+
+            <!--<div th:include="fragments/_popular-product-section.html"></div>-->
+
     </div>
     <footer>
         <div th:replace="fragments/_footer.html"></div>
