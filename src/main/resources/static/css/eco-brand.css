@@ -1,0 +1,9 @@
+/**
+ @todo change id when eco brand log impl is made
+ */
+#eco-brand-card {
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+
+}
