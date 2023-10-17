@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -9,12 +9,16 @@
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/categories-container.css">
+    <link rel="stylesheet" href="/css/popular-product.css">
 </head>
 <body>
     <div class="main-content-container">
         <div th:replace="fragments/_navbar.html"></div>
-        <section id="category-carousel-section">
-            <div th:include="fragments/_container-category.html"></div>
+        <section id="container-category" class="mb-4 mt-4">
+            <div th:include="fragments/_home/_container-category.html"></div>
+        </section>
+        <section id="popular-product">
+            <div th:include="fragments/_popular-product-section.html"></div>
         </section>
         <div th:include="fragments/_home/_container-category"></div>
     </div>

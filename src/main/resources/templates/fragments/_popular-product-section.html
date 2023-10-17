@@ -1,8 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="fr">
-<div class="container-fluid">
-    <img class="container-image-categories img-fluid card-img rounded-bottom-4 mt-2"
-        th:src="@{'images/popular_product/banner.jpg'}"
-         th:alt="Une images bannière pour la section des produits populair du site">
+<div class="container-fluid m-0 p-0 popular-product-container">
+    <!-- Static banner img -->
+    <div id="banner-image" class="d-flex flex-column justify-content-center mb-4">
+        <p class="display-4 text-white col-md-3">Nos produits</p>
+        <p class="display-4 text-white col-md-4">aussi populaire</p>
+        <p class="display-4 text-white col-md-6">que les frères Mawen</p>
+    </div>
+    <!-- Whole popular product container -->
+    <div class="container-fluid d-flex justify-content-around">
+        <!-- Card product -->
+        <div class="container-card card col-5 col-md-5 col-lg-2 shadow bg-body rounded border-0">
+            <!-- @Todo implement product link -->
+            <a href="#" class="text-decoration-none text-5 text-md-">
+                <!-- @Todo implement product img from controller -->
+                <div class="card-image">
+                    <img class="img-fluid rounded-top-2" src="/images/navbar_category/Trail%20et%20Running.jpg" alt="Image d'un produit populaire">
+                </div>
+                <!-- @Todo implement product info -->
+                <div class="card-body">
+                    <p id="product-price" class="d-flex justify-content-end text-danger text-uppercase fw-bold">155,50€</p>
+                    <h5 class="card-title text-dark">Product title</h5>
+                    <p class="card-text text-dark display-0 ">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
 </div>
-</html>
+

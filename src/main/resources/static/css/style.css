@@ -21,3 +21,7 @@ body {
 .navbar-collapse {
     z-index: 1;
 }
+
+#popular-product {
+    background: linear-gradient(to right, rgba(128, 128, 128, 0.1), white);
+}
