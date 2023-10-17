@@ -57,9 +57,9 @@ function menuContainer(productCategory) {
 
     // <span> element with category name
     spanCategoryTitle.textContent = productCategory.name;
-    spanCategoryTitle.className ='span-menu-text fw-bold text-light text-uppercase col-4 ' +
-        'col-md-1 d-flex flex-column align-items-start ' +
-        'justify-content-center'
+    spanCategoryTitle.className ='span-menu-text fw-bold text-light ' +
+        'text-uppercase col-4 col-md-1 d-flex flex-column ' +
+        'align-items-start justify-content-center'
         ;
     // -------------------------------- //
 
