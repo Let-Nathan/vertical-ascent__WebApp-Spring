@@ -23,5 +23,5 @@ body {
 }
 
 #popular-product {
-    background: linear-gradient(to right, rgba(128, 128, 128, 0.1), white);
+    background: linear-gradient(to right, rgba(128, 128, 128, 10%), white);
 }
