@@ -1,0 +1,14 @@
+.container-fluid #banner-image {
+    background-image: url("../images/popular_product/banner.jpg");
+    background-repeat: no-repeat;
+
+}
+
+#banner-image {
+    height: 450px;
+}
+
+.card-image img {
+    max-height: 300px;
+    min-width: 100%;
+}
