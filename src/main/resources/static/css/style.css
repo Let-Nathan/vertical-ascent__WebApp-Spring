@@ -22,6 +22,10 @@ body {
     z-index: 1;
 }
 
-#popular-product {
+#home-section {
     background: linear-gradient(to right, #80808019, white);
+}
+
+section #popular-product {
+    margin-bottom: 1.5rem;
 }
