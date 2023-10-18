@@ -22,8 +22,13 @@ body {
     z-index: 1;
 }
 
-#home-section {
+#popular-product #eco-brand #article {
     background: linear-gradient(to right, #80808019, white);
+}
+
+#user-rating {
+    background: linear-gradient(to bottom, #80808019, white);
+
 }
 
 section #popular-product {
