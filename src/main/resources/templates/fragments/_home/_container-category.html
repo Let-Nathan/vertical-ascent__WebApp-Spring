@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<div class="container container-categories">
     <div class="d-flex flex-column">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Slide Wrapper -->
-            <div class="carousel-inner col-12">
+            <div class="carousel-inner col-12 mt-3">
                 <div th:each="category, iterStat : ${productCategories}"
                      class="carousel-item"
                      th:classappend="${iterStat.index == 0} ? 'active' : ''">
@@ -23,14 +22,13 @@
     </div>
 
     <!-- Navigation switch button -->
-    <div class="carousel-controls d-flex justify-content-center">
+    <div class="carousel-controls d-flex justify-content-center mb-5">
         <div class="col-md-3 col-6 d-flex justify-content-around">
             <p class="carousel-control-prev sr-only text-black text-center" role="button" data-slide="prev" href="#myCarousel">Previous</p>
             <p class="carousel-control-next sr-only text-black" href="#myCarousel" role="button" data-slide="next">Next</p>
         </div>
     </div>
 
-</div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
