@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<div id="main-rating" class="container d-flex align-items-center flex-column p-0">
+    <!-- Main rating container -->
+    <div class="container h-flex justify-content-center">
+        <div class="d-flex justify-content-center text-center">
+            <p id="title-rating" class="text-justify m-3 p-0 fw-bold fs-4 p-0">Excellent</p>
+            <!-- Stars container -->
+            <th:block th:each="i: ${#numbers.sequence(1, 5)}">
+                <img src="/images/user_rating/star.svg" alt="image d'une étoile" class="h3">
+            </th:block>
+        </div>
+        <p class="text-muted fst-italic text-center m-0 p-0">Basé sur les <strong>x avis</strong> laissé sur le site</p>
+    </div>
+    <!-- User rating container -->
+    <div class="container-fluid p-0">
+        <p class="text-muted text-start m-1">Nos avis 4 et 5 étoiles</p>
+        <!-- User card container-->
+        <div class="card-user-rating-container d-flex justify-content-center mt-4">
+            <!-- User card -->
+            <div class="card bg-gradient shadow col-11 d-fle justify-content-center">
+                <div class="h-flex col m-2">
+                    <th:block th:each="i: ${#numbers.sequence(1, 5)}">
+                        <img src="/images/user_rating/star.svg">
+                    </th:block>
+                </div>
+                <p class="card-text text-muted mt-0 m-2">John, il y a 15 heures</p>
+                <p class="card-text m-2 fw-bold"> Ce produit est vraiment formidable, je recommandes</p>
+                <div class="btn-container container-fluid d-flex justify-content-center">
+                    <a class="text-decoration-none col-6">
+                        <p class="text-success text-center m-0 p-0 mt-2 mb-2 fw-bold">En savoir plus</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
