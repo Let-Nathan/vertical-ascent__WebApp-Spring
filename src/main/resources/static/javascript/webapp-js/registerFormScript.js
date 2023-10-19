@@ -1,12 +1,13 @@
-document.getElementById("input-confirmPassword").addEventListener("input", function() {
-    let password = document.getElementById("input-password").value;
-    let confirmPassword = this.value;
-    let errorSpan = document.getElementById("passwordError");
+document.getElementById("input-confirmPassword")
+        .addEventListener("input", function() {
+    const PASSWORD = document.getElementById('input-password').value;
+    const CONFIRM_PASSWORD = this.value;
+    const ERROR_SPAN = document.getElementById('passwordError');
 
-    if (password === confirmPassword) {
-    errorSpan.textContent = "";
+    if (PASSWORD === CONFIRM_PASSWORD) {
+        ERROR_SPAN.textContent = '';
     } else {
-        errorSpan.textContent = "Les mots de passe ne correspondent pas";
-        errorSpan.class = "text-danger";
+        ERROR_SPAN.textContent = 'Les mots de passe ne correspondent pas';
+        ERROR_SPAN.class = 'text-danger';
     }
 });
