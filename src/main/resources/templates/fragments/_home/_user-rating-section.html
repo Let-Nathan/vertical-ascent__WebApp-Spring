@@ -2,10 +2,10 @@
     <!-- Main rating container -->
     <div class="container-fluid d-flex flex-column justify-content-center justify-content-md-start p-0 ">
         <div class="d-flex text-center">
-            <p id="title-rating" class="text-justify ms-3 ms-md3 ms-lg-3 mb-0 p-0 fw-bold fs-4 p-0 blockquote">Excellent</p>
+            <p id="title-rating" class="text-justify ms-3 ms-md3 ms-lg-3 mb-0 p-0 fw-bold fs-4 p-0 blockquote mt-3">Excellent</p>
             <!-- Stars container -->
             <th:block th:each="i: ${#numbers.sequence(1, 5)}">
-                <img src="/images/user_rating/star.svg" alt="image d'une étoile" class="h3 m-1">
+                <img src="/images/user_rating/star.svg" alt="image d'une étoile" class="h3 m-1 mt-3">
             </th:block>
         </div>
         <!-- @todo add number of customer's advice -->
@@ -29,7 +29,7 @@
                 <p class="card-text text-muted mt-0 m-2">John, il y a 15 heures</p>
                 <p class="card-text m-2 fw-bold text-lg-center"> Ce produit est vraiment formidable, je recommandes</p>
                 <div class="btn-container container-fluid d-flex justify-content-center">
-                    <a class="text-decoration-none col-6">
+                    <a class="text-decoration-none col-6" href="#">
                         <p class="text-success text-center m-0 p-0 mt-2 mb-2 fw-bold">En savoir plus</p>
                     </a>
                 </div>
