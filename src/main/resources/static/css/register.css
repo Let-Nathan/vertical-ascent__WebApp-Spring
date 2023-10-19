@@ -1,0 +1,7 @@
+#banner-image {
+    background-image: url("../images/register/banner.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+
+}
