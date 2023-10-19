@@ -1,5 +1,5 @@
-document.getElementById("input-confirmPassword")
-        .addEventListener("input", function() {
+document.getElementById('input-confirmPassword')
+        .addEventListener('input', function() {
     const PASSWORD = document.getElementById('input-password').value;
     const CONFIRM_PASSWORD = this.value;
     const ERROR_SPAN = document.getElementById('passwordError');
