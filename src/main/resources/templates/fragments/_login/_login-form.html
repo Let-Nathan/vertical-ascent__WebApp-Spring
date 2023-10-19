@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<h3 class="fw-bold text-uppercase col-8 mt-4">Identifiez-vous ou créer un compte </h3>
-<p class="text-dark">Vous avez déjà commandé sur notre site ? Connectez-vous simplement</p>
+<h3 class="fw-bold text-uppercase col-8 mt-4 ms-3 m-0">Identifiez-vous ou créer un compte </h3>
+<p class="text-dark ms-3">Vous avez déjà commandé sur notre site ? Connectez-vous simplement</p>
 <!-- Form login container -->
 <div class="container-fluid d-flex justify-content-center col-lg-6">
     <!-- Form -->
@@ -9,10 +9,14 @@
     <input type="email" id="inputEmail" class="form-control mb-2" placeholder="Email address" required="" autofocus="">
     <label for="inputPassword" class="sr-only mb-2">Mot de passe</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-    <div class="checkbox mb-3 mt-3">
+    <!-- Remember me / Forget password Container -->
+    <div class="checkbox mb-3 mt-3 d-flex justify-content-between">
         <label>
             <input type="checkbox" value="remember-me"> Se souvenir de moi
         </label>
+        <a href="#" class="text-decoration-underline link-underline-dark">
+            <p class="text-dark">Mot de passe oublié ?</p>
+        </a>
     </div>
     <button class="btn btn-lg btn-danger btn-block mt-1" type="submit">Connexion</button>
 </form>
@@ -25,5 +29,7 @@
         Créez votre compte dès maintenant et passez vos commande facilement,
         suivez leurs avancement et rejoignez le programme de fidélité !
     </p>
-    <button class="btn btn-primary text-uppercase">S'enregistrer</button>
+    <a href="#" class="text-decoration-none">
+        <button class="btn btn-primary text-uppercase">S'enregistrer</button>
+    </a>
 </div>
