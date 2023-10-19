@@ -14,13 +14,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoginController {
 	
 	/**
-	 * Default home path ==> @Todo Router config file.
+	 * Login path
 	 *
 	 * @return The view name
 	 *
 	 */
 	@GetMapping("/login")
-	public final String home() {
+	public final String login() {
 		return "login";
+	}
+	
+	/**
+	 * Register path
+	 *
+	 * @return The view name
+	 *
+	 */
+	@GetMapping("/register")
+	public final String register() {
+		return "register";
 	}
 }
