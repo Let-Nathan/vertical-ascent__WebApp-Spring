@@ -1,9 +1,104 @@
 <!DOCTYPE html>
-<nav aria-label="breadcrumb">
+<nav aria-label="breadcrumb" class="mt-5 mb-4">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
         <!-- @todo impl categories redirect -->
-        <li class="breadcrumb-item"><a href="/categories"></a></li>
+        <li class="breadcrumb-item"><a href="/categories">categories name</a></li>
         <li class="breadcrumb-item active" aria-current="page"></li>
     </ol>
 </nav>
+<!-- Top category title description container -->
+<div class="product-title-description d-flex flex-column">
+    <div id="title-container" class="d-flex mb-2">
+        <!-- Return arrow -->
+        <a href="/" class="text-decoration-none d-flex flex-column justify-content-center">
+            <img src="/images/icon/arrow-left.svg" alt="Flêche de retour en arrière">
+        </a>
+        <!-- @Todo impl product category: name, desc -->
+        <h1 class="text-uppercase fw-bold ms-3 mb-0 mt-0 p-0 col-6">Product Category</h1>
+    </div>
+    <p id="categories-description" class="fw-semibold">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut nunc enim.
+        Nam ut nisl sit amet ligula laoreet porttitor.
+        Nam aliquam nibh nec pulvinar venenatis. Nulla luctus luctus tincidunt. Nulla feugiat elit
+        ut metus scelerisque laoreet. Aliquam posuere enim tempus ligula pellentesque, quis tincidunt
+        ex aliquet.
+    </p>
+</div>
+<!-- Products container -->
+<div class="d-flex flex-wrap justify-content-center justify-content-around product-container p-0 m-0">
+    <!-- card product @todo impl product from db (img path, desc, alt, price, discount, product id url path) -->
+    <a href="/product/" class="text-decoration-none">
+        <div class="card-product card border-top-2 border-bottom-0 border-opacity-50 border-danger mb-5">
+        <img id="product-image" src="/images/product/drago.jpg" alt="images de">
+        <p class="text-danger d-flex justify-content-end">109,99€</p>
+        <p class="fw-bold d-flex justify-content-start text-uppercase mb-0 mt-2">Brand Name</p>
+        <p class="fw-semibold d-flex justify-content-start fw-semibold m-0 mb-4">Product Name</p>
+    </div>
+    </a>
+    <a href="/product/" class="text-decoration-none">
+        <div class="card-product card border-top-2 border-bottom-0 border-opacity-50 border-danger mb-5">
+        <img id="product-image" src="/images/product/drago.jpg" alt="images de">
+        <p class="text-danger d-flex justify-content-end">109,99€</p>
+        <p class="fw-bold d-flex justify-content-start text-uppercase mb-0 mt-2">Brand Name</p>
+        <p class="fw-semibold d-flex justify-content-start fw-semibold m-0 mb-4">Product Name</p>
+    </div>
+    </a>
+    <a href="/product/" class="text-decoration-none">
+        <div class="card-product card border-top-2 border-bottom-0 border-opacity-50 border-danger mb-5">
+        <img id="product-image" src="/images/product/drago.jpg" alt="images de">
+        <p class="text-danger d-flex justify-content-end">109,99€</p>
+        <p class="fw-bold d-flex justify-content-start text-uppercase mb-0 mt-2">Brand Name</p>
+        <p class="fw-semibold d-flex justify-content-start fw-semibold m-0 mb-4">Product Name</p>
+    </div>
+    </a>
+    <a href="/product/" class="text-decoration-none">
+        <div class="card-product card border-top-2 border-bottom-0 border-opacity-50 border-danger mb-5">
+        <img id="product-image" src="/images/product/drago.jpg" alt="images de">
+        <p class="text-danger d-flex justify-content-end">109,99€</p>
+        <p class="fw-bold d-flex justify-content-start text-uppercase mb-0 mt-2">Brand Name</p>
+        <p class="fw-semibold d-flex justify-content-start fw-semibold m-0 mb-4">Product Name</p>
+    </div>
+    </a>
+    <a href="/product/" class="text-decoration-none">
+        <div class="card-product card border-top-2 border-bottom-0 border-opacity-50 border-danger mb-5">
+        <img id="product-image" src="/images/product/drago.jpg" alt="images de">
+        <p class="text-danger d-flex justify-content-end">109,99€</p>
+        <p class="fw-bold d-flex justify-content-start text-uppercase mb-0 mt-2">Brand Name</p>
+        <p class="fw-semibold d-flex justify-content-start fw-semibold m-0 mb-4">Product Name</p>
+    </div>
+    </a>
+    <a href="/product/" class="text-decoration-none">
+        <div class="card-product card border-top-2 border-bottom-0 border-opacity-50 border-danger mb-5">
+        <img id="product-image" src="/images/product/drago.jpg" alt="images de">
+        <p class="text-danger d-flex justify-content-end">109,99€</p>
+        <p class="fw-bold d-flex justify-content-start text-uppercase mb-0 mt-2">Brand Name</p>
+        <p class="fw-semibold d-flex justify-content-start fw-semibold m-0 mb-4">Product Name</p>
+    </div>
+    </a>
+    <a href="/product/" class="text-decoration-none">
+        <div class="card-product card border-top-2 border-bottom-0 border-opacity-50 border-danger mb-5">
+        <img id="product-image" src="/images/product/drago.jpg" alt="images de">
+        <p class="text-danger d-flex justify-content-end">109,99€</p>
+        <p class="fw-bold d-flex justify-content-start text-uppercase mb-0 mt-2">Brand Name</p>
+        <p class="fw-semibold d-flex justify-content-start fw-semibold m-0 mb-4">Product Name</p>
+    </div>
+    </a>
+    <a href="/product/" class="text-decoration-none">
+        <div class="card-product card border-top-2 border-bottom-0 border-opacity-50 border-danger mb-5">
+        <img id="product-image" src="/images/product/drago.jpg" alt="images de">
+        <p class="text-danger d-flex justify-content-end">109,99€</p>
+        <p class="fw-bold d-flex justify-content-start text-uppercase mb-0 mt-2">Brand Name</p>
+        <p class="fw-semibold d-flex justify-content-start fw-semibold m-0 mb-4">Product Name</p>
+    </div>
+    </a>
+    <a href="/product/" class="text-decoration-none">
+        <div class="card-product card border-top-2 border-bottom-0 border-opacity-50 border-danger mb-5">
+        <img id="product-image" src="/images/product/drago.jpg" alt="images de">
+        <p class="text-danger d-flex justify-content-end">109,99€</p>
+        <p class="fw-bold d-flex justify-content-start text-uppercase mb-0 mt-2">Brand Name</p>
+        <p class="fw-semibold d-flex justify-content-start fw-semibold m-0 mb-4">Product Name</p>
+    </div>
+    </a>
+</div>
+<!-- implement filter -->
