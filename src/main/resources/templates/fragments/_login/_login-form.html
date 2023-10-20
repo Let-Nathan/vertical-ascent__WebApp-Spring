@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <h3 class="fw-bold text-uppercase col-8 mt-4 ms-3 m-0">Identifiez-vous ou créer un compte </h3>
 <p class="text-dark ms-3">Vous avez déjà commandé sur notre site ? Connectez-vous simplement</p>
-<!-- Form login container -->
-<div class="container-fluid d-flex justify-content-center col-lg-6">
-    <!-- Form -->
-    <form id="login-form" class="d-flex justify-content-center flex-column col-10 mt-4">
-    <label for="inputEmail" class="sr-only mb-2 mt-3">Identifiant</label>
-    <input type="email" id="inputEmail" class="form-control mb-2" placeholder="Email address" required="" autofocus="">
-    <label for="inputPassword" class="sr-only mb-2">Mot de passe</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-    <!-- Remember me / Forget password Container -->
-    <div class="checkbox mb-3 mt-3 d-flex justify-content-between">
-        <label>
-            <input type="checkbox" value="remember-me"> Se souvenir de moi
-        </label>
-        <a href="#" class="text-decoration-underline link-underline-dark">
-            <p class="text-dark">Mot de passe oublié ?</p>
+<!-- Container -->
+<div class="d-lg-flex justify-content-lg-around">
+    <!-- Form login container -->
+    <div class="container-fluid d-flex justify-content-center col-lg-6">
+        <!-- Form -->
+        <form id="login-form" class="d-flex justify-content-center flex-column col-10 mt-4">
+        <label for="inputEmail" class="sr-only mb-2 mt-3">Identifiant</label>
+        <input type="email" id="inputEmail" class="form-control mb-2" placeholder="Email address" required="" autofocus="">
+        <label for="inputPassword" class="sr-only mb-2">Mot de passe</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+        <!-- Remember me / Forget password Container -->
+        <div class="checkbox mb-3 mt-3 d-flex justify-content-between">
+            <label>
+                <input type="checkbox" value="remember-me"> Se souvenir de moi
+            </label>
+            <a href="#" class="text-decoration-underline link-underline-dark">
+                <p class="text-dark">Mot de passe oublié ?</p>
+            </a>
+        </div>
+        <button class="btn btn-lg btn-danger btn-block mt-1 p-2" type="submit">Connexion</button>
+    </form>
+    </div>
+    <!-- Register container -->
+    <div class="container-fluid col-10 d-flex flex-column mt-2 col-lg-5">
+        <h5 class="mt-5">Vous n'avez jamais commandé sur notre site ?</h5>
+        <p>
+            Ce n'est pas grave, on as tous nos petits défauts .. :)
+            Créez votre compte dès maintenant et passez vos commande facilement,
+            suivez leurs avancement et rejoignez le programme de fidélité !
+        </p>
+        <a href="/register" class="text-decoration-none mt-1">
+            <button class="btn btn-primary text-uppercase w-100 p-2">S'enregistrer</button>
         </a>
     </div>
-    <button class="btn btn-lg btn-danger btn-block mt-1 p-2" type="submit">Connexion</button>
-</form>
-</div>
-<!-- Register container -->
-<div class="container-fluid col-10 d-flex flex-column mt-2 col-lg-5">
-    <h5 class="mt-5">Vous n'avez jamais commandé sur notre site ?</h5>
-    <p>
-        Ce n'est pas grave, on as tous nos petits défauts .. :)
-        Créez votre compte dès maintenant et passez vos commande facilement,
-        suivez leurs avancement et rejoignez le programme de fidélité !
-    </p>
-    <a href="/register" class="text-decoration-none mt-1">
-        <button class="btn btn-primary text-uppercase w-100 p-2">S'enregistrer</button>
-    </a>
 </div>
