@@ -18,4 +18,9 @@ public class ProductCategoryController {
 		return "product";
 	}
 	
+	@GetMapping("/categories")
+	public final String displayCategories() {
+		return "categories";
+	}
+	
 }

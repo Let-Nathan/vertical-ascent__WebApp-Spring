@@ -12,16 +12,18 @@
     <script src="/javascript/bootstrap/bootstrap.min.js"></script>
 </head>
 <body>
-<div th:replace="fragments/_navbar.html"></div>
-<section>
-    <div class="container-fluid" th:include="fragments/_product/_product-section.html"></div>
-</section>
-<section id="user-rating">
-    <div class="container-fluid d-flex align-items-center flex-column mt-5 p-0 col-md-12 col-lg-12 mb-5 m-0"
-         th:include="fragments/_home/_user-rating-section.html">
+    <div class="main-content-container">
+        <div th:replace="fragments/_navbar.html"></div>
+        <section>
+            <div class="container-fluid" th:include="fragments/_product/_product-section.html"></div>
+        </section>
+        <section id="user-rating">
+            <div class="container-fluid d-flex align-items-center flex-column mt-5 p-0 col-md-12 col-lg-12 mb-5 m-0"
+                 th:include="fragments/_home/_user-rating-section.html">
+            </div>
+        </section>
     </div>
-</section>
-<footer>
-    <div th:replace="fragments/_footer.html"></div>
-</footer>
+    <footer>
+        <div th:replace="fragments/_footer.html"></div>
+    </footer>
 </body>
