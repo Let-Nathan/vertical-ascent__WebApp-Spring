@@ -1,11 +1,11 @@
 /**
  * Fetch api product categories to create category navbar menu
  */
-fetch('api/product-categories')
+fetch('/api/product-categories')
     .then((response) => {
         if (!response.ok) {
             throw new Error(
-                'Unable to obtain response from API : ' + response.statusText,
+                'Unable to obtain response from API : ' + response.status,
             );
         }
         return response.json();
@@ -39,7 +39,7 @@ function menuContainer(productCategory) {
     // -------------------------------- //
 
     // <a> element make container clickable //
-    aElement.href = 'product-category/' + productCategory.id;
+    aElement.href = '/product-category/' + productCategory.id;
     aElement.class = 'aElement';
     aElement.style.textDecoration = 'none';
     // -------------------------------- //
