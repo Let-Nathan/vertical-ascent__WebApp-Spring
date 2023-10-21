@@ -1,5 +1,14 @@
 #product-image {
     background-repeat: no-repeat;
     background-position: center center;
-    max-height: 150px;
+    max-height: 250px;
+}
+
+.filter {
+    background: linear-gradient(to right, #e9ecef, white) ;
+}
+
+#filter-icon {
+    height: 30px;
+    width: 30px;
 }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<div class="top-container container-fluid d-flex flex-column">
+    <!-- Container top title filter -->
+    <div class="container-fluid">
+        <div class="left-container d-flex">
+            <img class="m-1     " src="/images/icon/funnel.svg" alt="Icon d'un filtre" id="filter-icon">
+            <p class="fw-bold text-danger h2 ms-4 mb-0">Affiner</p>
+        </div>
+        <img src="/images/icon/x-circle.svg" alt="Icon croix" class="d-md-none">
+    </div>
+    <!-- Separator -->
+    <hr class="hr w-100">
+    <!-- Filter desc container -->
+    <div class="desc-filter-container container-fluid d-flex justify-content-center col-9 mb-3">
+        <p><strong>Affiner votre recherche </strong> pour trouver les produits qui correspondent à vos critères</p>
+    </div>
+</div>
+<p class="h2 mb-2 ms-3">Filtrer par</p>
+<!-- Filter by gender -->
+<div class="filter mt-3">
+    <div class="container-fluid ms-4">
+        <p class="h3">Genre</p>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="mixte" id="mixteFilter">
+            <label class="form-check-label" for="mixteFilter">Mixte</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="femme" id="femmeFilter">
+            <label class="form-check-label" for="femmeFilter">Femme</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="homme" id="hommeFilter">
+            <label class="form-check-label" for="hommeFilter">Homme</label>
+        </div>
+    </div>
+</div>
+
+<!-- Filter by Brand @todo import from db -->
+<div class="filter mt-3">
+    <div class="container-fluid ms-3">
+        <p class="h3">Marques</p>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="nike" id="nikeFilter">
+            <label class="form-check-label" for="nikeFilter">Nike</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="adidas" id="adidasFilter">
+            <label class="form-check-label " for="adidasFilter">Adidas</label>
+        </div>
+    </div>
+</div>
+
+<!-- Filter by Price -->
+<div class="filter mt-3">
+    <div class="container-fluid ms-3 d-flex flex-column">
+        <p class="h3">Prix</p>
+        <label for="priceRange" class="mb-2">Sélectionnez une plage de prix :</label>
+        <input type="range" id="priceRange" min="0" max="100" step="1" class="col-9">
+    </div>
+
+</div>
+
+<!-- Filter by Name -->
+<div class="filter">
+    <div class="container-fluid ms-3 d-flex flex-column">
+        <label for="product-name-filter" class="h3 text-muted">Nom</label>
+        <input class="col-9 rounded-2" type="text" id="product-name-filter">
+    </div>
+</div>
