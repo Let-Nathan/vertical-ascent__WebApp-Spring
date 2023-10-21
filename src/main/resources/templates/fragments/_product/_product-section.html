@@ -26,11 +26,15 @@
     </p>
 </div>
 <!-- Product & filter container -->
-<div id="2-col-lg-container" class="d-flex justify-content-between">
+<div id="2-col-lg-container" class="d-flex justify-content-center justify-content-md-between">
     <!-- implement filter -->
     <div id="filter-scroll-container" data-bs-spy="scroll" data-bs-smooth-scroll="true" tabindex="0" data-offset="1"
-         class="card-filter-container rounded-3 scrollspy overflow-y-scroll d-flex flex-column col-md-3 col-lg-3 d-sm-none d-none d-md-block d-lg-block p-0"
+         class="card-filter-container rounded-3 scrollspy overflow-y-scroll d-flex flex-column col-md-3 col-lg-3 p-0"
          th:include="/fragments/_product/_filter-product">
+    </div>
+    <!-- Bottom container display on mobile -->
+    <div class="bar-filter-container d-md-none d-lg-none d-block"
+     th:includ="/fragments/_product/_container-mobile-filter">
     </div>
     <!-- Products container -->
     <div class="container d-flex flex-wrap row justify-content-between m-0">
