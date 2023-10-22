@@ -23,7 +23,7 @@ body {
 
 /** Middle container gradient **/
 #popular-product #eco-brand #article {
-    background: linear-gradient(to right, rgba(170, 170, 170, 0.1), white);
+    background: linear-gradient(to right, rgba(170, 170, 170, 10), white);
 }
 
 /** User rating gradient **/
