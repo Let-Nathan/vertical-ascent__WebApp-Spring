@@ -12,3 +12,14 @@
     height: 30px;
     width: 30px;
 }
+
+
+.bar-filter-container {
+    z-index: 1;
+    position: fixed;
+    bottom: 0;
+}
+
+.product-container {
+    z-index: 0;
+}
