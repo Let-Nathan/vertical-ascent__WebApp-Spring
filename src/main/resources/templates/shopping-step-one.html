@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/shopping-step.css">
+    <script src="/javascript/bootstrap/bootstrap.min.js"></script>
+    <script src="/javascript/webapp-js/shoppingStepScript.js"></script>
+    <title>Shopping Cart - Vertical Ascent</title>
+</head>
+<body>
+<div class="main-content-container">
+    <div th:replace="fragments/_navbar.html"></div>
+    <section id="shopping-cart-product">
+        <div th:include="/fragments/_order/step-one"></div>
+    </section>
+</div>
+</body>
+</html>

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -9,17 +8,24 @@
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/popular-product.css">
+    <link rel="stylesheet" href="/css/empty-product.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <script src="/javascript/bootstrap/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="main-content-container">
         <div th:replace="fragments/_navbar.html"></div>
-        <section id="container-category" class="mb-4 mt-4 container-categories container">
-            <div th:include="fragments/_section/_container-category.html"></div>
+        <!-- Empty storage display empty shopping cart fragments -->
+        <section id="empty-shopping-cart" class="container-fluid p-0">
+            <div th:include="/fragments/_order/_empty_shopping_cart"></div>
         </section>
-    <section id="popular-product">
-        <div th:include="/fragments/_section/_popular-product-section.html"></div>
-    </section>
+        <section id=""></section>
+        <section id="popular-product">
+            <div th:include="fragments/_section/_popular-product-section.html" class="container-fluid m-0 p-0 popular-product-container mb-4"></div>
+        </section>
     </div>
 </body>
+<footer>
+    <div th:replace="fragments/_footer.html"></div>
+</footer>
 </html>
