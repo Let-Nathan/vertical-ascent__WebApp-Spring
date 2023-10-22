@@ -22,7 +22,7 @@ body {
 }
 
 /** Middle container gradient **/
-#popular-product #eco-brand #article {
+#popular-product #eco-brand #article #shopping-cart-product {
     background: linear-gradient(to right, #80808019, white);
 }
 
