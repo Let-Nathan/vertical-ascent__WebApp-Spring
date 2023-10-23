@@ -15,6 +15,6 @@ public class PurchasingProcessController {
 	
 	@GetMapping("/shopping_cart")
 	public final String shoppingCart() {
-		return "shopping-step-one";
+		return "shopping_cart";
 	}
 }
