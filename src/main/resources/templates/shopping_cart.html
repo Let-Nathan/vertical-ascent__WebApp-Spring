@@ -6,20 +6,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/popular-product.css">
     <script src="/javascript/bootstrap/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="main-content-container">
-        <div th:replace="fragments/_navbar.html"></div>
-        <section id="container-category" class="mb-4 mt-4 container-categories container">
-            <div th:include="fragments/_section/_container-category.html"></div>
-        </section>
-    <section id="popular-product">
-        <div th:include="/fragments/_section/_popular-product-section.html"></div>
-    </section>
-    </div>
+<section id="popular-product">
+    <div th:include="/fragments/_section/_popular-product-section.html"></div>
+</section>
 </body>
 </html>
