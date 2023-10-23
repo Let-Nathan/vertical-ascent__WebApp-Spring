@@ -18,21 +18,21 @@
     <div class="main-content-container">
         <div th:replace="fragments/_navbar.html"></div>
         <section id="container-category" class="mb-4 mt-4 container-categories container">
-            <div th:include="fragments/_section/_container-category.html"></div>
+            <div th:include="fragments/section/_category-section.html"></div>
         </section>
         <div id="home-section">
             <section id="popular-product">
-                <div th:include="fragments/_section/_popular-product-section.html" class="container-fluid m-0 p-0 popular-product-container mb-4"></div>
+                <div th:include="fragments/section/_popular-product-section.html" class="container-fluid m-0 p-0 popular-product-container mb-4"></div>
             </section>
             <section id="eco-brand">
-                <div class="container-fluid d-flex flex-column p-0 " th:include="fragments/_section/_eco-brand-section.html"></div>
+                <div class="container-fluid d-flex flex-column p-0 " th:include="fragments/section/_eco-brand-section.html"></div>
             </section>
             <section id="article">
-                <div class="container-fluid m-0 p-0 mt-5" th:include="fragments/_section/_article-section.html"></div>
+                <div class="container-fluid m-0 p-0 mt-5" th:include="fragments/section/_article-section.html"></div>
             </section>
             <section id="user-rating">
                 <div class="container-fluid d-flex align-items-center flex-column mt-5 p-0 col-md-12 col-lg-12 mb-5 m-0"
-                     th:include="fragments/_section/_user-rating-section.html">
+                     th:include="fragments/section/_user-rating-section.html">
                 </div>
             </section>
         </div>

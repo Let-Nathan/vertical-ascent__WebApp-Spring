@@ -3,23 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/navbar.css">
-    <link rel="stylesheet" href="/css/shopping-step/shopping-step.css">
+    <link rel="stylesheet" href="/css/order/shopping-step-circle.css">
+    <link rel="stylesheet" href="/css/order/shopping-cart.css">
+    <link rel="stylesheet" href="/css/order/product-recommendation.css">
     <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="/css/shopping-step/product-recommendation.css">
     <script src="/javascript/bootstrap/bootstrap.min.js"></script>
     <title>Shopping Cart - Vertical Ascent</title>
 </head>
 <body>
     <div class="main-content-container">
         <div th:replace="fragments/_navbar.html"></div>
-        <section id="shopping-cart-product" class="p-2 pb-4">
-            <div th:include="fragments/_order/_step-one.html"></div>
+        <section>
+            <div th:include="fragments/order/_back-previous-pages.html"></div>
         </section>
         <section>
-            <div id="product-recommendation" class="container-fluid p-0" th:include="fragments/_section/_product-recommendation.html"></div>
+            <div th:include="fragments/order/_step-cirlce-shopping-cart.html"></div>
+        </section>
+        <section>
+            <div th:include="fragments/order/shopping-cart/_card-product-shopping-cart.html"></div>
+        </section>
+        <section>
+            <div th:include="fragments/order/shopping-cart/_delivery-amount-before-free.html"></div>
+        </section>
+        <section>
+            <div th:include="fragments/order/shopping-cart/_shopping-cart-resume.html"></div>
+        </section>
+        <section>
+            <div class="mb-4" th:include="fragments/order/shopping-cart/_question-about-order.html"></div>
+        </section>
+        <section>
+            <div id="product-recommendation" class="container-fluid p-0" th:include="fragments/section/_product-recommendation.html"></div>
         </section>
     </div>
 </body>

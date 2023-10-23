@@ -25,6 +25,6 @@ public class ShoppingProcessController {
 	
 	@GetMapping("/livraison")
 	public final String delivery() {
-		return "delivery";
+		return "shopping-delivery";
 	}
 }

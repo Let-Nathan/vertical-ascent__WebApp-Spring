@@ -17,11 +17,10 @@
         <div th:replace="fragments/_navbar.html"></div>
         <!-- Empty storage display empty shopping cart fragments -->
         <section id="empty-shopping-cart" class="container-fluid p-0">
-            <div th:include="/fragments/_order/_empty_shopping_cart"></div>
+            <div th:include="/fragments/order/_empty-shopping-cart"></div>
         </section>
-        <section id=""></section>
         <section id="popular-product">
-            <div th:include="fragments/_section/_popular-product-section.html" class="container-fluid m-0 p-0 popular-product-container mb-4"></div>
+            <div class="container-fluid m-0 p-0 popular-product-container" th:include="fragments/section/_popular-product-section.html"></div>
         </section>
     </div>
 </body>
