@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  *
  */
 @Controller
-public class PurchasingProcessController {
+public class ShoppingProcessController {
 	
 	@GetMapping("/shopping_cart")
 	public final String shoppingCart() {

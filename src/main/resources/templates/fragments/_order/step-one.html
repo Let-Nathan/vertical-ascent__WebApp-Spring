@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Top container with step  -->
-<div class="container-fluid mb-3 mt-3">
-    <a href="javascript:history.back()" class="text-decoration-none d-flex justify-content-center">
+<div class="container-fluid mb-4">
+    <a href="javascript:history.back()" class="text-decoration-none d-flex justify-content-center   ">
         <img src="/images/icon/arrow-left-short.svg" alt="Icone de retour">
         <p class="fst-italic m-0 text border-dark">Continuer mes achats</p>
     </a>
@@ -33,11 +33,126 @@
 </div>
 <!-- Shopping product title -->
 <div class="container-fluid">
-    <p>Mon Panier</p>
-    <p>Excellent choix</p>
-    <p>voici les produits dans votre panier</p>
+    <p class="h1 mb-3 fw-bold">Mon Panier</p>
+    <p class="mb-0 fw-semibold">Excellent choix</p>
+    <p class="m-0 fw-semibold">voici les produits dans votre panier</p>
 </div>
-<!-- Product shopping -->
-<div class="container-fluid">
+<!-- Product shopping @todo replace by product info -->
+<div class="container-fluid bg-white d-flex p-2 mt-4 rounded-3 border-4 col-11 shadow-lg mb-4">
+    <!-- left-col product img, description and button delete product -->
+    <div class="col-5 d-flex flex-column justify-content-around mb-4">
+        <img class="img-fluid" src="/images/product/drago.jpg" alt="image d'un produit">
+        <p>Ceci est une description non significative d'une paire de pompe qui ne manque pas d'air</p>
+        <button class="btn btn-danger fw-bold">Supprimer</button>
+    </div>
+    <!-- Span space between left and right col product info -->
+    <span class="col-1"></span>
+    <div class="col mb-4 d-flex flex-column justify-content-around">
+        <!-- Product brand and name -->
+        <div class="container-fluid p-0">
+            <p class="fw-bold fs-2 m-0">Marque</p>
+            <p class="fw-semibold fs-3">Product name</p>
+        </div>
+        <!-- Product price and discount -->
+        <div class="container-fluid d-flex p-0">
+            <!-- Price container -->
+            <div class="col flex-column">
+                <p class="mb-1">Prix unitaire</p>
+                <p class="fw-bold mb-1">99,99€</p>
+            </div>
+            <!-- Discount container -->
+            <div class="col d-flex flex-column align-items-center">
+                <p class="bg-warning col-4 mb-1">-9%</p>
+                <p class="text-decoration-line-through text-muted">109,99€</p>
+            </div>
+        </div>
+        <!-- Size or height depends on product -->
+        <div class="container-fluid p-0">
+            <p class="mb-0">Pointure</p>
+            <p class="fw-bold ">41</p>
+        </div>
+        <!-- Product quantity -->
+        <div class="container-fluid p-0 mb-3">
+            <p class="mb-0">Quantité</p>
+            <div class="d-flex justify-content-between">
+                <img class="img-fluid col-2" src="/images/icon/plus-circle.svg" alt="Icon plus pour ajuster la quantitée de l'article">
+                <p class="text-danger m-0 fs-3">1</p>
+                <img class="img-fluid col-2" src="/images/icon/dash-circle.svg" alt="Icon moins pour ajuster la quantitée de l'article">
+            </div>
+        </div>
+        <!-- Product total price -->
+        <div class="container-fluid p-0">
+            <p class="m-0">Prix total</p>
+            <p class="fw-bold m-0">99,99€</p>
+        </div>
+    </div>
+</div>
+<!-- Price need before free delivery @todo replace with total price before free delivery-->
+<div class="container-fluid d-flex justify-content-around col-11 bg-white shadow-lg rounded-3 p-2 mb-3">
+    <img class="img-fluid col-1" src="/images/icon/truck.svg" alt="icon d'un camion de livraison">
+    <p class="col-10 m-0 text-center">Seulement <strong>1€</strong> pour bénificier de la livraison gratuite !</p>
+</div>
+<!-- Reduction and shopping cart resume -->
+<div class="container-fluid col-11 bg-white shadow-lg rounded-3 mb-3 p-0">
+    <!-- Promotion container -->
+    <div class="container-fluid d-flex justify-content-around m-0">
+        <p class="text-danger text-decoration-underline fs-4 mt-2">Un code promo, des points de fidélités ?</p>
+        <img class="img-fluid col-1" src="/images/icon/plus-circle.svg" alt="Icon plus pour ajouter un code promo ou des points de fidélités">
+    </div>
+    <hr>
+    <!-- Shopping resume-->
+    <div class="container-fluid m-0">
+        <!-- Under total container -->
+        <div class="container-fluid d-flex justify-content-between">
+            <p>Sous total</p>
+            <p>99,99 €</p>
+        </div>
+        <!-- Delivery price estimation container -->
+        <div class="container-fluid d-flex justify-content-between">
+            <p>Estimation des frais de livraison</p>
+            <p class="fw-bold">6,90 €</p>
+        </div>
+        <!-- Taxes total price container -->
+        <div class="container-fluid d-flex justify-content-between">
+            <div class="left">
+                <p class="opacity-75 mb-0">Total des taxes</p>
+                <p class="fst-italic text-muted opacity-50">(inclus dans le prix)</p>
+            </div>
+            <p class="right text-muted opacity-75 d-flex align-items-center">17,60€</p>
+        </div>
+        <!-- Total price container -->
+        <div class="container-fluid d-flex justify-content-between">
+            <p class="fw-bold">Total</p>
+            <p class="fw-bold">99,99 €</p>
+        </div>
+        <div class="container-fluid d-flex justify-content-center">
+            <button class="btn col-8 btn-primary text-uppercase mb-4">Valider mon panier</button>
+        </div>
+    </div>
+</div>
+<!-- Question about order -->
+<div class="container-fluid col-11 shadow-lg rounded-3 p-0 bg-white d-flex flex-column justify-content-between">
+    <!-- First paragraph -->
+    <div class="container-fluid justify-content-center">
+        <p class="fw-semibold text-center mt-3">Une question sur votre commande ou simplement besoin d'aide ?</p>
+    </div>
+    <!-- Second paragraph -->
+    <div class="container-fluid">
+        <p class="m-0">Le standard téléphonique est disponnible du lundi au vendredi de 9h00 à 13h00 et de 14h00 à 18h00.</p>
+        <p>Prix d'un appel local.</p>
+    </div>
+    <!-- Third paragraph -->
+    <div class="container-fluid">
+        <p>Vous pouvez contacter le support par e-mail et nous vous répondrons le plus vite possible.</p>
+        <p>
+            La <a href="#" class="text-dark text-decoration-underline">FAQ</a> est également disponnible pour les plus
+            curieux d'entre vous
+        </p>
+    </div>
+    <div class="container-fluid d-flex justify-content-center">
+        <a href="#" class="text-decoration-none">
+            <button class="btn btn-danger text-uppercase mb-4">Nous contacter</button>
+        </a>
+    </div>
+</div>
 
-</div>
