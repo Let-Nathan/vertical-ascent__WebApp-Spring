@@ -13,8 +13,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ShoppingProcessController {
 	
-	@GetMapping("/shopping-cart")
+	@GetMapping("/panier")
 	public final String shoppingCart() {
-		return "shopping-step-one";
+		return "shopping-cart";
+	}
+	
+	@GetMapping("/panier-vide")
+	public final String emptyShoppingCart() {
+		return "empty-shopping-cart";
+	}
+	
+	@GetMapping("/livraison")
+	public final String delivery() {
+		return "delivery";
 	}
 }
