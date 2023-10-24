@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
  *
  */
 @Controller
-public class ProductCategoryController {
+public class ProductController {
 	
 	@GetMapping("/product-category/{id}")
 	public final String displayProduct() {
-		return "product";
+		return "products-list";
 	}
 	
 	@GetMapping("/categories")
