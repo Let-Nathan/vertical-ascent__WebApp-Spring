@@ -7,6 +7,5 @@ document.addEventListener('DOMContentLoaded', function() {
     MOBILE_FILTER_TRIGGER.addEventListener(
         'click', function() {
         DESKTOP_FILTER_CONTAINER.classList.toggle('d-none');
-
     });
 });
