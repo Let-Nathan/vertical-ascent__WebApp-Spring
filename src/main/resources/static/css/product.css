@@ -13,6 +13,10 @@
     width: 30px;
 }
 
+#mobile-filter-container {
+    z-index: 1;
+}
+
 
 .bar-filter-container {
     z-index: 1;

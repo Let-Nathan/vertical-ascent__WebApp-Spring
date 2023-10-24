@@ -20,7 +20,7 @@ public class ShoppingProcessController {
 	
 	@GetMapping("/panier-vide")
 	public final String emptyShoppingCart() {
-		return "empty-shopping-cart";
+		return "shopping-cart-empty";
 	}
 	
 	@GetMapping("/livraison")
