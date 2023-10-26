@@ -19,24 +19,25 @@
     <section>
         <div th:include="fragments/order/_back-previous-pages.html"></div>
     </section>
-    <section class="mt-3 mb-5s">
+    <section class="mt-3 mb-5">
         <div th:include="fragments/order/_step-cirlce-shopping-cart.html"></div>
-    </section>
-    <section class="mb-3">
-        <div th:include="fragments/order/delivery/_delivery-container.html"></div>
     </section>
     <section>
         <div th:include="fragments/order/delivery/_product.html"></div>
     </section>
     <section>
+    <section class="mb-5">
+        <div class="d-flex flex-column align-items-center" th:include="fragments/order/delivery/_delivery-container.html"></div>
+    </section>
+    <section class="mb-5">
         <div th:include="fragments/order/delivery/_delivery-cart-resume.html"></div>
     </section>
-    <section>
+    <section class="mb-5">
         <div th:include="fragments/order/_question-about-order.html"></div>
     </section>
 </div>
 </body>
-<footer class="mt-5">
+<footer>
     <div th:replace="fragments/_footer.html"></div>
 </footer>
 </html>
