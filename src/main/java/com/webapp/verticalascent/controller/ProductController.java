@@ -19,6 +19,7 @@ public class ProductController {
 	}
 	
 	@GetMapping("/product/{id}")
-	public final String productDetails(){return "product-details";}
-	
+	public final String productDetails() {
+		return "product-details";
+	}
 }
