@@ -40,7 +40,7 @@ function menuContainer(productCategory) {
     // -------------------------------- //
 
     // <a> element make container clickable //
-    A_ELEMENT.href = '/product-category/' + productCategory.id;
+    A_ELEMENT.href = '/product-category/' + productCategory.name;
     A_ELEMENT.class = 'aElement';
     A_ELEMENT.style.textDecoration = 'none';
     // -------------------------------- //

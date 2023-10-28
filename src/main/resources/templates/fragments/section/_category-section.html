@@ -7,14 +7,16 @@
                      class="carousel-item"
                      th:classappend="${iterStat.index == 0} ? 'active' : ''">
                     <div class="container d-flex justify-content-center">
-                        <div class="modal-content rounded-4 mt-4 mb-5 shadow-lg d-flex flex-column align-content-between">
-                            <p class="fw-bold mb-0 p-2 text-center container-category-name" th:text="${category.name}"></p>
+                        <a th:href="@{'/product-category/' + ${category.name}}" class="text-decoration-none">
+                            <div class="modal-content rounded-4 mt-4 mb-5 shadow-lg d-flex flex-column align-content-between">
+                            <p class="fw-bold mb-0 p-2 text-center container-category-name text-dark" th:text="${category.name}"></p>
                             <div class="img-container">
                                 <img class="container-image-categories img-fluid card-img rounded-bottom-4 mt-2"
                                      th:src="@{'images/navbar_category/'+ ${category.name} + '.jpg'}"
                                      th:alt="${category.name}">
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
             </div>
