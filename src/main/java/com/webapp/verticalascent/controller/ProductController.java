@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ProductController {
 	
-	@GetMapping("/product-category/{id}")
+	@GetMapping("/product-category/{categoryName}")
 	public final String productCategory() {
 		return "products-list";
 	}
