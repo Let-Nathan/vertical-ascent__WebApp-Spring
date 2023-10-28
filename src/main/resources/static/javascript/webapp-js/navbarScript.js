@@ -31,8 +31,7 @@ function menuContainer(productCategory) {
     const DIV_CONTAINER = document.createElement('div');
     const A_ELEMENT = document.createElement('a');
     const SPAN_CATEGORY_TITLE = document.createElement('span');
-    const JPG = ".jpg";
-    const PNG = ".png";
+    const JPG = '.jpg';
     // -------------------------------- //
 
     // <list> element //
@@ -61,8 +60,8 @@ function menuContainer(productCategory) {
     SPAN_CATEGORY_TITLE.textContent = productCategory.name;
     SPAN_CATEGORY_TITLE.className ='span-menu-text fw-bold text-light ' +
         'text-uppercase col-4 col-md-1 d-flex flex-column ' +
-        'align-items-start justify-content-center border border-3 border-dark opacity-100'
-        ;
+        'align-items-start justify-content-center border border-3 ' +
+        'border-dark opacity-100';
     // -------------------------------- //
 
     // Assembly of elements  //
