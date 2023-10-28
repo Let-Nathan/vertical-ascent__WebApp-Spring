@@ -37,12 +37,8 @@ public class ProductCategory {
     )
     private String description;
     
-    @Column
-    private int quantity;
-    
-    @Column(nullable = false)
-    private double price;
-    
     @Column(nullable = false)
     private boolean isAvailable;
+    
+    
 }
