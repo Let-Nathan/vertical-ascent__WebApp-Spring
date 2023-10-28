@@ -26,48 +26,50 @@ fetch('/api/product-categories')
  */
 function menuContainer(productCategory) {
     // Init whole list / container for menu //
-    const ulSelector = document.querySelector('.menu-categories');
-    const listElement = document.createElement('li');
-    const divContainer = document.createElement('div');
-    const aElement = document.createElement('a');
-    const spanCategoryTitle = document.createElement('span');
+    const UL_SELECTOR = document.querySelector('.menu-categories');
+    const LIST_ELEMENT = document.createElement('li');
+    const DIV_CONTAINER = document.createElement('div');
+    const A_ELEMENT = document.createElement('a');
+    const SPAN_CATEGORY_TITLE = document.createElement('span');
+    const JPG = ".jpg";
+    const PNG = ".png";
     // -------------------------------- //
 
     // <list> element //
-    listElement.className =
+    LIST_ELEMENT.className =
         'category ' + productCategory.name + ' nav-menu-list';
     // -------------------------------- //
 
     // <a> element make container clickable //
-    aElement.href = '/product-category/' + productCategory.id;
-    aElement.class = 'aElement';
-    aElement.style.textDecoration = 'none';
+    A_ELEMENT.href = '/product-category/' + productCategory.id;
+    A_ELEMENT.class = 'aElement';
+    A_ELEMENT.style.textDecoration = 'none';
     // -------------------------------- //
 
     // <div> element with background image //
-    divContainer.className =
+    DIV_CONTAINER.className =
         'nav-menu-container shadow-sm p-2 mb-3 ' +
-        'flex-row col-lg-12 shadow-lg bg-body';
+        'flex-row col-lg-12 shadow-lg bg-body opacity-75';
 
     // Todo implement an image collection
     //  (images name != category name = empty container)
-    divContainer.style.backgroundImage =
-        `url("../images/navbar_category/${productCategory.name}.jpg")`;
+    DIV_CONTAINER.style.backgroundImage =
+        `url("../images/navbar_category/${productCategory.name}${JPG}")`;
     // -------------------------------- //
 
     // <span> element with category name
-    spanCategoryTitle.textContent = productCategory.name;
-    spanCategoryTitle.className ='span-menu-text fw-bold text-light ' +
+    SPAN_CATEGORY_TITLE.textContent = productCategory.name;
+    SPAN_CATEGORY_TITLE.className ='span-menu-text fw-bold text-light ' +
         'text-uppercase col-4 col-md-1 d-flex flex-column ' +
-        'align-items-start justify-content-center'
+        'align-items-start justify-content-center border border-3 border-dark opacity-100'
         ;
     // -------------------------------- //
 
     // Assembly of elements  //
-    divContainer.append(spanCategoryTitle);
-    aElement.append(divContainer);
-    listElement.append(aElement);
-    ulSelector.append(listElement);
+    DIV_CONTAINER.append(SPAN_CATEGORY_TITLE);
+    A_ELEMENT.append(DIV_CONTAINER);
+    LIST_ELEMENT.append(A_ELEMENT);
+    UL_SELECTOR.append(LIST_ELEMENT);
     // -------------------------------- //
 }
 
