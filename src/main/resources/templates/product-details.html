@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title> Product category name - Vertical Ascent</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/navbar.css">
-    <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/order/product-recommendation.css">
     <link rel="stylesheet" href="/css/user-rating.css">
-    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <script src="/javascript/bootstrap/bootstrap.min.js"></script>
+    <title>Detail produit - Vertical Ascent</title>
 </head>
 <body>
     <div class="main-content-container">
         <div th:replace="fragments/_navbar.html"></div>
         <section>
-            <div class="container-fluid m-0 p-0" th:include="fragments/product-categories/_product-section.html"></div>
+            <div th:include="fragments/product-details/_product.html"></div>
+        </section>
+        <section>
+            <div id="product-recommendation" class="container-fluid p-0" th:include="fragments/section/_product-recommendation.html"></div>
         </section>
         <section id="user-rating">
             <div class="container-fluid d-flex align-items-center flex-column mt-5 p-0 col-md-12 col-lg-12 mb-5 m-0"
@@ -24,7 +27,8 @@
             </div>
         </section>
     </div>
-    <footer>
-        <div th:replace="fragments/_footer.html"></div>
-    </footer>
 </body>
+<footer>
+    <div th:replace="fragments/_footer.html"></div>
+</footer>
+</html>
