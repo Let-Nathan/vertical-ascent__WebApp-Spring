@@ -14,8 +14,21 @@
 <div class="main-content-container">
     <div th:replace="fragments/_navbar.html"></div>
 </div>
+<!-- Bread crumb -->
+<nav aria-label="breadcrumb" class="mt-5 mb-4 ms-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        <li class="breadcrumb-item col-6"><p>Mon compte</p></li>
+    </ol>
+</nav>
 <section>
-    <div class="container-fluid" th:replace="fragments/user/_personal-information.html"></div>
+    <div th:replace="fragments/user/_personal-information.html"></div>
+</section>
+<section>
+    <div th:replace="fragments/user/_wish-list.html"></div>
+</section>
+<section>
+    <div th:replace="fragments/user/_addresses.html"></div>
 </section>
 <footer>
     <div th:replace="fragments/_footer.html"></div>
