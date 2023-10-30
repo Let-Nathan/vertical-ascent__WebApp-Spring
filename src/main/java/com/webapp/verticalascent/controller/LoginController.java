@@ -18,8 +18,4 @@ public class LoginController {
 		return "login";
 	}
 	
-	@GetMapping("/register")
-	public final String register() {
-		return "register";
-	}
 }
