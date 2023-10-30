@@ -1,12 +1,11 @@
 package com.webapp.verticalascent.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -48,5 +47,8 @@ public class User {
 
     @Column(nullable = false)
     private Timestamp inscriptionDate;
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Addresses> addresses;
 }
 
