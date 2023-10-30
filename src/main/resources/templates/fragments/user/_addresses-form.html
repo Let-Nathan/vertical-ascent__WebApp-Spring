@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!-- User form addresses component -->
+<div class="container-fluid form-group d-flex flex-column align-items-center">
+    <div class="card-body shadow-lg rounded-3 col-11 p-2">
+        <!-- Title container -->
+        <div class="container">
+            <p class="h2 fw-bold">Mon carnet d'adresses</p>
+            <p class="fst-italic text-muted">Ajouter une adresse</p>
+            <hr>
+        </div>
+        <!-- Form container -->
+        <div class="container">
+            <label for="enterprise">Société</label>
+            <input id="enterprise" type="text" class="form-control">
+            <label for="street">Voie</label>
+            <input class="form-control" id="street" type="text" required>
+            <label for="country">Pays</label>
+            <select class="form-control" id="country">
+                <option selected>France</option>
+            </select>
+            <div class="form-control d-flex">
+                <label for="postalCode" class="col-">Code postal</label>
+                <input id="postalCode" required class="form-control" type="text">
+                <label for="city" class="col-">Ville</label>
+                <input id="city" required class="form-control" type="text">
+            </div>
+            <label for="phoneNumber">Téléphone</label>
+            <input type="tel" required class="form-control" id="phoneNumber">
+        </div>
+    </div>
+</div>

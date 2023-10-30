@@ -18,4 +18,7 @@ public class UserController {
 		return "user-account";
 	}
 	
+	@GetMapping("/new-addresses")
+	public final String newAddresses() { return "user-addresses"; }
+	
 }
