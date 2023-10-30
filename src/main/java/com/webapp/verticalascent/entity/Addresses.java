@@ -19,25 +19,25 @@ import lombok.Setter;
 public class Addresses {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column
     private int number;
 
-    @Column(nullable = false)
+    @Column
     private String street;
 
-    @Column(nullable = false)
+    @Column
     private String city;
 
-    @Column(nullable = false)
+    @Column
     private String postalCode;
 
-    @Column(nullable = false)
+    @Column
     private Boolean isBillingAddresses;
     
-    @Column(nullable = false)
+    @Column
     private Boolean isDefaultAddresses;
     
     @ManyToOne
