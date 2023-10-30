@@ -20,17 +20,18 @@
                     <li class="breadcrumb-item col-6"><p>Mon compte</p></li>
                 </ol>
             </nav>
-            <div class="container-fluid d-md-flex align-items-center">
-                <section class="col-md-4">
+            <div class="container-fluid d-md-flex align-items-center p-0">
+                <section class="col-md-6">
                     <div th:replace="fragments/user/_personal-information.html"></div>
                 </section>
-                <section class="col-md-5">
-                    <div th:replace="fragments/user/_wish-list.html"></div>
-                </section>
-                <section class="col-md- col-lg-3">
+                <section class="col-md-6 ">
                     <div th:replace="fragments/user/_addresses.html"></div>
                 </section>
             </div>
+                <section class="col-md-6">
+                    <div th:replace="fragments/user/_wish-list.html"></div>
+                </section>
+
         </div>
         <footer>
             <div th:replace="fragments/_footer.html"></div>
