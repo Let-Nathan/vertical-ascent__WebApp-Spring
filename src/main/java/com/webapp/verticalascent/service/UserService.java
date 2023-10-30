@@ -7,6 +7,9 @@ import com.webapp.verticalascent.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -29,6 +32,7 @@ public class UserService {
 	 * Save user into database.
 	 */
 	public void registerUser(User user) {
+		user.setInscriptionDate(Timestamp.from(Instant.now()));
 		userRepository.save(user);
 	}
 }

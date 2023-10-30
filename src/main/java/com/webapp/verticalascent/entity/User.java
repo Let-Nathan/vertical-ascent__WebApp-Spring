@@ -24,7 +24,7 @@ import lombok.Setter;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -39,14 +39,18 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = true)
-    private String mobilePhone;
-
     @Column(nullable = false)
+    private String mobilePhone;
+    
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
 
     @Column(nullable = false)
     private Timestamp inscriptionDate;
+    
+    @Column(nullable = false)
+    private Boolean isActive = false;
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Addresses> addresses;

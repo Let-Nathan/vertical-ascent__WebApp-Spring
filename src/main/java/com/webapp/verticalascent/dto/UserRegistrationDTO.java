@@ -1,6 +1,11 @@
 package com.webapp.verticalascent.dto;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -16,5 +21,7 @@ public class UserRegistrationDTO {
 	private String email;
 	private String password;
 	private String mobilePhone;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthDate;
+	
 }
