@@ -1,6 +1,7 @@
 package com.webapp.verticalascent.service;
 
 import com.webapp.verticalascent.dto.UserRegistrationDto;
+import com.webapp.verticalascent.entity.ErrorsLog;
 import com.webapp.verticalascent.entity.User;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,9 @@ public class DtoToEntityConversionService {
 			user.setMobilePhone(userRegistrationDto.getMobilePhone());
 			user.setBirthDate(userRegistrationDto.getBirthDate());
 		} catch (Exception e) {
-			e.getStackTrace();
+			ErrorsLog errorsLog = new ErrorsLog();
+			errorsLog.setErrorMessage(e.getMessage());
+			errorsLog
 		}
 		return user;
 	}
