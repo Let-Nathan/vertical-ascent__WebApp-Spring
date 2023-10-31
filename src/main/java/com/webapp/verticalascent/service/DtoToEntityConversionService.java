@@ -29,9 +29,7 @@ public class DtoToEntityConversionService {
 			user.setMobilePhone(userRegistrationDto.getMobilePhone());
 			user.setBirthDate(userRegistrationDto.getBirthDate());
 		} catch (Exception e) {
-			ErrorsLog errorsLog = new ErrorsLog();
-			errorsLog.setErrorMessage(e.getMessage());
-			errorsLog
+		
 		}
 		return user;
 	}

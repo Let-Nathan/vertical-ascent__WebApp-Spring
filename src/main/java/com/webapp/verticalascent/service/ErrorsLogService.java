@@ -24,7 +24,7 @@ public class ErrorsLogService {
 	/**
 	 * Save ErrorsLog into database
 	 *
-	 * @param eLog Take ErrorsLog entity.
+	 * @param eLog Take Errors log entity.
 	 */
 	public void storeLogs(ErrorsLog eLog){
 		eLogRepository.save(eLog);
