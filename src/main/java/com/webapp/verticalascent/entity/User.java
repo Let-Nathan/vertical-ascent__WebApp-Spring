@@ -1,14 +1,16 @@
 package com.webapp.verticalascent.entity;
 
 import jakarta.persistence.*;
-
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 /**
  * Object representation of user table.
