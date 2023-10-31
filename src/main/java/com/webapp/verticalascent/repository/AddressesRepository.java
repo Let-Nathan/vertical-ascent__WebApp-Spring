@@ -2,9 +2,8 @@ package com.webapp.verticalascent.repository;
 
 import com.webapp.verticalascent.entity.Addresses;
 import com.webapp.verticalascent.entity.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * Access and manage "Addresses" data.
