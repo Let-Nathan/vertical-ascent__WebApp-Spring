@@ -1,6 +1,6 @@
 package com.webapp.verticalascent.controller;
 
-import com.webapp.verticalascent.dto.UserRegistrationDTO;
+import com.webapp.verticalascent.dto.UserRegistrationDto;
 import com.webapp.verticalascent.entity.User;
 import com.webapp.verticalascent.service.UserRegistrationService;
 import com.webapp.verticalascent.service.UserService;
@@ -9,11 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -30,37 +26,45 @@ public class RegistrationController {
 	private final UserService userService;
 	
 	/**
-	 * Dependency injection for userRegistrationService
+	 * Dependency injection for userRegistrationService.
 	 *
 	 * @param userRegistrationService (UserRegistrationService)
 	 */
 	@Autowired
-	public RegistrationController (
+	public RegistrationController(
 		final UserRegistrationService userRegistrationService,
 		final UserService userService
-	)
-	{
+	) {
 		this.userRegistrationService = userRegistrationService;
 		this.userService = userService;
 	}
 	
 	@GetMapping("/register")
 	public String register(Model model) {
-		UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO();
-		model.addAttribute("userRegistrationDTO", userRegistrationDTO);
+		UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
+		model.addAttribute("userRegistrationDTO", userRegistrationDto);
 		return "register";
 	}
 	
+	/**
+	 * Saved form if is validated by associated dto.
+	 *
+	 * @param userRegistrationDto (Data transfer object)
+	 * @param result (Errors from validation form)
+	 * @return redirect (Home page redirect after validation successful)
+	 */
 	@RequestMapping(value = "/register/save")
-	public String registerSaved (
-		@Valid UserRegistrationDTO userRegistrationDTO,
+	public String registerSaved(
+		@Valid UserRegistrationDto userRegistrationDto,
 		BindingResult result
 	) {
 		if (result.hasErrors()) {
 			return "register";
 		}
 		
-		User user = userRegistrationService.convertUserRegistrationDTOToEntity(userRegistrationDTO);
+		User user = userRegistrationService.convertUserRegistrationDtoToEntity(
+			userRegistrationDto
+		);
 		
 		userService.registerUser(user);
 		
