@@ -2,7 +2,7 @@ package com.webapp.verticalascent.controller;
 
 import com.webapp.verticalascent.dto.UserRegistrationDto;
 import com.webapp.verticalascent.entity.User;
-import com.webapp.verticalascent.service.UserRegistrationService;
+import com.webapp.verticalascent.service.DtoToEntityConversionService;
 import com.webapp.verticalascent.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,20 +22,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class RegistrationController {
 	
-	private final UserRegistrationService userRegistrationService;
+	private final DtoToEntityConversionService dtoToEntityConversionService;
 	private final UserService userService;
 	
 	/**
 	 * Dependency injection for userRegistrationService.
 	 *
-	 * @param userRegistrationService (UserRegistrationService)
+	 * @param dtoToEntityConversionService (UserRegistrationService)
 	 */
 	@Autowired
 	public RegistrationController(
-		final UserRegistrationService userRegistrationService,
+		final DtoToEntityConversionService dtoToEntityConversionService,
 		final UserService userService
 	) {
-		this.userRegistrationService = userRegistrationService;
+		this.dtoToEntityConversionService = dtoToEntityConversionService;
 		this.userService = userService;
 	}
 	
@@ -62,7 +62,7 @@ public class RegistrationController {
 			return "register";
 		}
 		
-		User user = userRegistrationService.convertUserRegistrationDtoToEntity(
+		User user = dtoToEntityConversionService.convertUserRegistrationDtoToEntity(
 			userRegistrationDto
 		);
 		

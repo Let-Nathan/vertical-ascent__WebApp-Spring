@@ -55,7 +55,7 @@ public class UserRegistrationDto {
 	@Pattern(
 		regexp = "^(?:\\+\\d+|\\d+)$",
 		message = "Le téléphone doit contenir uniquement des chiffres "
-			+ "ou dans le format international."
+			+ "ou dans le format +33."
 	)
 	@Size(
 		min = 10,

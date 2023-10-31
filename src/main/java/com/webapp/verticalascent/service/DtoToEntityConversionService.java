@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @version 1.0
  */
 @Service
-public class UserRegistrationService {
+public class DtoToEntityConversionService {
 	/**
 	 * Methode to convert User Dto to User Entity.
 	 *
@@ -20,12 +20,16 @@ public class UserRegistrationService {
 	 */
 	public User convertUserRegistrationDtoToEntity(UserRegistrationDto userRegistrationDto) {
 		User user = new User();
-		user.setFirstName(userRegistrationDto.getFirstName());
-		user.setLastName(userRegistrationDto.getLastName());
-		user.setEmail(userRegistrationDto.getEmail());
-		user.setPassword(userRegistrationDto.getPassword());
-		user.setMobilePhone(userRegistrationDto.getMobilePhone());
-		user.setBirthDate(userRegistrationDto.getBirthDate());
+		try {
+			user.setFirstName(userRegistrationDto.getFirstName());
+			user.setLastName(userRegistrationDto.getLastName());
+			user.setEmail(userRegistrationDto.getEmail());
+			user.setPassword(userRegistrationDto.getPassword());
+			user.setMobilePhone(userRegistrationDto.getMobilePhone());
+			user.setBirthDate(userRegistrationDto.getBirthDate());
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
 		return user;
 	}
 }

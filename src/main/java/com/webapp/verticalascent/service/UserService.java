@@ -30,4 +30,8 @@ public class UserService {
 		user.setInscriptionDate(Timestamp.from(Instant.now()));
 		userRepository.save(user);
 	}
+	
+	public boolean userEmailExist(String email) {
+		return userRepository.findByEmailExists(email) != null;
+	}
 }
