@@ -43,22 +43,23 @@ public class UserRegistrationDto {
 	@NotEmpty
 	@Size(
 		min = 8, max = 32,
-		message = "Le mot de passe doit contenir entre 8 et 32 caracthères."
+		message = "Le mot de passe doit contenir entre 8 et 32 caractères."
 	)
 	@Pattern(
 		regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
 		message = "Le mot de passe doit contenir, un chiffre, une lettre minuscule "
-			+ "et une majuscule et un caracthère spécial."
+			+ "et une majuscule et un caractère spécial."
 	)
 	private String password;
 	
 	@Pattern(
 		regexp = "^(?:\\+\\d+|\\d+)$",
-		message = "Le téléphone doit être au format chiffre ou avec +33."
+		message = "Le téléphone doit contenir uniquement des chiffres "
+			+ "ou dans le format international."
 	)
 	@Size(
 		min = 10,
-		message = "Vous devez renseigner un nuémro valide, avec 10 chiffres."
+		message = "La longueur du numéro n'est pas valide."
 	)
 	private String mobilePhone;
 	

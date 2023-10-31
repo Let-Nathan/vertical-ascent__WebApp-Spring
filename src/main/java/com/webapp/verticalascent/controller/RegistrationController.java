@@ -42,7 +42,7 @@ public class RegistrationController {
 	@GetMapping("/register")
 	public String register(Model model) {
 		UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
-		model.addAttribute("userRegistrationDTO", userRegistrationDto);
+		model.addAttribute("userRegistrationDto", userRegistrationDto);
 		return "register";
 	}
 	
