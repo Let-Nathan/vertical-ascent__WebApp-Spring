@@ -2,6 +2,9 @@ package com.webapp.verticalascent.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
@@ -20,6 +23,7 @@ public class UserRegistrationDTO {
 	
 	@NotBlank(message = "Merci de renseigner votre nom de famille")
 	@NotEmpty
+	@Size(min = 2, max = 3)
 	private String lastName;
 	
 	@NotBlank

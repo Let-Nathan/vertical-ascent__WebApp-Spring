@@ -31,20 +31,28 @@
     <!-- Form register container -->
     <div class="container-fluid d-flex align-items-center flex-column m-0 p-0 ">
         <!-- Form -->
-        <form  th:object="${userRegistrationDTO}" id="register-information-form" class="mt-4 col-10" action="/register/save" method="post">
+        <form th:object="${userRegistrationDTO}" id="register-information-form" class="mt-4 col-10" action="/register/save" method="post">
             <div class="responsive-container d-md-flex d-lg-flex justify-content-lg-around">
                 <!-- Personal information container -->
                 <div class="personal-info-container container-fluid p-0">
                     <h3 class="p-0 mt-2">Informations Personnelles</h3>
                     <!-- Personal information form-container -->
                     <div class="m-0 p-0">
-                        <label for="input-firstName" class="sr-only mb-2 mt-3">Prénom</label>
+                        <!-- First name input -->
+                        <label for="input-firstName" class="sr-only mb-2 mt-3 row">Prénom</label>
+                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger"></span>
                         <input th:field="*{firstName}" name="firstName" type="text" id="input-firstName" class="form-control mb-2" required="required" autofocus="">
-                        <label th:field="*{lastName}" for="input-lastName" class="sr-only mb-2 mt-2">Nom</label>
-                        <input name="lastName" type="text" id="input-lastName" class="form-control mb-2" required="required">
-                        <label for="input-birthDate" class="sr-only mb-2 mt-2">Date de naissance</label>
+                        <!-- Last name input -->
+                        <label for="input-lastName" class="sr-only mb-2 mt-2 row">Nom</label>
+                        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger mb-2"></span>
+                        <input th:field="*{lastName}" name="lastName" type="text" id="input-lastName" class="form-control mb-2" required="required">
+                        <!-- Birthdate input -->
+                        <label for="input-birthDate" class="sr-only mb-2 mt-2 row">Date de naissance</label>
+                        <span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" class="text-danger"></span>
                         <input th:field="*{birthDate}" name="birthDate" type="date" id="input-birthDate" class="form-control mb-2 text-center" pattern="\d{2}-\d{2}-\d{4}">
-                        <label for="input-mobilePhone" class="sr-only mb-2 mt-2 mb-2">Téléphone</label>
+                        <!-- Mobile phone input -->
+                        <label for="input-mobilePhone" class="sr-only mb-2 mt-2 mb-2 row">Téléphone</label>
+                        <span th:if="${#fields.hasErrors('mobilePhone')}" th:errors="*{mobilePhone}" class="text-danger"></span>
                         <input th:field="*{mobilePhone}" name="mobilePhone" type="tel" id="input-mobilePhone" class="form-control mb-2">
                     </div>
                 </div>
@@ -59,10 +67,14 @@
                     <h3 class="p-0 mt-2">Informations d'identification</h3>
                     <!-- Identification information form-container -->
                     <div class="m-0 p-0">
-                        <label for="input-emailAddress" class="sr-only mb-2 mt-3">Adresse e-mail</label>
+                        <!-- Email input -->
+                        <label for="input-emailAddress" class="sr-only mb-2 mt-3 row">Adresse e-mail</label>
+                        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
                         <input th:field="*{email}" name="email" type="email" id="input-emailAddress" class="form-control mb-2" required="required" autofocus="">
+                        <!-- Password input -->
                         <span id="passwordError" class="text-danger"></span>
-                        <label for="input-password" class="sr-only mb-2 mt-3">Mot de passe</label>
+                        <label for="input-password" class="sr-only mb-2 mt-3 row">Mot de passe</label>
+                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
                         <input th:field="*{password}" name="password" type="password" id="input-password" class="form-control mb-2" required="required" autofocus="">
                         <label for="input-confirmPassword" class="sr-only mb-2 mt-3">Confirmer le mot de passe</label>
                         <input type="password" id="input-confirmPassword" class="form-control mb-2" required="required" data-match="#input-confirmPassword">
