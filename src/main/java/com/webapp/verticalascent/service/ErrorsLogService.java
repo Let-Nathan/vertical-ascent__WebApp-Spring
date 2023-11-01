@@ -22,23 +22,15 @@ public class ErrorsLogService {
 	}
 	
 	/**
-	 * Save ErrorsLog into database
+	 * Bind Exception into ErrorsLog entity before store it into database.
 	 *
-	 * @param eLog Take Errors log entity.
+	 * @param e Take Exception object.
 	 */
-	public void storeLogs(ErrorsLog eLog){
-		errorsLogRepository.save(eLog);
-	}
-	
-	/**
-	 * Binding Exception into ErrorsLog entity
-	 *
-	 * @param e Take an Exception object
-	 */
-	public void errorLogTraitment(Exception e){
+	public void storeLogs(Exception e){
 		ErrorsLog errorsLog = new ErrorsLog();
 		errorsLog.setErrorMessage(e.getMessage());
 		errorsLog.setErrorType(e.getClass().getSimpleName());
-		storeLogs(errorsLog);
+		errorsLogRepository.save(errorsLog);
 	}
+	
 }

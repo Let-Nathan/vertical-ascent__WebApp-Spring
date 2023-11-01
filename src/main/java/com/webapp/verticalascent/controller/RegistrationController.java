@@ -86,7 +86,7 @@ public class RegistrationController {
 				userService.registerUser(user);
 			} catch (Exception e) {
 				// saved potential errors into errors log entity
-				errorsLogService.errorLogTraitment(e);
+				errorsLogService.storeLogs(e);
 			}
 			return "redirect:/";
 		}

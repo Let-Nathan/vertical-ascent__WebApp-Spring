@@ -3,6 +3,7 @@ package com.webapp.verticalascent.service;
 import com.webapp.verticalascent.dto.UserRegistrationDto;
 import com.webapp.verticalascent.entity.ErrorsLog;
 import com.webapp.verticalascent.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,6 +14,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DtoToEntityConversionService {
+	
+	private final ErrorsLogService errorsLogService;
+	
+	@Autowired
+	public DtoToEntityConversionService(ErrorsLogService errorsLogService){
+		this.errorsLogService = errorsLogService;
+	}
 	/**
 	 * Methode to convert User Dto to User Entity.
 	 *
@@ -29,7 +37,7 @@ public class DtoToEntityConversionService {
 			user.setMobilePhone(userRegistrationDto.getMobilePhone());
 			user.setBirthDate(userRegistrationDto.getBirthDate());
 		} catch (Exception e) {
-		
+			errorsLogService.storeLogs(e);
 		}
 		return user;
 	}
