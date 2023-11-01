@@ -2,7 +2,8 @@ package com.webapp.verticalascent.controller;
 
 import com.webapp.verticalascent.dto.UserRegistrationDto;
 import com.webapp.verticalascent.entity.User;
-import com.webapp.verticalascent.service.UserRegistrationService;
+import com.webapp.verticalascent.service.DtoToEntityConversionService;
+import com.webapp.verticalascent.service.ErrorsLogService;
 import com.webapp.verticalascent.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,32 +23,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class RegistrationController {
 	
-	private final UserRegistrationService userRegistrationService;
+	private final DtoToEntityConversionService dtoToEntityConversionService;
+	private final ErrorsLogService errorsLogService;
 	private final UserService userService;
 	
 	/**
 	 * Dependency injection for userRegistrationService.
 	 *
-	 * @param userRegistrationService (UserRegistrationService)
+	 * @param dtoToEntityConversionService (UserRegistrationService)
 	 */
 	@Autowired
 	public RegistrationController(
-		final UserRegistrationService userRegistrationService,
+		final DtoToEntityConversionService dtoToEntityConversionService,
+		final ErrorsLogService errorsLogService,
 		final UserService userService
-	) {
-		this.userRegistrationService = userRegistrationService;
+		) {
+		this.dtoToEntityConversionService = dtoToEntityConversionService;
+		this.errorsLogService = errorsLogService;
 		this.userService = userService;
 	}
 	
 	@GetMapping("/register")
 	public String register(Model model) {
 		UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
-		model.addAttribute("userRegistrationDTO", userRegistrationDto);
+		model.addAttribute("userRegistrationDto", userRegistrationDto);
 		return "register";
 	}
 	
 	/**
-	 * Saved form if is validated by associated dto.
+	 * Saved form if is valid by associated dto.
 	 *
 	 * @param userRegistrationDto (Data transfer object)
 	 * @param result (Errors from validation form)
@@ -58,16 +62,32 @@ public class RegistrationController {
 		@Valid UserRegistrationDto userRegistrationDto,
 		BindingResult result
 	) {
+		//Check errors from UserReg Dto, return errors to view if true.
 		if (result.hasErrors()) {
 			return "register";
 		}
 		
-		User user = userRegistrationService.convertUserRegistrationDtoToEntity(
+		//We assume that form is valid after dto validation.
+		User user = dtoToEntityConversionService.convertUserRegistrationDtoToEntity(
 			userRegistrationDto
 		);
 		
-		userService.registerUser(user);
-		
-		return "redirect:/";
+		//Check if there is no user email
+		if (userService.userEmailExist(user.getEmail())) {
+			result.rejectValue(
+				"email",
+				"userRegistrationDto",
+				"L'adresse e-mail est déjà utilisé."
+			);
+			return "register";
+		} else {
+			try {
+				userService.registerUser(user);
+			} catch (Exception e) {
+				// saved potential errors into errors log entity
+				errorsLogService.storeLogs(e);
+			}
+			return "redirect:/";
+		}
 	}
 }
