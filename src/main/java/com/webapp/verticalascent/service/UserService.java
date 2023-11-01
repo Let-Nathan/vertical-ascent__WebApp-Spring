@@ -24,13 +24,21 @@ public class UserService {
 	}
 	
 	/**
-	 * Save user into database.
+	 * Take User object as parameter and saved it into database.
+	 *
+	 * @param user User object representation
 	 */
 	public void registerUser(User user) {
 		user.setInscriptionDate(Timestamp.from(Instant.now()));
 		userRepository.save(user);
 	}
 	
+	/**
+	 * Find a potential user email in use
+	 *
+	 * @param email string e-mail addresses.
+	 * @return boolean
+	 */
 	public boolean userEmailExist(String email) {
 		return userRepository.findByEmailExists(email) != null;
 	}

@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RegistrationController {
 	
 	private final DtoToEntityConversionService dtoToEntityConversionService;
-	private final ErrorsLogService eLogService;
+	private final ErrorsLogService errorsLogService;
 	private final UserService userService;
 	
 	/**
@@ -36,11 +36,11 @@ public class RegistrationController {
 	@Autowired
 	public RegistrationController(
 		final DtoToEntityConversionService dtoToEntityConversionService,
-		final ErrorsLogService eLogService,
+		final ErrorsLogService errorsLogService,
 		final UserService userService
 		) {
 		this.dtoToEntityConversionService = dtoToEntityConversionService;
-		this.eLogService = eLogService;
+		this.errorsLogService = errorsLogService;
 		this.userService = userService;
 	}
 	
@@ -74,16 +74,19 @@ public class RegistrationController {
 		);
 		
 		//Check if there is no user email
-		if(userService.userEmailExist(user.getEmail())){
-			result.rejectValue("email","userRegistrationDto","E-mail addresses already in use.");
+		if (userService.userEmailExist(user.getEmail())) {
+			result.rejectValue(
+				"email",
+				"userRegistrationDto",
+				"E-mail addresses already in use."
+			);
 			return "register";
 		} else {
 			try {
 				userService.registerUser(user);
-				
 			} catch (Exception e) {
-				// saved potential log
-				eLogService.errorLogTraitment(e);
+				// saved potential errors into errors log entity
+				errorsLogService.errorLogTraitment(e);
 			}
 			return "redirect:/";
 		}

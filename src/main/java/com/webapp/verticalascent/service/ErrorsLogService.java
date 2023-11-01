@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class ErrorsLogService {
 	
-	private final ErrorsLogRepository eLogRepository;
+	private final ErrorsLogRepository errorsLogRepository;
 	
 	@Autowired
-	public ErrorsLogService(ErrorsLogRepository eLogRepository){
-		this.eLogRepository = eLogRepository;
+	public ErrorsLogService(ErrorsLogRepository errorsLogRepository){
+		this.errorsLogRepository = errorsLogRepository;
 	}
 	
 	/**
@@ -27,7 +27,7 @@ public class ErrorsLogService {
 	 * @param eLog Take Errors log entity.
 	 */
 	public void storeLogs(ErrorsLog eLog){
-		eLogRepository.save(eLog);
+		errorsLogRepository.save(eLog);
 	}
 	
 	/**
@@ -36,9 +36,9 @@ public class ErrorsLogService {
 	 * @param e Take an Exception object
 	 */
 	public void errorLogTraitment(Exception e){
-		ErrorsLog eLog = new ErrorsLog();
-		eLog.setErrorMessage(e.getMessage());
-		eLog.setErrorType(e.getClass().getSimpleName());
-		storeLogs(eLog);
+		ErrorsLog errorsLog = new ErrorsLog();
+		errorsLog.setErrorMessage(e.getMessage());
+		errorsLog.setErrorType(e.getClass().getSimpleName());
+		storeLogs(errorsLog);
 	}
 }
