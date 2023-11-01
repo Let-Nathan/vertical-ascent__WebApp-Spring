@@ -1,7 +1,6 @@
 package com.webapp.verticalascent.controller;
 
 import com.webapp.verticalascent.dto.UserRegistrationDto;
-import com.webapp.verticalascent.entity.ErrorsLog;
 import com.webapp.verticalascent.entity.User;
 import com.webapp.verticalascent.service.DtoToEntityConversionService;
 import com.webapp.verticalascent.service.ErrorsLogService;
