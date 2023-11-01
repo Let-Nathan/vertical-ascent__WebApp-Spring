@@ -34,7 +34,7 @@ public class UserService {
 	}
 	
 	/**
-	 * Find a potential user email in use
+	 * Find a potential user email in use.
 	 *
 	 * @param email string e-mail addresses.
 	 * @return boolean

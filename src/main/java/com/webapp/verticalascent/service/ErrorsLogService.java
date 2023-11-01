@@ -17,7 +17,7 @@ public class ErrorsLogService {
 	private final ErrorsLogRepository errorsLogRepository;
 	
 	@Autowired
-	public ErrorsLogService(ErrorsLogRepository errorsLogRepository){
+	public ErrorsLogService(ErrorsLogRepository errorsLogRepository) {
 		this.errorsLogRepository = errorsLogRepository;
 	}
 	
@@ -26,7 +26,7 @@ public class ErrorsLogService {
 	 *
 	 * @param e Take Exception object.
 	 */
-	public void storeLogs(Exception e){
+	public void storeLogs(Exception e) {
 		ErrorsLog errorsLog = new ErrorsLog();
 		errorsLog.setErrorMessage(e.getMessage());
 		errorsLog.setErrorType(e.getClass().getSimpleName());

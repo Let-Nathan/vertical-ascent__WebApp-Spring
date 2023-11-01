@@ -18,9 +18,10 @@ public class DtoToEntityConversionService {
 	private final ErrorsLogService errorsLogService;
 	
 	@Autowired
-	public DtoToEntityConversionService(ErrorsLogService errorsLogService){
+	public DtoToEntityConversionService(ErrorsLogService errorsLogService) {
 		this.errorsLogService = errorsLogService;
 	}
+	
 	/**
 	 * Methode to convert User Dto to User Entity.
 	 *
