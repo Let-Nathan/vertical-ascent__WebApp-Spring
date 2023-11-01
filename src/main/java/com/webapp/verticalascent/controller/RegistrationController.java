@@ -78,7 +78,7 @@ public class RegistrationController {
 			result.rejectValue(
 				"email",
 				"userRegistrationDto",
-				"E-mail addresses already in use."
+				"L'adresse e-mail est déjà utilisé."
 			);
 			return "register";
 		} else {

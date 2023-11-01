@@ -40,6 +40,6 @@ public class UserService {
 	 * @return boolean
 	 */
 	public boolean userEmailExist(String email) {
-		return userRepository.findByEmailExists(email) != null;
+		return userRepository.findByEmail(email) != null;
 	}
 }
