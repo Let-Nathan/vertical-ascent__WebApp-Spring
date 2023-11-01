@@ -17,11 +17,10 @@ public class SecurityConfig {
 		http
 			.authorizeHttpRequests((authorize) -> authorize
 				.requestMatchers("/**").permitAll()
-				.requestMatchers("/register/save").permitAll()
 			)
 			
 			.formLogin(Customizer.withDefaults())
-			.csrf().disable();
+			.csrf(Customizer.withDefaults());
 		return http.build();
 	}
 	
