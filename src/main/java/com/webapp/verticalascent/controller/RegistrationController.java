@@ -87,7 +87,7 @@ public class RegistrationController {
 				// saved potential errors into errors log entity
 				errorsLogService.storeLogs(e);
 			}
-			return "redirect:/";
+			return "redirect:/login";
 		}
 	}
 }
