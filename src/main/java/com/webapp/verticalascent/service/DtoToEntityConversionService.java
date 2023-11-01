@@ -1,7 +1,6 @@
 package com.webapp.verticalascent.service;
 
 import com.webapp.verticalascent.dto.UserRegistrationDto;
-import com.webapp.verticalascent.entity.ErrorsLog;
 import com.webapp.verticalascent.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
