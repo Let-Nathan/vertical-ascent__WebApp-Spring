@@ -21,6 +21,7 @@
             <div th:include="fragments/section/_category-section.html"></div>
         </section>
         <div id="home-section">
+            <p th:text="${userEmail}" class="display-1"></p>
             <section id="popular-product">
                 <div th:include="fragments/section/_popular-product-section.html" class="container-fluid m-0 p-0 popular-product-container mb-4"></div>
             </section>

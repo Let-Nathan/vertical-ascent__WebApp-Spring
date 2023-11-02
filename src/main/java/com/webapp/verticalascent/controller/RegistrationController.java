@@ -73,7 +73,7 @@ public class RegistrationController {
 		);
 		
 		//Check if there is no user email
-		if (userService.userEmailExist(user.getEmail())) {
+		if (userService.isEmailExist(user.getEmail()) != null) {
 			result.rejectValue(
 				"email",
 				"userRegistrationDto",

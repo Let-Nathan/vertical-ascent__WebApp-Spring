@@ -5,8 +5,10 @@ import com.webapp.verticalascent.repository.UserRepository;
 import java.sql.Timestamp;
 import java.time.Instant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,12 +21,12 @@ import org.springframework.stereotype.Service;
 public class UserService {
 	
 	private final UserRepository userRepository;
-	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Autowired
-	public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+	public UserService(
+		UserRepository userRepository
+	) {
 		this.userRepository = userRepository;
-		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
 	
 	/**
@@ -35,7 +37,8 @@ public class UserService {
 	 */
 	public void registerUser(User user) {
 		user.setInscriptionDate(Timestamp.from(Instant.now()));
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		userRepository.save(user);
 	}
 	
@@ -45,7 +48,8 @@ public class UserService {
 	 * @param email string e-mail addresses.
 	 * @return boolean
 	 */
-	public boolean userEmailExist(String email) {
-		return userRepository.findByEmail(email) != null;
+	public User isEmailExist(String email) {
+		return userRepository.findByEmail(email);
 	}
+	
 }
