@@ -1,13 +1,11 @@
 package com.webapp.verticalascent.service;
 
+import com.webapp.verticalascent.entity.Role;
 import com.webapp.verticalascent.entity.User;
 import com.webapp.verticalascent.repository.UserRepository;
 import java.sql.Timestamp;
 import java.time.Instant;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +19,15 @@ import org.springframework.stereotype.Service;
 public class UserService {
 	
 	private final UserRepository userRepository;
+	private final RoleService roleService;
 	
 	@Autowired
 	public UserService(
-		UserRepository userRepository
+		UserRepository userRepository,
+		RoleService roleService
 	) {
 		this.userRepository = userRepository;
+		this.roleService = roleService;
 	}
 	
 	/**
@@ -39,11 +40,18 @@ public class UserService {
 		user.setInscriptionDate(Timestamp.from(Instant.now()));
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		// Vérifiez si l'utilisateur a déjà un rôle
+		if (user.getRole() == null) {
+			// Si l'utilisateur n'a pas de rôle, attribuez-lui le rôle par défaut
+			Role defaultRole = roleService.getDefaultRole();
+			user.setRole(defaultRole);
+		}
 		userRepository.save(user);
 	}
 	
 	/**
-	 * Find a potential user email in use.
+	 * Return true if method find the email addresses in database with using
+	 * UserRepository dependency injection.
 	 *
 	 * @param email string e-mail addresses.
 	 * @return boolean
