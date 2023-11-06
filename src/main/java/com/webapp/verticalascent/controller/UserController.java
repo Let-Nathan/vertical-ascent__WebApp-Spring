@@ -25,7 +25,8 @@ public class UserController {
 	
 	/**
 	 * Access to new-addresses pages @todo impl multiple addresses.
-	 * @return
+	 *
+	 * @return view
 	 */
 	@GetMapping("/new-addresses")
 	public final String newAddresses() {

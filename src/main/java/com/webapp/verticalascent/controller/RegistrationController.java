@@ -66,8 +66,12 @@ public class RegistrationController {
 		@Valid UserRegistrationDto userRegistrationDto,
 		BindingResult result
 	) {
-		//Check errors from BindingResult comparison with UserRegistrationDto, return error true.
-		if (result.hasErrors() || userService.isEmailExist(userRegistrationDto.getEmail()) != null) {
+		//Check errors from BindingResult comparison with UserRegistrationDto,
+		// return error if comparison failed with custom message defined in Dto.
+		if (
+			result.hasErrors()
+				|| userService.isEmailExist(userRegistrationDto.getEmail()) != null
+		) {
 			result.rejectValue(
 				"email",
 				"userRegistrationDto",
@@ -78,7 +82,11 @@ public class RegistrationController {
 			//Trying to insert the user into the database.
 			try {
 				//Convert UserDto into User object before insertion into database.
-				User user = dtoToEntityConversionService.convertUserRegistrationDtoToEntity(userRegistrationDto);
+				User user =
+					dtoToEntityConversionService
+						.convertUserRegistrationDtoToEntity(
+							userRegistrationDto
+						);
 				//Store User into database.
 				userService.registerUser(user);
 			} catch (DataException dataEx) {

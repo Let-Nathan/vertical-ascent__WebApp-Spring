@@ -4,6 +4,7 @@ import com.webapp.verticalascent.entity.Role;
 import com.webapp.verticalascent.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 /**
  * Service implementation with logic for Role.
  *
@@ -21,7 +22,7 @@ public class RoleService {
 	}
 	
 	/**
-	 * Return the default Role defined as "ROLE_USER"
+	 * Return the default Role defined as "ROLE_USER".
 	 *
 	 * @return Role
 	 */

@@ -22,7 +22,7 @@ public class ShoppingProcessController {
 	 */
 	@GetMapping("/panier")
 	public final String shoppingCart(Authentication authentication) {
-		if(authentication.isAuthenticated()){
+		if (authentication.isAuthenticated()) {
 			return "shopping-cart";
 		}
 		return "/shopping-cart-empty";
