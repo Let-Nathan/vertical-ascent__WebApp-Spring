@@ -38,12 +38,14 @@ public class UserService {
 	 */
 	public void registerUser(User user) {
 		user.setInscriptionDate(Timestamp.from(Instant.now()));
+		//Password encryption with encoding.
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		// Vérifiez si l'utilisateur a déjà un rôle
+		//Check if user has already a Role assigned.
 		if (user.getRole() == null) {
-			// Si l'utilisateur n'a pas de rôle, attribuez-lui le rôle par défaut
+			//If user has no Role, we define "ROLE_USER" by default.
 			Role defaultRole = roleService.getDefaultRole();
+			//Set Role to User.
 			user.setRole(defaultRole);
 		}
 		userRepository.save(user);

@@ -48,8 +48,6 @@ public class HomeController {
      * @return The view name
      *
      */
-    
-    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/")
     public final String home(Model model, @AuthenticationPrincipal UserDetails user) {
         

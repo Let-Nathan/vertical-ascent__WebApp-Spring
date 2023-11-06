@@ -67,7 +67,7 @@ public class RegistrationController {
 		BindingResult result
 	) {
 		//Check errors from BindingResult comparison with UserRegistrationDto, return error true.
-		if (result.hasErrors() && userService.isEmailExist(userRegistrationDto.getEmail()) != null) {
+		if (result.hasErrors() || userService.isEmailExist(userRegistrationDto.getEmail()) != null) {
 			result.rejectValue(
 				"email",
 				"userRegistrationDto",
@@ -75,11 +75,10 @@ public class RegistrationController {
 			);
 			return "register";
 		} else {
+			//Trying to insert the user into the database.
 			try {
 				//Convert UserDto into User object before insertion into database.
-					User user = dtoToEntityConversionService.convertUserRegistrationDtoToEntity(
-					userRegistrationDto
-				);
+				User user = dtoToEntityConversionService.convertUserRegistrationDtoToEntity(userRegistrationDto);
 				//Store User into database.
 				userService.registerUser(user);
 			} catch (DataException dataEx) {
@@ -87,21 +86,6 @@ public class RegistrationController {
 				errorsLogService.storeLogs(dataEx);
 			}
 			return "redirect:/login";
-		
-//		User user = dtoToEntityConversionService.convertUserRegistrationDtoToEntity(
-//			userRegistrationDto
-//		);
-//
-//		//Check if there is no user email
-//		if (userService.isEmailExist(user.getEmail()) != null) {
-//			result.rejectValue(
-//				"email",
-//				"userRegistrationDto",
-//				"L'adresse e-mail est déjà utilisé."
-//			);
-//			return "register";
-//		}
-//
 		}
 	}
 }

@@ -12,7 +12,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-
+/**
+ * Service implementation wi
+ *
+ * @author Nathan L.
+ * @version 1.0
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 

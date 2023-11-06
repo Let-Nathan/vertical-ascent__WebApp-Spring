@@ -14,17 +14,35 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ShoppingProcessController {
 	
+	/**
+	 * Display shopping cart user if he had one in database.
+	 *
+	 * @param authentication verify that user is connected
+	 * @return view
+	 */
 	@GetMapping("/panier")
 	public final String shoppingCart(Authentication authentication) {
-		authentication.isAuthenticated();
-		return "shopping-cart";
+		if(authentication.isAuthenticated()){
+			return "shopping-cart";
+		}
+		return "/shopping-cart-empty";
 	}
 	
+	/**
+	 * Empty shopping cart view.
+	 *
+	 * @return view
+	 */
 	@GetMapping("/panier-vide")
 	public final String emptyShoppingCart() {
 		return "shopping-cart-empty";
 	}
 	
+	/**
+	 * Delivery pages.
+	 *
+	 * @return view
+	 */
 	@GetMapping("/livraison")
 	public final String delivery() {
 		return "shopping-delivery";
