@@ -6,6 +6,7 @@ import com.webapp.verticalascent.service.DtoToEntityConversionService;
 import com.webapp.verticalascent.service.ErrorsLogService;
 import com.webapp.verticalascent.service.UserService;
 import jakarta.validation.Valid;
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,7 +52,10 @@ public class RegistrationController {
 	}
 	
 	/**
-	 * Saved form if is valid by associated dto.
+	 * The input form is validated by UserRegistrationDto with @valid annotation.
+	 * If errors happens, BindingResult store it and we can tell to the end user,
+	 * what happens.
+	 * UserService is used to check if there is no similar e-mail, already store.
 	 *
 	 * @param userRegistrationDto (Data transfer object)
 	 * @param result (Errors from validation form)
@@ -62,18 +66,12 @@ public class RegistrationController {
 		@Valid UserRegistrationDto userRegistrationDto,
 		BindingResult result
 	) {
-		//Check errors from UserReg Dto, return errors to view if true.
-		if (result.hasErrors()) {
-			return "register";
-		}
-		
-		//We assume that form is valid after dto validation.
-		User user = dtoToEntityConversionService.convertUserRegistrationDtoToEntity(
-			userRegistrationDto
-		);
-		
-		//Check if there is no user email
-		if (userService.userEmailExist(user.getEmail())) {
+		//Check errors from BindingResult comparison with UserRegistrationDto,
+		// return error if comparison failed with custom message defined in Dto.
+		if (
+			result.hasErrors()
+				|| userService.isEmailExist(userRegistrationDto.getEmail()) != null
+		) {
 			result.rejectValue(
 				"email",
 				"userRegistrationDto",
@@ -81,13 +79,21 @@ public class RegistrationController {
 			);
 			return "register";
 		} else {
+			//Trying to insert the user into the database.
 			try {
+				//Convert UserDto into User object before insertion into database.
+				User user =
+					dtoToEntityConversionService
+						.convertUserRegistrationDtoToEntity(
+							userRegistrationDto
+						);
+				//Store User into database.
 				userService.registerUser(user);
-			} catch (Exception e) {
-				// saved potential errors into errors log entity
-				errorsLogService.storeLogs(e);
+			} catch (DataException dataEx) {
+				//Saved potential errors into errors log entity
+				errorsLogService.storeLogs(dataEx);
 			}
-			return "redirect:/";
+			return "redirect:/login";
 		}
 	}
 }

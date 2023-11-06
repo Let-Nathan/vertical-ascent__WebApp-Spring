@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * Controller class for Login.
+ * Controller class for Home path.
  *
  * @author Nathan L.
  * @version 1.0
@@ -12,10 +12,15 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class LoginController {
-	
-	@GetMapping("/login")
-	public final String login() {
-		return "login";
-	}
-	
+    
+    /**
+     * Handle log-in from user.
+     * Defined by Spring security and implement in Security Config.
+     *
+     * @return view (If log-in successful redirect to "/account" path).
+     */
+    @GetMapping("/login")
+    public final String loginForm() {
+        return "login";
+    }
 }

@@ -13,11 +13,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UserController {
 	
+	/**
+	 * Display user's account information.
+	 *
+	 * @return view
+	 */
 	@GetMapping("/account")
 	public final String login() {
 		return "user-account";
 	}
 	
+	/**
+	 * Access to new-addresses pages @todo impl multiple addresses.
+	 *
+	 * @return view
+	 */
 	@GetMapping("/new-addresses")
 	public final String newAddresses() {
 		return "user-addresses";

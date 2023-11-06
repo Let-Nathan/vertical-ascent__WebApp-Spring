@@ -32,6 +32,7 @@ dependencies {
 	implementation 'mysql:mysql-connector-java:8.0.28'
     implementation 'org.jetbrains:annotations:24.0.0'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '3.1.2'
+	implementation "org.springframework.boot:spring-boot-starter-security"
     compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
