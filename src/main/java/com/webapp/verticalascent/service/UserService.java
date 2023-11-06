@@ -53,8 +53,8 @@ public class UserService {
 	 * Return true if method find the email addresses in database with using
 	 * UserRepository dependency injection.
 	 *
-	 * @param email string e-mail addresses.
-	 * @return boolean
+	 * @param email (String e-mail addresses).
+	 * @return User (Based on email return user object).
 	 */
 	public User isEmailExist(String email) {
 		return userRepository.findByEmail(email);

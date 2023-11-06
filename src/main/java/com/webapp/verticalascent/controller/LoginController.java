@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LoginController {
     
-    
-    @GetMapping("/login-user")
+    /**
+     * Handle log-in from user.
+     * Defined by Spring security and implement in Security Config.
+     *
+     * @return view (If log-in successful redirect to "/account" path).
+     */
+    @GetMapping("/login")
     public final String loginForm() {
         return "login";
     }
- 
 }
