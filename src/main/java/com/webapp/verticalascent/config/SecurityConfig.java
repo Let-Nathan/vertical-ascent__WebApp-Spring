@@ -43,6 +43,7 @@ public class SecurityConfig {
 	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests(authorize -> authorize
+				.requestMatchers("/api/product-categories").denyAll()
 				.requestMatchers("/account").hasRole("USER")
 				.requestMatchers("/**", "/logout").permitAll()
 				.requestMatchers(
