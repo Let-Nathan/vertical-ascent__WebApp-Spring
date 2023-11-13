@@ -1,7 +1,13 @@
 package com.webapp.verticalascent.repository;
 
 import com.webapp.verticalascent.entity.Product;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Access and manage "Product" data.
@@ -11,5 +17,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  */
 public interface ProductRepository extends JpaRepository<Product, Long> {
-
+	@Query("SELECT p FROM Product p WHERE p.category IN " +
+		"(SELECT c FROM ProductCategory c WHERE c.name = :categoryName)")
+	List<Product> findByCategoryName(@Param("categoryName") String categoryName);
 }

@@ -43,7 +43,4 @@ public class ProductCategory {
     @Column(nullable = false)
     private boolean isAvailable;
     
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<Product> products;
-    
 }

@@ -36,8 +36,13 @@ public class Product {
     @Column(nullable = false)
     private String description;
     
+    @Column(nullable = false)
+    private Long price;
+    
+    @Column(nullable = false)
+    private int quantity;
+    
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private ProductCategory category;
 }
-

@@ -31,4 +31,13 @@ public class ProductCategoryService {
 		return productCategoryRepository.findAll();
 	}
 	
+	/**
+	 * Get one product category from the repository.
+	 *
+	 * @return ProductCategory unique category based on name.
+	 */
+	public ProductCategory getOneCategoyByName(String categoryName) {
+		return productCategoryRepository.findByName(categoryName);
+	}
+	
 }
