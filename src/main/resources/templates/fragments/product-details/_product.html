@@ -17,22 +17,16 @@
         </div>
         <!-- Container product name and price -->
         <div class="col mb-4 d-flex justify-content-around m-3">
-            <!-- Product brand and name -->
+            <!-- Product name -->
             <div class="container-fluid p-0 flex-colum col">
-                <p class="fw-bold fs-2 m-0">Marque</p>
                 <p th:text="${product.name}" class="fw-semibold fs-3"></p>
             </div>
             <p th:text="${product.price} + ' €'" class="col text-danger fs-5 fw-bold d-flex align-items-center justify-content-end"></p>
         </div>
         <!-- Container product description -->
         <div class="container-fluid">
-            <p class="d-flex justify-content-center">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut tempus leo, vel cursus libero.
-                Sed eget laoreet lacus. Nam tellus leo, imperdiet at risus ut, dictum ornare odio. Nullam tempor
-                facilisis purus, a sodales leo. Cras ipsum nibh, congue a elit vulputate, fermentum pulvinar metus.
-            </p>
+            <p th:text="${product.description}" class="d-flex justify-content-center"></p>
         </div>
-        <!-- Size container ? -->
 
         <!-- Add to shopping cart btn -->
         <button class="m-3 p-2 btn btn-danger text-uppercase fw-bold d-flex justify-content-between align-items-center">
