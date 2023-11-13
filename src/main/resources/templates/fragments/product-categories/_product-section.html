@@ -6,10 +6,9 @@
         <a href="/" class="text-decoration-none d-flex flex-column justify-content-center">
             <img src="/images/icon/arrow-left.svg" alt="Flêche de retour en arrière">
         </a>
-        <!-- @Todo impl product category: name, desc -->
-        <h1 th:text="${category.name}" class="text-uppercase fw-bold ms-3 mb-0 mt-0 p-0 col-6"></h1>
+        <h1 th:text="${category.name}" class="text-uppercase fw-bold m-3 mb-0 mt-0 p-0 col-6"></h1>
     </div>
-    <p th:text="${category.description}" id="categories-description" class="fw-semibold"></p>
+    <p th:text="${category.description}" id="categories-description" class="fw-semibold m-2"></p>
 </div>
 <!-- Product & filter container -->
 <div id="2-col-lg-container" class="d-flex justify-content-center justify-content-md-between">
