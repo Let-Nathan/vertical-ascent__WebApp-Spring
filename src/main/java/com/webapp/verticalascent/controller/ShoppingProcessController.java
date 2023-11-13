@@ -3,6 +3,7 @@ package com.webapp.verticalascent.controller;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * Controller class for user purchasing process.
@@ -17,15 +18,19 @@ public class ShoppingProcessController {
 	/**
 	 * Display shopping cart user if he had one in database.
 	 *
-	 * @param authentication verify that user is connected
 	 * @return view
 	 */
-	@GetMapping("/panier")
-	public final String shoppingCart(Authentication authentication) {
-		if (authentication.isAuthenticated()) {
-			return "shopping-cart";
-		}
+	@GetMapping("/pannier")
+	public final String shoppingCart() {
+		
 		return "/shopping-cart-empty";
+	}
+	
+	@GetMapping("/add-product/{id}")
+	public final String addPorduct(
+		@PathVariable Long id
+	) {
+		return "/shopping-cart";
 	}
 	
 	/**
@@ -33,7 +38,7 @@ public class ShoppingProcessController {
 	 *
 	 * @return view
 	 */
-	@GetMapping("/panier-vide")
+	@GetMapping("/pannier-vide")
 	public final String emptyShoppingCart() {
 		return "shopping-cart-empty";
 	}
