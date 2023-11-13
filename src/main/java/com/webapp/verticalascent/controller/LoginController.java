@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LoginController {
     
-    String TEST = "blabla";
     /**
      * Handle log-in from user.
      * Defined by Spring security and implement in Security Config.

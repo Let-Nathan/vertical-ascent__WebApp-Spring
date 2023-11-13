@@ -2,11 +2,10 @@ package com.webapp.verticalascent.service;
 
 import com.webapp.verticalascent.entity.Product;
 import com.webapp.verticalascent.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Service implementation with logic for Product.
