@@ -40,5 +40,4 @@ public class ProductCategory {
     @Column(nullable = false)
     private boolean isAvailable;
     
-    
 }

@@ -7,15 +7,9 @@
             <img src="/images/icon/arrow-left.svg" alt="Flêche de retour en arrière">
         </a>
         <!-- @Todo impl product category: name, desc -->
-        <h1 class="text-uppercase fw-bold ms-3 mb-0 mt-0 p-0 col-6">Product Category</h1>
+        <h1 th:text="${category.name}" class="text-uppercase fw-bold ms-3 mb-0 mt-0 p-0 col-6"></h1>
     </div>
-    <p id="categories-description" class="fw-semibold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut nunc enim.
-        Nam ut nisl sit amet ligula laoreet porttitor.
-        Nam aliquam nibh nec pulvinar venenatis. Nulla luctus luctus tincidunt. Nulla feugiat elit
-        ut metus scelerisque laoreet. Aliquam posuere enim tempus ligula pellentesque, quis tincidunt
-        ex aliquet.
-    </p>
+    <p th:text="${category.description}" id="categories-description" class="fw-semibold"></p>
 </div>
 <!-- Product & filter container -->
 <div id="2-col-lg-container" class="d-flex justify-content-center justify-content-md-between">
@@ -25,9 +19,9 @@
          th:include="fragments/product-categories/_filter-product.html">
     </div>
     <!-- Products container -->
-    <div class="container" th:include="fragments/product-categories/_product-card.html"></div>
+    <div id="product-list-category" class="container" th:include="fragments/product-categories/_product-card.html"></div>
 </div>
 <!-- Bottom container display on mobile -->
-<div id="mobile-filter-container" class="bar-filter-container container-fluid d-md-none d-lg-none d-block col-12 bg-white"
+<div id="mobile-filter-container" class="bar-filter-container container-fluid d-md-none d-lg-none d-block col-12 bg-white fixed mt-5"
      th:include="fragments/product-categories/_container-mobile-filter.html">
 </div>
