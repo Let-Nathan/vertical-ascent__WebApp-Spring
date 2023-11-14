@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -15,10 +16,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
- * Object representation of Cart product table.
- * Used to store product information and link it to the user's session.
+ * Object representation of shopping session table.
+ * Used to store user cart product, perform order.
  *
  * @author Nathan L
  * @version 1.0
@@ -27,8 +29,8 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "cart_product")
-public class CartProduct {
+@Table(name = "shopping_session")
+public class ShoppingSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,17 +41,20 @@ public class CartProduct {
     private Date createdAt;
     
     @Column(nullable = false)
-    private BigDecimal totalPrice;
+    @Temporal(TemporalType.DATE)
+    private Date expirationDate;
     
     @Column(nullable = false)
-    private int quantity;
+    private BigDecimal totalPrice;
+    
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private Boolean isActive;
     
     @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @JoinColumn(name = "user_id")
+    private User user;
     
-    @ManyToOne
-    @JoinColumn(name = "session_id")
-    private ShoppingSession session;
+    @OneToMany(mappedBy = "shopping_session")
+    private List<CartProduct> cartProducts;
 }
 
