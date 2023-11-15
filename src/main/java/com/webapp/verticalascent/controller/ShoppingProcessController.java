@@ -1,6 +1,5 @@
 package com.webapp.verticalascent.controller;
 
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,12 +25,6 @@ public class ShoppingProcessController {
 		return "/shopping-cart-empty";
 	}
 	
-	@GetMapping("/add-product/{id}")
-	public final String addPorduct(
-		@PathVariable Long id
-	) {
-		return "/shopping-cart";
-	}
 	
 	/**
 	 * Empty shopping cart view.

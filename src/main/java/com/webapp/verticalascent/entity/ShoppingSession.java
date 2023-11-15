@@ -1,17 +1,9 @@
 package com.webapp.verticalascent.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import lombok.Getter;
@@ -37,11 +29,11 @@ public class ShoppingSession {
     private Long id;
     
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
     
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date expirationDate;
     
     @Column(nullable = false)
@@ -54,7 +46,17 @@ public class ShoppingSession {
     @JoinColumn(name = "user_id")
     private User user;
     
-    @OneToMany(mappedBy = "shopping_session")
+    @OneToMany(mappedBy = "shoppingSession")
     private List<CartProduct> cartProducts;
+    
+    @PrePersist
+    protected void onCreat() {
+        Date currentDate = new Date();
+        createdAt = currentDate;
+        
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        expirationDate = calendar.getTime();
+    }
 }
-
