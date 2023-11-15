@@ -38,5 +38,15 @@ public class ProductService {
 		return productRepository.findById(id);
 	}
 	
+	/**
+	 * Take a Product as parameter and defined if a product is in stock.
+	 *
+	 * @param product Product object
+ 	 * @return boolean
+	 */
+	public boolean isInStock(Product product) {
+		return product.getQuantity() > 0;
+	}
+	
 	
 }

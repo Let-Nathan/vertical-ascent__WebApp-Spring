@@ -9,12 +9,13 @@
 </nav>
 <!-- Product container -->
 <div class="d-lg-flex justify-content-around flex-lg-wrap">
-    <!-- Product details card @todo replace by product info -->
     <div class="container-fluid d-flex flex-column bg-white d-flex p-2 mt-4 rounded-3 border-4 col-11 col-md-5 col-lg-5 shadow-lg mb-4">
         <!-- Img product -->
         <div class="mb-4 d-flex justify-content-center">
             <img class="img-fluid " src="/images/product/drago.jpg" alt="image d'un produit">
         </div>
+        <!-- Product error stock -->
+        <p class="text-danger" th:text="${errorMessage}"></p>
         <!-- Container product name and price -->
         <div class="col mb-4 d-flex justify-content-around m-3">
             <!-- Product name -->
@@ -29,10 +30,19 @@
         </div>
 
         <!-- Add to shopping cart btn -->
-        <button class="m-3 p-2 btn btn-danger text-uppercase fw-bold d-flex justify-content-between align-items-center">
-            <span>ajouter au panier</span>
-            <p class="m-0" th:text="${product.price} + ' €'"></p>
-        </button>
+        <a  class="m-3 text-decoration-none d-flex justify-content-center">
+            <button
+                    id="add-product"
+                    class="btn btn-danger text-uppercase fw-bold w-100 p-0 d-flex justify-content-between"
+                    th:data-product-id="${product.id}"
+                    th:data-product-name="${product.name}"
+                    th:data-product-price="${product.price}"
+                    th:data-product-quantity="${product.quantity}"
+            >
+                <span class="m-2">ajouter au panier</span>
+                <span class="m-2" th:text="${product.price} + ' €'"></span>
+            </button>
+        </a>
 
         <!-- Border in stock -->
         <div th:if="${product.quantity >= 1}" class="border border-success m-3">
@@ -51,3 +61,6 @@
     </div>
 </div>
 
+<div th:include="/fragments/order/shopping-cart/_product-modal-sucess"></div>
+
+<script src="/javascript/webapp-js/productScript.js"></script>

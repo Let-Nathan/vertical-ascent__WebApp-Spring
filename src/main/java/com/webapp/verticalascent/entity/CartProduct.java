@@ -1,15 +1,7 @@
 package com.webapp.verticalascent.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Getter;
@@ -42,7 +34,7 @@ public class CartProduct {
     private BigDecimal totalPrice;
     
     @Column(nullable = false)
-    private int quantity;
+    private int quantity = 1;
     
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -50,6 +42,11 @@ public class CartProduct {
     
     @ManyToOne
     @JoinColumn(name = "session_id")
-    private ShoppingSession session;
+    private ShoppingSession shoppingSession;
+    
+    @PrePersist
+    protected void onCreat() {
+        createdAt = new Date();
+    }
 }
 

@@ -1,15 +1,19 @@
 package com.webapp.verticalascent.controller;
 
 import com.webapp.verticalascent.entity.Product;
+import com.webapp.verticalascent.service.CartProductService;
 import com.webapp.verticalascent.service.ProductCategoryService;
 import com.webapp.verticalascent.service.ProductService;
 import java.util.List;
 import java.util.Optional;
+
+import com.webapp.verticalascent.service.ShoppingSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Controller class for Login.
@@ -22,14 +26,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class    ProductController {
 	
 	private final ProductService productService;
+	private final ShoppingSessionService shoppingSessionService;
 	private final ProductCategoryService productCategoryService;
 	
 	@Autowired
 	public ProductController(
 		ProductService productService,
+		ShoppingSessionService shoppingSessionService,
 		ProductCategoryService productCategoryService
 	) {
 		this.productService = productService;
+		this.shoppingSessionService = shoppingSessionService;
 		this.productCategoryService = productCategoryService;
 	}
 	
@@ -76,5 +83,18 @@ public class    ProductController {
 			model.addAttribute("error", e.getMessage());
 		}
 		return "product-details";
+	}
+	
+	@GetMapping("/add-product/{id}")
+	public final String addProduct(
+		@PathVariable Long id,
+		RedirectAttributes redirectAttributes
+	) {
+		try {
+			return "/shopping-cart";
+		} catch (IllegalArgumentException e) {
+			redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+			return "redirect:/product/" + id;
+		}
 	}
 }
