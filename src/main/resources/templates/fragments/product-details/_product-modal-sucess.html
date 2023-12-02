@@ -1,0 +1,22 @@
+<!-- Modal -->
+<div class="modal fade" id="addToCartModal" tabindex="-1" aria-labelledby="addToCartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addToCartModalLabel">Produit ajouté au panier</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Votre produit a été ajouté au panier.</p>
+                <p class="mb-0">Quantité</p>
+                <div class="d-flex">
+                    <img id="item-minus" class="img-fluid col-1" src="/images/icon/dash-circle.svg" alt="Icon moins pour ajuster la quantitée de l'article">
+                    <span id="cartQuantity" class="m-4 display-4">1</span>
+                    <img id="item-plus" class="img-fluid col-1" src="/images/icon/plus-circle.svg" alt="Icon plus pour ajuster la quantitée de l'article">
+                </div>
+                <button id="viewCartBtn" class="btn btn-primary">Voir le panier</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Continuer mes achats</button>
+            </div>
+        </div>
+    </div>
+</div>

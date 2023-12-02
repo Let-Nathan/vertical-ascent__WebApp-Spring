@@ -5,6 +5,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const MODAL = new bootstrap.Modal(document.getElementById('addToCartModal'), {
         keyboard: false
     });
+    const ITEM_INCREMENT = document.getElementById('item-plus');
+    const ITEM_DECREMENT = document.getElementById('item-minus');
+    const CART_QUANTITY = document.getElementById('cartQuantity');
+
+    ITEM_INCREMENT.addEventListener('click', function() {
+        let quantity = parseInt(CART_QUANTITY.innerText);
+        quantity++;
+        CART_QUANTITY.innerText = quantity;
+
+        updateLocalStorage(quantity);
+    });
+
+    ITEM_DECREMENT.addEventListener('click', function() {
+        let quantity = parseInt(CART_QUANTITY.innerText);
+        if (quantity > 1) {
+            quantity--;
+            CART_QUANTITY.innerText = quantity;
+
+            updateLocalStorage(quantity);
+        }
+    });
 
     /**
      * Add an event listener on click to the product button. We will add product
@@ -21,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // cart user and shopping session.
         if (productQuantity === '0') {
             alert('Product not in stock');
-            exit();
+            return;
         }
 
         let cart = JSON.parse(localStorage.getItem('userCart')) || [];
@@ -33,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
             productInCart.quantity += 1;
             quantity = productInCart.quantity;
         } else {
-            //If no product, we initialised one with a default quantity.
+            //If no product, we initialized one with a default quantity.
             cart.push({
                 productId: productId,
                 productName: productName,
@@ -44,8 +65,20 @@ document.addEventListener('DOMContentLoaded', function() {
         //Update the local storage.
         localStorage.setItem('userCart', JSON.stringify(cart));
 
-        // Affichage de la modale avec la quantité mise à jour du produit
+        //Display modal with updated quantity
         document.getElementById('cartQuantity').innerText = quantity;
         MODAL.show();
     });
+
+    function updateLocalStorage(quantity) {
+        const productId = ADD_PRODUCT.getAttribute('data-product-id');
+        let cart = JSON.parse(localStorage.getItem('userCart')) || [];
+        let productInCart = cart.find(item => item.productId === productId);
+
+        if (productInCart) {
+            productInCart.quantity = quantity;
+        }
+
+        localStorage.setItem('userCart', JSON.stringify(cart));
+    }
 });
