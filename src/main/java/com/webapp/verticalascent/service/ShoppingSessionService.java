@@ -1,13 +1,19 @@
 package com.webapp.verticalascent.service;
 
+import com.webapp.verticalascent.dto.ProductDto;
 import com.webapp.verticalascent.entity.CartProduct;
+import com.webapp.verticalascent.entity.Product;
 import com.webapp.verticalascent.entity.ShoppingSession;
 import com.webapp.verticalascent.entity.User;
+import com.webapp.verticalascent.repository.ProductRepository;
 import com.webapp.verticalascent.repository.ShoppingSessionRepository;
+import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -20,15 +26,16 @@ import java.util.List;
 public class ShoppingSessionService {
 	
 	private final ShoppingSessionRepository shoppingSessionRepository;
-	private final CartProductService cartProductService;
+	private final ProductRepository productRepository;
 	
 	@Autowired
 	public ShoppingSessionService(
 		ShoppingSessionRepository shoppingSessionRepository,
+		ProductRepository productRepository,
 		CartProductService cartProductService
 	) {
 		this.shoppingSessionRepository = shoppingSessionRepository;
-		this.cartProductService = cartProductService;
+		this.productRepository = productRepository;
 	}
 	
 	/**
@@ -40,26 +47,23 @@ public class ShoppingSessionService {
 		return shoppingSessionRepository.findByUserAndIsActive(user, true);
 	}
 	
-//	public BigDecimal calcultotalPrice(List<CartProduct> cartProductList) {
-//		BigDecimal totalSessionPrice = BigDecimal.ZERO;
-//		for (CartProduct cartProduct : cartProductList) {
-//			totalSessionPrice = totalSessionPrice.add(cartProduct.getTotalPrice());
-//		}
-//		return totalSessionPrice;
-//	}
-//
-//	public void newShoppingSession(User user, List<CartProduct> cartProductList) {
-//		if(isShoppingSessionActive(user) != null) {
-//
-//		} else {
-//			ShoppingSession shoppingSession = new ShoppingSession();
-//			shoppingSession.setUser(user);
-//			shoppingSession.setCartProducts(cartProductList);
-//			shoppingSession.setTotalPrice(calcultotalPrice(cartProductList));
-//			shoppingSession.setIsActive(true);
-//			cartProductService.newCartProduct();
-//			shoppingSessionRepository.save((shoppingSession));
-//		}
-//	}
+	public List<ProductDto> validateCartItems(List<ProductDto> cartItems) {
+		List<ProductDto> validatedItems = new ArrayList<>();
+		
+		for (ProductDto cartItem : cartItems) {
+			Optional<Product> productOptional = productRepository.findById(cartItem.getId());
+			if (productOptional.isPresent()) {
+				Product product = productOptional.get();
+				if (product.getName().equals(cartItem.getName()) && product.getPrice().equals(cartItem.getPrice())) {
+					validatedItems.add(cartItem);
+				} else {
+					throw new ValidationException("Produit invalide : " + cartItem.getName());
+				}
+			}
+		}
+		
+		return validatedItems;
+	}
+	
 
 }

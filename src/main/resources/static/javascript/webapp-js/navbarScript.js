@@ -79,6 +79,7 @@ function menuContainer(productCategory) {
 window.addEventListener('click', function(event) {
     const navbarCollapse = document.querySelector('.navbar-collapse');
     const menuCategories = document.querySelector('.menu-categories');
+
     // Show is a class name added by bootstrap aria controls
     if (navbarCollapse.classList.contains('show')) {
         if (!menuCategories.contains(event.target)) {

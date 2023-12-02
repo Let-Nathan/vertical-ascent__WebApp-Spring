@@ -6,9 +6,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
@@ -43,16 +45,21 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 		http
+			.csrf(csrf -> csrf
+				.ignoringRequestMatchers("/validate-cart")
+			)
 			.authorizeHttpRequests(authorize -> authorize
 				.requestMatchers("/account").hasRole("USER")
 				.requestMatchers("/**", "/logout").permitAll()
+				.requestMatchers(HttpMethod.POST, "/validate-cart").permitAll()
 				.requestMatchers(
 					"/css/**", "/javascript/**", "/images/**"
 				).permitAll()
-				.anyRequest().authenticated()
+				
 			)
-			.formLogin(httpSecurityFormLoginConfigurer ->
-				httpSecurityFormLoginConfigurer
+			
+			.formLogin(form ->
+				form
 					.loginPage("/login")
 					.loginProcessingUrl("/login")
 					.defaultSuccessUrl("/")
@@ -62,8 +69,11 @@ public class SecurityConfig {
 			.logout(logout -> logout
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/login")
-			)
-			.sessionManagement(Customizer.withDefaults());
+			);
+		
+			
+			
+		
 		return http.build();
 	}
 	
