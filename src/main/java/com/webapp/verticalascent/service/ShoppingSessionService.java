@@ -136,28 +136,37 @@ public class ShoppingSessionService {
 	 * @param cartItems List of product dto from local storage.
 	 */
 	public void createNewShoppingSession(String sessionId, List<ProductDto> cartItems) {
-		// Init a Shopping Session object with props.
-		ShoppingSession newUserShoppingSess = new ShoppingSession();
-		newUserShoppingSess.setCreatedAt(new Date());
-		newUserShoppingSess.setExpirationDate(new Date());
-		newUserShoppingSess.setSessionID(sessionId);
-		newUserShoppingSess.setIsActive(true);
-		
-		// Create new cart products linked to the new Shopping Session.
-		List<CartProduct> newCartProducts = cartProductService.createNewCartProducts(newUserShoppingSess, cartItems);
-		BigDecimal totalPrice = calculateTotalPrice(newCartProducts);
-		// Link the carts product to the Shopping Session.
-		newUserShoppingSess.setCartProducts(newCartProducts);
-		newUserShoppingSess.setTotalPrice(totalPrice);
-		// Save Shopping Session in the database.
-		ShoppingSession savedSession = shoppingSessionRepository.save(newUserShoppingSess);
-		
-		for (CartProduct newCartProduct : newCartProducts) {
-			newCartProduct.setShoppingSession(savedSession);
-			cartProductService.savedCartProduct(newCartProduct);
-		}
+		// Build the new shopping session
+		ShoppingSession newUserShoppingSession = buildNewUserShoppingSession(sessionId);
+		// Create new carts products with the List cartItems and linked it to the new anonymous shopping sess
+		List<CartProduct> newCartProducts = cartProductService.createNewCartProducts(newUserShoppingSession, cartItems);
+		// Link the List of Cart Product to the current Shopping Session.
+		newUserShoppingSession.setCartProducts(newCartProducts);
+		newUserShoppingSession.setTotalPrice(calculateTotalPrice(newCartProducts));
+		// Persist the Anonymous Shopping Sess in database.
+		shoppingSessionRepository.save(newUserShoppingSession);
 	}
 	
+	/**
+	 * Build a new Shopping Session for the anonymous user.
+	 *
+	 * @param sessionId The id of user's session.
+	 * @return ShoppingSession
+	 */
+	private ShoppingSession buildNewUserShoppingSession(String sessionId) {
+		ShoppingSession newUserShoppingSession = new ShoppingSession();
+		newUserShoppingSession.setCreatedAt(new Date());
+		newUserShoppingSession.setExpirationDate(newExpirationDate());
+		newUserShoppingSession.setSessionID(sessionId);
+		newUserShoppingSession.setIsActive(true);
+		return newUserShoppingSession;
+	}
+	
+	/**
+	 * Total price of a List<CartProduct>
+	 * @param newCartProducts List of cart product from the anonymous user.
+	 * @return BigDecimal totalPrice of List.
+	 */
 	private BigDecimal calculateTotalPrice(List<CartProduct> newCartProducts) {
 		BigDecimal totalPrice = BigDecimal.ZERO;
 		for (CartProduct cartProduct : newCartProducts) {
@@ -166,6 +175,10 @@ public class ShoppingSessionService {
 		return totalPrice;
 	}
 	
+	/**
+	 * Scheduled task to check if a session need to expire.
+	 * If so, set isActive to false.
+	 */
 	@Scheduled(cron = "0 0 0 * * *") // All minutes to check if ok
 	private void checkSessionExpiration() {
 		List<ShoppingSession> sessions = shoppingSessionRepository.findAll();
