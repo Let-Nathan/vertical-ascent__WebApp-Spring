@@ -1,5 +1,6 @@
 package com.webapp.verticalascent.service;
 
+import com.webapp.verticalascent.dto.ProductDto;
 import com.webapp.verticalascent.entity.CartProduct;
 import com.webapp.verticalascent.entity.Product;
 import com.webapp.verticalascent.entity.ShoppingSession;
@@ -8,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -21,20 +25,22 @@ import java.util.Optional;
 public class CartProductService {
 	
 	private final CartProductRepository cartProductRepository;
-	private final ErrorsLogService errorsLogService;
 	private final ProductService productService;
 	
 	@Autowired
 	public CartProductService(
 		CartProductRepository cartProductRepository,
-		ErrorsLogService errorsLogService,
 		ProductService productService
 		) {
 		this.cartProductRepository = cartProductRepository;
-		this.errorsLogService = errorsLogService;
 		this.productService = productService;
 	}
 	
+	/**
+	 * Create a new Cart Product
+	 * @param id
+	 * @param shoppingSession
+	 */
 	public void newCartProduct(Long id, ShoppingSession shoppingSession) {
 		Optional<Product> productOptional = productService.findOneById(id);
 		
@@ -50,6 +56,15 @@ public class CartProductService {
 			);
 		}
 	}
-
 	
+	public CartProduct getCartItemBySessionAndProduct(ShoppingSession shoppingSession, Product product) {
+		return cartProductRepository.findByShoppingSessionAndProductAndShoppingSessionIsActive(shoppingSession, product, true);
+	}
+	
+	public void savedCartProduct(CartProduct cartProduct) {
+		 cartProductRepository.save(cartProduct);
+	}
+	
+	
+
 }

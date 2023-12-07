@@ -1,6 +1,8 @@
 package com.webapp.verticalascent.repository;
 
 import com.webapp.verticalascent.entity.CartProduct;
+import com.webapp.verticalascent.entity.Product;
+import com.webapp.verticalascent.entity.ShoppingSession;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -10,4 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0
  */
 public interface CartProductRepository extends JpaRepository<CartProduct, Long> {
+	CartProduct findByShoppingSessionAndProductAndShoppingSessionIsActive(ShoppingSession shoppingSession, Product product, Boolean isActive);
 }

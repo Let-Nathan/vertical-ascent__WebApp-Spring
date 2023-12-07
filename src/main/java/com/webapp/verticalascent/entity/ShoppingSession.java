@@ -46,6 +46,9 @@ public class ShoppingSession {
     @JoinColumn(name = "user_id")
     private User user;
     
+    @Column(nullable = false, unique = true)
+    private String sessionID;
+    
     @OneToMany(mappedBy = "shoppingSession")
     private List<CartProduct> cartProducts;
     
@@ -53,10 +56,10 @@ public class ShoppingSession {
     protected void onCreat() {
         Date currentDate = new Date();
         createdAt = currentDate;
-        
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(currentDate);
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         expirationDate = calendar.getTime();
+      
     }
 }

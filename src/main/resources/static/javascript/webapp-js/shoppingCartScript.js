@@ -32,14 +32,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function sendCartItems(cartItems) {
-        const CSRFTOKEN = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+        const userId = localStorage.getItem('userId');
+
+        const requestBody = {
+            cartItems: cartItems
+        };
+
+        if (userId) {
+            requestBody.userId = userId;
+        }
         fetch('/validate-cart', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
-                'X-XSRF-TOKEN': CSRFTOKEN,
             },
-            body: JSON.stringify(cartItems),
+            body: JSON.stringify(requestBody),
         })
             .then((response) => {
                 if (!response) {
@@ -47,5 +54,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 return response.json();
             })
+            .then((data) => {
+                if(!localStorage.getItem("userId")) {
+                    localStorage.setItem("userId", data.sessionId);
+                }
+                window.location.href = '/pannier?userId=' + data.sessionId;
+            })
+            .catch((error) => {
+                console.log('Une erreur est survenue : ' + error);
+            });
     }
 });

@@ -30,11 +30,15 @@ public class CartProduct {
     @Temporal(TemporalType.DATE)
     private Date createdAt;
     
+    @Column
+    @Temporal(TemporalType.DATE)
+    private Date modifiedAt;
+    
     @Column(nullable = false)
     private BigDecimal totalPrice;
     
     @Column(nullable = false)
-    private int quantity = 1;
+    private int quantity;
     
     @ManyToOne
     @JoinColumn(name = "product_id")
