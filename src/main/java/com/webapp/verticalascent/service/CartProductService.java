@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 
 /**
@@ -36,25 +33,18 @@ public class CartProductService {
 		this.productService = productService;
 	}
 	
-	/**
-	 * Create a new Cart Product
-	 * @param id
-	 * @param shoppingSession
-	 */
-	public void newCartProduct(Long id, ShoppingSession shoppingSession) {
-		Optional<Product> productOptional = productService.findOneById(id);
-		
-		if(productOptional.isPresent() && productService.isInStock(productOptional.get())) {
+	public List<CartProduct> createNewCartProducts(ShoppingSession newUserShoppingSess, List<ProductDto> cartItems) {
+		List<CartProduct> newCartProducts = new ArrayList<>();
+		for (ProductDto newCartItem : cartItems) {
 			CartProduct cartProduct = new CartProduct();
-			cartProduct.setProduct(productOptional.get());
-			cartProduct.setTotalPrice(BigDecimal.valueOf(productOptional.get().getPrice()));
-			cartProduct.setShoppingSession(shoppingSession);
-			cartProductRepository.save(cartProduct);
-		} else {
-			throw new IllegalArgumentException(
-				"Le produit n'est pas en stock actuellement. Vous pouvez l'ajouter à votre liste d'envie en attendant."
-			);
+			cartProduct.setShoppingSession(newUserShoppingSess);
+			cartProduct.setProduct(productService.findOneById(newCartItem.getId()).orElseThrow());
+			cartProduct.setCreatedAt(new Date());
+			cartProduct.setQuantity(newCartItem.getQuantity());
+			cartProduct.setTotalPrice(BigDecimal.valueOf(newCartItem.getQuantity() * newCartItem.getPrice()));
+			newCartProducts.add(cartProduct);
 		}
+		return newCartProducts;
 	}
 	
 	public CartProduct getCartItemBySessionAndProduct(ShoppingSession shoppingSession, Product product) {
@@ -65,6 +55,45 @@ public class CartProductService {
 		 cartProductRepository.save(cartProduct);
 	}
 	
+	public void updateExistingCartProduct(CartProduct existingCartProductAndSession, ProductDto cartItem) {
+		if(cartItem.getQuantity() <= 0 ) {
+			existingCartProductAndSession.setQuantity(0);
+		} else {
+			existingCartProductAndSession.setQuantity(existingCartProductAndSession.getQuantity() + cartItem.getQuantity());
+		}
+		existingCartProductAndSession.setTotalPrice(BigDecimal.valueOf(existingCartProductAndSession.getQuantity() * cartItem.getPrice()));
+		existingCartProductAndSession.setModifiedAt(new Date());
+		savedCartProduct(existingCartProductAndSession);
+	}
 	
-
+	
+	
+	/**
+	 * Check if the product from the local storage are valid product.
+	 *
+	 * @param cartItems List of product from the local storage.
+	 * @return List<ProductDto> validatedItems || empty (can be empty).
+	 */
+	public List<ProductDto> validateCartItems(List<ProductDto> cartItems) {
+		List<ProductDto> validatedItems = new ArrayList<>();
+		
+		for (ProductDto cartItem : cartItems) {
+			Optional<Product> productOptional = productService.findOneById(cartItem.getId());
+			
+			if (productOptional.isPresent()) {
+				Product product = productOptional.get();
+				
+				if (isValidProduct(cartItem, product)) {
+					validatedItems.add(cartItem);
+				}
+			}
+		}
+		return validatedItems;
+	}
+	
+	private boolean isValidProduct(ProductDto cartItem, Product product) {
+		return cartItem.getName().equals(product.getName())
+			&& Objects.equals(cartItem.getPrice(), product.getPrice())
+			&& cartItem.getQuantity() <= product.getQuantity();
+	}
 }

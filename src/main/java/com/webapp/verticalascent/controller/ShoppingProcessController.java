@@ -4,6 +4,7 @@ import com.webapp.verticalascent.dto.ProductDto;
 import com.webapp.verticalascent.entity.CartProduct;
 import com.webapp.verticalascent.entity.Product;
 import com.webapp.verticalascent.entity.ShoppingSession;
+import com.webapp.verticalascent.service.CartProductService;
 import com.webapp.verticalascent.service.ProductService;
 import com.webapp.verticalascent.service.ShoppingSessionService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,78 +34,87 @@ public class ShoppingProcessController {
 	
 	private final ShoppingSessionService shoppingSessionService;
 	private final ProductService productService;
+	private final CartProductService cartProductService;
 	
 	@Autowired
 	public ShoppingProcessController(
 		ShoppingSessionService shoppingSessionService,
-		ProductService productService
+		ProductService productService,
+		CartProductService cartProductService
 		
 	) {
 		this.shoppingSessionService = shoppingSessionService;
 		this.productService = productService;
+		this.cartProductService = cartProductService;
 	}
 	
 	@GetMapping("/pannier")
 	public String showShoppingCart(
 		HttpServletRequest request,
+		@RequestParam String pannierId,
 		Model model
 	) {
 		HttpSession session = request.getSession();
 		String sessionId = session.getId();
+		System.out.println("Pannier id ==> " + pannierId);
+//		cartProductService.validateCartItems()
 		
-		// Récupérer la ShoppingSession en fonction du sessionId
-		ShoppingSession userShoppingSession = shoppingSessionService.isShoppingSessionActive(sessionId);
-		
-		if (userShoppingSession != null) {
-			// Récupérer les CartProducts associés à la ShoppingSession
-			List<CartProduct> cartProducts = userShoppingSession.getCartProducts();
-			
-			List<Optional<Product>> products = new ArrayList<>();
-			
-			for (CartProduct cartProduct : cartProducts) {
-				Optional<Product> product = productService.findOneById(cartProduct.getProduct().getId());
-				products.add(product);
-			}
-			model.addAttribute("products", products);
-		}
+		model.addAttribute("userProduct" );
 		return "/shopping-cart";
 	}
+	
 	
 	/**
 	 * Display shopping cart user if he had one in database.
 	 *
 	 * @return view
 	 */
-	
 	@PostMapping("/validate-cart")
 	public ResponseEntity<Object> validateCartItems(
 		@RequestBody Map<String, Object> requestPayload,
 		HttpServletRequest request
 	) {
+		// Store user current session
 		HttpSession session = request.getSession();
 		String sessionId = session.getId();
-		String userId = (String) requestPayload.get("userId");
-		
+		// Find if there is already a local storage session registered
+		String anonymousUserId = (String) requestPayload.get("userId");
+		// Get cart product from local storage & convert them to List<ProductDto>
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<ProductDto> cartItems = objectMapper.convertValue(
 			requestPayload.get("cartItems"),
 			new TypeReference<>() {
 			}
 		);
-		
-		List<ProductDto> validatedItems = shoppingSessionService.validateCartItems(cartItems);
+		// Check if product send by user are conventional
+		List<ProductDto> validatedItems = cartProductService.validateCartItems(cartItems);
 		if (validatedItems == null) {
 			return ResponseEntity.notFound().build();
 		}
-		Map<String, Object> response = new HashMap<>();
-		response.put("sessionId", sessionId);
-		if(userId != null) {
-			shoppingSessionService.userShoppingSession(userId, validatedItems);
-		} else {
-			shoppingSessionService.userShoppingSession(sessionId, validatedItems);
-		}
 		
-		return ResponseEntity.ok().body(response);
+		try {
+			if (anonymousUserId != null && shoppingSessionService.isShoppingSessionActive(anonymousUserId)) {
+				// Anonymous user have an active session & local storage id
+				shoppingSessionService.handleExistingShoppingSession(anonymousUserId, validatedItems);
+			} else if (anonymousUserId != null && shoppingSessionService.isShoppingSessionExistAndShoppingProcessNotEnd(anonymousUserId)) {
+				// Anonymous user have not active Session but have one who exist and shopping process not end.
+				// So we activated back the session, and handle cart items with service.
+				ShoppingSession shoppingSession = shoppingSessionService.activeShoppingSession(anonymousUserId);
+				shoppingSessionService.handleExistingShoppingSession(shoppingSession.getSessionID(), cartItems);
+			} else {
+				// Anonymous user have no session, so we created one with cart product.
+				shoppingSessionService.createNewShoppingSession(sessionId, validatedItems);
+			}
+		} catch (Exception e) {
+			return ResponseEntity.ofNullable(e.getMessage());
+		}
+		// If user is anonymous we send back in resp session to store it in local storage
+		if(anonymousUserId == null) {
+			Map<String, Object> response = new HashMap<>();
+			response.put("sessionId", sessionId);
+			return ResponseEntity.ok().body(response);
+		}
+		return ResponseEntity.ok("ok");
 	}
 	
 	
