@@ -1,6 +1,4 @@
 package com.webapp.verticalascent.dto;
-
-import jakarta.validation.constraints.*;
 import lombok.Data;
 
 /**
@@ -12,19 +10,8 @@ import lombok.Data;
  */
 @Data
 public class ProductDto {
-	
-	@NotNull(message = "Merci de ne pas modifier le local storage ;)")
 	private Long id;
-	
-	@NotNull(message = "Merci de ne pas modifier le local storage ;)")
-	@Pattern(regexp = "[a-zA-Z0-9]+")
 	private String name;
-	
-	@NotNull(message = "Merci de ne pas modifier le local storage ;)")
 	private Long price;
-	
-	@NotNull(message = "Merci de ne pas modifier le local storage ;)")
-	@Min(value = 1)
-	@Max(value = 1)
 	private int quantity;
 }
