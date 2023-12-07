@@ -162,7 +162,7 @@ public class ShoppingSessionService {
 				&& cartItem.getQuantity() <= product.getQuantity();
 		}
 	
-	@Scheduled(cron = "0 0 0 * * *") // Tous les jours à minuit
+	@Scheduled(cron = "0 * * * * *") // Tous les jours à minuit
 	public void checkSessionExpiration() {
 		List<ShoppingSession> sessions = shoppingSessionRepository.findAll();
 		Date currentDate = new Date();
