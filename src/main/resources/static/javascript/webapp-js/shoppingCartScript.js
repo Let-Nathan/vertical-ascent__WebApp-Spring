@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(!localStorage.getItem("userId")) {
                     localStorage.setItem("userId", data.sessionId);
                 }
-                window.location.href = '/pannier?userId=' + data.sessionId;
+                window.location.href = '/pannier?pannierId=' + data.sessionId;
             })
             .catch((error) => {
                 console.log('Une erreur est survenue : ' + error);

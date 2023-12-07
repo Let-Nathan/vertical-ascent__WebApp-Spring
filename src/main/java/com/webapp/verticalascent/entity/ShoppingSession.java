@@ -39,7 +39,7 @@ public class ShoppingSession {
     @Column(nullable = false)
     private BigDecimal totalPrice;
     
-    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
     private Boolean isActive;
     
     @ManyToOne
@@ -48,6 +48,9 @@ public class ShoppingSession {
     
     @Column(nullable = false, unique = true)
     private String sessionID;
+    
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private Boolean isShoppingProcessEnd;
     
     @OneToMany(mappedBy = "shoppingSession")
     private List<CartProduct> cartProducts;
@@ -60,6 +63,7 @@ public class ShoppingSession {
         calendar.setTime(currentDate);
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         expirationDate = calendar.getTime();
+        isShoppingProcessEnd = false;
       
     }
 }
