@@ -33,6 +33,13 @@ public class CartProductService {
 		this.productService = productService;
 	}
 	
+	/**
+	 * Creat a new cart product and link it to the user's shopping sess.
+	 *
+	 * @param newUserShoppingSess ShoppingSession
+	 * @param cartItems List of product dto
+	 * @return List<CartProduct>
+	 */
 	public List<CartProduct> createNewCartProducts(ShoppingSession newUserShoppingSess, List<ProductDto> cartItems) {
 		List<CartProduct> newCartProducts = new ArrayList<>();
 		for (ProductDto newCartItem : cartItems) {
@@ -47,14 +54,32 @@ public class CartProductService {
 		return newCartProducts;
 	}
 	
+	/**
+	 * Check if there is already a Cart Product associated to the Shopping Session.
+	 *
+	 * @param shoppingSession ShoppingSession
+	 * @param product Product
+	 * @return CartProduct object
+	 */
 	public CartProduct getCartItemBySessionAndProduct(ShoppingSession shoppingSession, Product product) {
 		return cartProductRepository.findByShoppingSessionAndProductAndShoppingSessionIsActive(shoppingSession, product, true);
 	}
 	
+	/**
+	 * Save the CarProduct into Database.
+	 *
+	 * @param cartProduct CartProduct
+	 */
 	public void savedCartProduct(CartProduct cartProduct) {
 		 cartProductRepository.save(cartProduct);
 	}
 	
+	/**
+	 * Updated an existing CartProduct (quantity, total price, modified at) and store new value into Database.
+	 *
+	 * @param existingCartProductAndSession CartProduct
+	 * @param cartItem ProductDto
+	 */
 	public void updateExistingCartProduct(CartProduct existingCartProductAndSession, ProductDto cartItem) {
 		if(cartItem.getQuantity() <= 0 ) {
 			existingCartProductAndSession.setQuantity(0);
@@ -91,7 +116,14 @@ public class CartProductService {
 		return validatedItems;
 	}
 	
-	private boolean isValidProduct(ProductDto cartItem, Product product) {
+	/**
+	 * Check if the current ProductDto match a product in Database.
+	 *
+	 * @param cartItem ProductDto
+	 * @param product Product
+	 * @return Boolean True if a product match current characteristics (price, quantity, name).
+	 */
+	private Boolean isValidProduct(ProductDto cartItem, Product product) {
 		return cartItem.getName().equals(product.getName())
 			&& Objects.equals(cartItem.getPrice(), product.getPrice())
 			&& cartItem.getQuantity() <= product.getQuantity();
