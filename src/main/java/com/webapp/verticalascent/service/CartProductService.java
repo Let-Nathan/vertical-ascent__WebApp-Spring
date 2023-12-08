@@ -58,11 +58,12 @@ public class CartProductService {
 				cartProduct.setTotalPrice(BigDecimal.valueOf(newCartItem.getQuantity() * newCartItem.getPrice()));
 				newCartProducts.add(cartProduct);
 			}
+			
+			// Maintenant, on retourne simplement la liste des CartProduct créés
+			return newCartProducts;
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
-		savedListCartProducts(newCartProducts);
-		return newCartProducts;
 	}
 	
 	/**
@@ -100,12 +101,11 @@ public class CartProductService {
 	 * Saved a list of Cart Product in database.
 	 *
 	 * @param cartProducts List CartProduct
-	 * @return List of CartProduct
 	 */
-	public List<CartProduct> savedListCartProducts(List<CartProduct> cartProducts) {
+	public void savedListCartProducts(List<CartProduct> cartProducts) {
 		// Save the list of cart products
 		try {
-			return cartProductRepository.saveAll(cartProducts);
+			cartProductRepository.saveAll(cartProducts);
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}

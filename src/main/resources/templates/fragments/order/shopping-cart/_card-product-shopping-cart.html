@@ -7,53 +7,45 @@
 </div>
 <!-- Container for product card on desktop -->
 <div class="d-lg-flex justify-content-around flex-lg-wrap">
-    <!-- Product shopping @todo replace by product info -->
-    <div class="container-fluid bg-white d-flex p-2 mt-4 rounded-3 border-4 col-11 col-md-5 col-lg-5 shadow-lg mb-4">
+    <!-- Product shopping -->
+    <div th:each="cartProduct : ${userProduct}" class="container-fluid bg-white d-flex p-2 mt-4 rounded-3 border-4 col-11 col-md-5 col-lg-5 shadow-lg mb-4">
+
         <!-- left-col product img, description and button delete product -->
         <div class="col-5 d-flex flex-column justify-content-around mb-4">
             <img class="img-fluid" src="/images/product/drago.jpg" alt="image d'un produit">
-            <p>Ceci est une description non significative d'une paire de pompe qui ne manque pas d'air</p>
-            <button class="btn btn-danger fw-bold">Supprimer</button>
+            <p th:text="${cartProduct.product.description}"></p>
+            <button onclick="confirmDelete('${cartProduct.product.id}')" class="btn btn-danger fw-bold">Supprimer</button>
         </div>
         <!-- Span space between left and right col product info -->
         <span class="col-1"></span>
-        <div class="col mb-4 d-flex flex-column justify-content-around">
+        <div class="col d-flex flex-column justify-content-around">
             <!-- Product brand and name -->
             <div class="container-fluid p-0">
-                <p class="fw-bold fs-2 m-0">Marque</p>
-                <p class="fw-semibold fs-3">Product name</p>
+                <p th:text="${#strings.substring(cartProduct.product.category.name, 0, 1).toUpperCase() + #strings.substring(cartProduct.product.category.name, 1)}" class="fw-bold fs-2 m-0"></p>
+                <p th:text="${cartProduct.product.name}" class="fw-semibold fs-4"></p>
             </div>
             <!-- Product price and discount -->
             <div class="container-fluid d-flex p-0">
                 <!-- Price container -->
                 <div class="col flex-column">
                     <p class="mb-1">Prix unitaire</p>
-                    <p class="fw-bold mb-1">99,99€</p>
-                </div>
-                <!-- Discount container -->
-                <div class="col d-flex flex-column align-items-center">
-                    <p class="bg-warning col-4 mb-1">-9%</p>
-                    <p class="text-decoration-line-through text-muted">109,99€</p>
+                    <p th:text="${cartProduct.product.price} + ' €'" class="fw-bold mb-1"></p>
                 </div>
             </div>
-            <!-- Size or height depends on product -->
-            <div class="container-fluid p-0">
-                <p class="mb-0">Pointure</p>
-                <p class="fw-bold ">41</p>
-            </div>
+
             <!-- Product quantity -->
             <div class="container-fluid p-0 mb-3">
-                <p class="mb-0">Quantité</p>
+                <p class="mb-0">Quantitée</p>
                 <div class="d-flex justify-content-between">
-                    <img class="img-fluid col-2" src="/images/icon/plus-circle.svg" alt="Icon plus pour ajuster la quantitée de l'article">
-                    <p class="text-danger m-0 fs-3">1</p>
-                    <img class="img-fluid col-2" src="/images/icon/dash-circle.svg" alt="Icon moins pour ajuster la quantitée de l'article">
+                    <!--<img class="img-fluid col-2" src="/images/icon/plus-circle.svg" alt="Icon plus pour ajuster la quantitée de l'article">-->
+                    <p th:text="${cartProduct.quantity}" class="text-danger m-0 fs-3"></p>
+                    <!--<img class="img-fluid col-2" src="/images/icon/dash-circle.svg" alt="Icon moins pour ajuster la quantitée de l'article">-->
                 </div>
             </div>
             <!-- Product total price -->
             <div class="container-fluid p-0">
                 <p class="m-0">Prix total</p>
-                <p class="fw-bold m-0">99,99€</p>
+                <p th:text="${cartProduct.totalPrice} + ' €'" class="fw-bold m-0"></p>
             </div>
         </div>
     </div>

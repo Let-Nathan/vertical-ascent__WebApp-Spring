@@ -57,11 +57,7 @@ public class ShoppingSessionService {
 	 * @return Boolean true of session Exist and shopping process not completed.
 	 */
 	public Boolean isShoppingSessionExistAndShoppingProcessNotEnd(String sessionId) {
-		try {
-			return shoppingSessionRepository.findBySessionIdAndIsShoppingProcessEnd(sessionId, false) != null;
-		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage());
-		}
+		return shoppingSessionRepository.findBySessionIdAndIsShoppingProcessEnd(sessionId, false) != null;
 	}
 	
 	/**
@@ -159,17 +155,14 @@ public class ShoppingSessionService {
 		ShoppingSession newUserShoppingSession = buildNewUserShoppingSession(sessionId);
 		// Create new carts products with the List cartItems and linked it to the new anonymous shopping sess
 		List<CartProduct> newCartProducts = cartProductService.createNewCartProducts(newUserShoppingSession, cartItems);
+		newUserShoppingSession.setTotalPrice(calculateTotalPrice(newCartProducts));
+		shoppingSessionRepository.save(newUserShoppingSession);
 		
 		// Link the List of Cart Product to the current Shopping Session.
 		newUserShoppingSession.setCartProducts(newCartProducts);
 		newUserShoppingSession.setTotalPrice(calculateTotalPrice(newCartProducts));
-		// Persist the Anonymous Shopping Sess in database.
-		shoppingSessionRepository.save(newUserShoppingSession);
-		for (CartProduct newCartProduct : newCartProducts) {
-			newCartProduct.setShoppingSession(newUserShoppingSession);
-			cartProductService.savedOneCartProduct(newCartProduct);
-		}
-		
+		cartProductService.savedListCartProducts(newCartProducts);
+		// Persist la ShoppingSession
 	}
 	
 	/**

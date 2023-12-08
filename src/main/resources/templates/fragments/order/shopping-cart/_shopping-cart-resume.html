@@ -6,25 +6,26 @@
         <!-- Under total container -->
         <div class="container-fluid d-flex justify-content-between mt-3">
             <p>Sous total</p>
-            <p>99,99 €</p>
+            <p th:text="${shoppingSession.totalPrice}">99,99 €</p>
         </div>
         <!-- Delivery price estimation container -->
         <div class="container-fluid d-flex justify-content-between">
             <p>Estimation des frais de livraison</p>
-            <p class="fw-bold">6,90 €</p>
+            <p th:text="${shoppingSession.totalPrice > 99 ? '0 €' : '6,90 €'}" class="fw-bold"></p>
         </div>
-        <!-- Taxes total price container -->
-        <div class="container-fluid d-flex justify-content-between">
-            <div class="left">
-                <p class="opacity-75 mb-0">Total des taxes</p>
-                <p class="fst-italic text-muted opacity-50">(inclus dans le prix)</p>
-            </div>
-            <p class="right text-muted opacity-75 d-flex align-items-center">17,60€</p>
-        </div>
+        <!--&lt;!&ndash; Taxes total price container &ndash;&gt;-->
+        <!--<div class="container-fluid d-flex justify-content-between">-->
+        <!--    <div class="left">-->
+        <!--        <p class="opacity-75 mb-0">Total des taxes</p>-->
+        <!--        <p class="fst-italic text-muted opacity-50">(inclus dans le prix)</p>-->
+        <!--    </div>-->
+        <!--    <p class="right text-muted opacity-75 d-flex align-items-center">17,60€</p>-->
+        <!--</div>-->
         <!-- Total price container -->
         <div class="container-fluid d-flex justify-content-between mb-3">
             <p class="fw-bold">Total</p>
-            <p class="fw-bold">99,99 €</p>
+            <p th:if="${shoppingSession.totalPrice >= 100}" th:text="${shoppingSession.totalPrice}"></p>
+            <p th:if="${shoppingSession.totalPrice <= 99}" th:text="(${shoppingSession.totalPrice} + 6.90)"></p>
         </div>
         <!-- Button component to redirect to delivery step pages -->
         <div class="container-fluid">
