@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Get the add product button.
     const ADD_PRODUCT = document.getElementById('add-product');
+
     // Bootstrap modal initialization.
     const MODAL = new bootstrap.Modal(
-        document.getElementById('addToCartModal'), {
-        keyboard: false
+        document.getElementById('addToCartModal'),
+        {
+        keyboard: false,
     });
     const ITEM_INCREMENT = document.getElementById('item-plus');
     const ITEM_DECREMENT = document.getElementById('item-minus');
@@ -34,10 +36,14 @@ document.addEventListener('DOMContentLoaded', function() {
      * is successfully add.
      */
     ADD_PRODUCT.addEventListener('click', function() {
-        const productId = ADD_PRODUCT.getAttribute('data-product-id');
-        const productName = ADD_PRODUCT.getAttribute('data-product-name');
-        const productPrice = ADD_PRODUCT.getAttribute('data-product-price');
-        const productQuantity = ADD_PRODUCT.getAttribute('data-product-quantity');
+        const productId =
+            ADD_PRODUCT.getAttribute('data-product-id');
+        const productName =
+            ADD_PRODUCT.getAttribute('data-product-name');
+        const productPrice =
+            ADD_PRODUCT.getAttribute('data-product-price');
+        const productQuantity =
+            ADD_PRODUCT.getAttribute('data-product-quantity');
 
         // Simple user verification, we will re check data before create
         // cart user and shopping session.
@@ -60,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 productId: productId,
                 productName: productName,
                 productPrice: productPrice,
-                quantity: 1
+                quantity: 1,
             });
         }
         // Update the local storage.
@@ -78,13 +84,13 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function updateLocalStorageQuantity(quantity) {
         const productId = ADD_PRODUCT.getAttribute('data-product-id');
-        let cart = JSON.parse(localStorage.getItem('userCart')) || [];
-        let productInCart = cart.find(item => item.productId === productId);
+        const CART = JSON.parse(localStorage.getItem('userCart')) || [];
+        const PRODUCTINCART = CART.find((item) => item.productId === productId);
 
-        if (productInCart) {
-            productInCart.quantity = quantity;
+        if (PRODUCTINCART) {
+            PRODUCTINCART.quantity = quantity;
         }
 
-        localStorage.setItem('userCart', JSON.stringify(cart));
+        localStorage.setItem('userCart', JSON.stringify(CART));
     }
 });

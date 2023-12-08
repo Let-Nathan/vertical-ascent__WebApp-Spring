@@ -18,23 +18,23 @@ document.addEventListener('DOMContentLoaded', function() {
     /**
      * Object representation for a product dto.
      *
-     * @param item
-     * @returns {{quantity: number, price: number, name: string, id: number}}
+     * @param item cart item from local storage converted in dto representation
+     * @return {{quantity: number, price: number, name: string, id: number}}
      */
     function convertToProductDto(item) {
         return {
             id: parseInt(item.productId),
             name: item.productName,
             price: parseInt(item.productPrice),
-            quantity: parseInt(item.quantity)
+            quantity: parseInt(item.quantity),
         };
     }
 
     /**
-     * If Cart Items(from local storage)  is empty, we redirect user.
+     * If Cart Items (from local storage) is empty, we redirect user.
      *
-     * @param cartItems
-     * @returns {boolean}
+     * @param cartItems localstorage cart items
+     * @return {boolean}
      */
     function redirectIfEmpty(cartItems) {
         if (!cartItems) {
@@ -73,8 +73,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then((data) => {
-                if(!localStorage.getItem('userId')) {
-                    localStorage.setItem("userId", data.sessionId);
+                if (!localStorage.getItem('userId')) {
+                    localStorage.setItem('userId', data.sessionId);
                 }
                 window.location.href = '/pannier?pannierId=' + data.sessionId;
             })
