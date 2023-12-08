@@ -1,13 +1,11 @@
 package com.webapp.verticalascent.controller;
 
 import com.webapp.verticalascent.entity.Product;
-import com.webapp.verticalascent.service.CartProductService;
 import com.webapp.verticalascent.service.ProductCategoryService;
 import com.webapp.verticalascent.service.ProductService;
+import com.webapp.verticalascent.service.ShoppingSessionService;
 import java.util.List;
 import java.util.Optional;
-
-import com.webapp.verticalascent.service.ShoppingSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -85,16 +83,4 @@ public class    ProductController {
 		return "product-details";
 	}
 	
-	@GetMapping("/add-product/{id}")
-	public final String addProduct(
-		@PathVariable Long id,
-		RedirectAttributes redirectAttributes
-	) {
-		try {
-			return "/shopping-cart";
-		} catch (IllegalArgumentException e) {
-			redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-			return "redirect:/product/" + id;
-		}
-	}
 }

@@ -5,13 +5,14 @@ import com.webapp.verticalascent.entity.CartProduct;
 import com.webapp.verticalascent.entity.Product;
 import com.webapp.verticalascent.entity.ShoppingSession;
 import com.webapp.verticalascent.repository.ShoppingSessionRepository;
+import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.util.*;
-
 
 /**
  * Service implementation with logic for Shopping Session.
@@ -45,18 +46,19 @@ public class ShoppingSessionService {
 	 * @return boolean true if session active found.
 	 */
 	public Boolean isShoppingSessionActive(String sessionId) {
-		return shoppingSessionRepository.findBySessionIDAndIsActive(sessionId, true) != null;
+		return shoppingSessionRepository.findBySessionIdAndIsActive(sessionId, true) != null;
 	}
 	
 	/**
+	 * Return true if we find a shopping session and the shopping process is not completed.
 	 *
 	 * @param sessionId The id of user's session.
 	 * @return Boolean true of session Exist and shopping process not completed.
 	 */
 	public Boolean isShoppingSessionExistAndShoppingProcessNotEnd(String sessionId) {
 		try {
-			return shoppingSessionRepository.findBySessionIDAndIsShoppingProcessEnd(sessionId, false) != null;
-		}catch (Exception e) {
+			return shoppingSessionRepository.findBySessionIdAndIsShoppingProcessEnd(sessionId, false) != null;
+		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
 	}
@@ -68,7 +70,7 @@ public class ShoppingSessionService {
 	 * @return ShoppingSession
 	 */
 	public ShoppingSession getShoppingSession(String sessionId) {
-		return shoppingSessionRepository.findBySessionID(sessionId);
+		return shoppingSessionRepository.findBySessionId(sessionId);
 	}
 	
 	/**
@@ -77,8 +79,8 @@ public class ShoppingSessionService {
 	 * @param sessionId The id of user's session.
 	 * @return ShoppingSession
 	 */
-	public ShoppingSession activeShoppingSession (String sessionId) {
-		ShoppingSession shoppingSession = shoppingSessionRepository.findBySessionIDAndIsActive(sessionId, false);
+	public ShoppingSession activeShoppingSession(String sessionId) {
+		ShoppingSession shoppingSession = shoppingSessionRepository.findBySessionIdAndIsActive(sessionId, false);
 		shoppingSession.setIsActive(true);
 		shoppingSession.setExpirationDate(newExpirationDate());
 		return shoppingSession;
@@ -116,7 +118,7 @@ public class ShoppingSessionService {
 					getShoppingSession(userShoppingSession),
 					product
 				);
-				if(existingCartProductAndSession != null ) {
+				if (existingCartProductAndSession != null) {
 					// User has already a Shopping Session with a similar product, so we update it.
 					cartProductService.updateExistingCartProduct(existingCartProductAndSession, cartItem);
 				} else {
@@ -157,13 +159,14 @@ public class ShoppingSessionService {
 		ShoppingSession newUserShoppingSession = new ShoppingSession();
 		newUserShoppingSession.setCreatedAt(new Date());
 		newUserShoppingSession.setExpirationDate(newExpirationDate());
-		newUserShoppingSession.setSessionID(sessionId);
+		newUserShoppingSession.setSessionId(sessionId);
 		newUserShoppingSession.setIsActive(true);
 		return newUserShoppingSession;
 	}
 	
 	/**
-	 * Total price of a List<CartProduct>
+	 * Total price of a List CartProduct.
+	 *
 	 * @param newCartProducts List of cart product from the anonymous user.
 	 * @return BigDecimal totalPrice of List.
 	 */

@@ -5,12 +5,14 @@ import com.webapp.verticalascent.entity.CartProduct;
 import com.webapp.verticalascent.entity.Product;
 import com.webapp.verticalascent.entity.ShoppingSession;
 import com.webapp.verticalascent.repository.CartProductRepository;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.util.*;
-
 
 /**
  * Service implementation with logic for Shopping Session.
@@ -38,9 +40,12 @@ public class CartProductService {
 	 *
 	 * @param newUserShoppingSess ShoppingSession
 	 * @param cartItems List of product dto
-	 * @return List<CartProduct>
+	 * @return List CartProduct
 	 */
-	public List<CartProduct> createNewCartProducts(ShoppingSession newUserShoppingSess, List<ProductDto> cartItems) {
+	public List<CartProduct> createNewCartProducts(
+		ShoppingSession newUserShoppingSess,
+		List<ProductDto> cartItems
+	) {
 		List<CartProduct> newCartProducts = new ArrayList<>();
 		for (ProductDto newCartItem : cartItems) {
 			CartProduct cartProduct = new CartProduct();
@@ -81,7 +86,7 @@ public class CartProductService {
 	 * @param cartItem ProductDto
 	 */
 	public void updateExistingCartProduct(CartProduct existingCartProductAndSession, ProductDto cartItem) {
-		if(cartItem.getQuantity() <= 0 ) {
+		if (cartItem.getQuantity() <= 0) {
 			existingCartProductAndSession.setQuantity(0);
 		} else {
 			existingCartProductAndSession.setQuantity(existingCartProductAndSession.getQuantity() + cartItem.getQuantity());
@@ -97,7 +102,7 @@ public class CartProductService {
 	 * Check if the product from the local storage are valid product.
 	 *
 	 * @param cartItems List of product from the local storage.
-	 * @return List<ProductDto> validatedItems || empty (can be empty).
+	 * @return List ProductDto validatedItems || empty (can be empty).
 	 */
 	public List<ProductDto> validateCartItems(List<ProductDto> cartItems) {
 		List<ProductDto> validatedItems = new ArrayList<>();

@@ -1,26 +1,27 @@
 package com.webapp.verticalascent.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.webapp.verticalascent.dto.ProductDto;
-import com.webapp.verticalascent.entity.CartProduct;
-import com.webapp.verticalascent.entity.Product;
 import com.webapp.verticalascent.entity.ShoppingSession;
 import com.webapp.verticalascent.service.CartProductService;
-import com.webapp.verticalascent.service.ProductService;
 import com.webapp.verticalascent.service.ShoppingSessionService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.type.TypeReference;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 
-import java.util.*;
 
 /**
  * Controller class for user purchasing process.
@@ -33,21 +34,27 @@ import java.util.*;
 public class ShoppingProcessController {
 	
 	private final ShoppingSessionService shoppingSessionService;
-	private final ProductService productService;
 	private final CartProductService cartProductService;
 	
 	@Autowired
 	public ShoppingProcessController(
 		ShoppingSessionService shoppingSessionService,
-		ProductService productService,
 		CartProductService cartProductService
 		
 	) {
 		this.shoppingSessionService = shoppingSessionService;
-		this.productService = productService;
 		this.cartProductService = cartProductService;
 	}
 	
+	
+	/**
+	 * Return view for user shopping cart.
+	 *
+	 * @param request HttpServletRequest get the current session id
+	 * @param pannierId String representation of anonymous user pannier id (sess id)
+	 * @param model Model add attributes to the thymeleaf view.
+	 * @return view
+	 */
 	@GetMapping("/pannier")
 	public String showShoppingCart(
 		HttpServletRequest request,
@@ -57,9 +64,8 @@ public class ShoppingProcessController {
 		HttpSession session = request.getSession();
 		String sessionId = session.getId();
 		System.out.println("Pannier id ==> " + pannierId);
-//		cartProductService.validateCartItems()
-		
-		model.addAttribute("userProduct" );
+		// cartProductService.validateCartItems()
+		model.addAttribute("userProduct");
 		return "/shopping-cart";
 	}
 	
@@ -93,14 +99,24 @@ public class ShoppingProcessController {
 		}
 		
 		try {
-			if (anonymousUserId != null && shoppingSessionService.isShoppingSessionActive(anonymousUserId)) {
+			if (
+				anonymousUserId != null
+				&& shoppingSessionService.isShoppingSessionActive(anonymousUserId)
+			) {
 				// Anonymous user have an active session & local storage id
-				shoppingSessionService.handleExistingShoppingSession(anonymousUserId, validatedItems);
-			} else if (anonymousUserId != null && shoppingSessionService.isShoppingSessionExistAndShoppingProcessNotEnd(anonymousUserId)) {
+				shoppingSessionService.handleExistingShoppingSession(
+					anonymousUserId,
+					validatedItems
+				);
+			} else if (
+				anonymousUserId != null
+				&& shoppingSessionService
+					.isShoppingSessionExistAndShoppingProcessNotEnd(anonymousUserId)
+			) {
 				// Anonymous user have not active Session but have one who exist and shopping process not end.
 				// So we activated back the session, and handle cart items with service.
 				ShoppingSession shoppingSession = shoppingSessionService.activeShoppingSession(anonymousUserId);
-				shoppingSessionService.handleExistingShoppingSession(shoppingSession.getSessionID(), cartItems);
+				shoppingSessionService.handleExistingShoppingSession(shoppingSession.getSessionId(), cartItems);
 			} else {
 				// Anonymous user have no session, so we created one with cart product.
 				shoppingSessionService.createNewShoppingSession(sessionId, validatedItems);
@@ -109,7 +125,7 @@ public class ShoppingProcessController {
 			return ResponseEntity.ofNullable(e.getMessage());
 		}
 		// If user is anonymous we send back in resp session to store it in local storage
-		if(anonymousUserId == null) {
+		if (anonymousUserId == null) {
 			Map<String, Object> response = new HashMap<>();
 			response.put("sessionId", sessionId);
 			return ResponseEntity.ok().body(response);
