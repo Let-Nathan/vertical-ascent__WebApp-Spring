@@ -16,4 +16,6 @@ public interface ShoppingSessionRepository extends JpaRepository<ShoppingSession
 	ShoppingSession findBySessionIdAndIsShoppingProcessEnd(String sessionId, boolean isProcessEnd);
 	
 	ShoppingSession findBySessionId(String sessionId);
+	
+	ShoppingSession findByUserAndIsActive(User user, Boolean isActive);
 }

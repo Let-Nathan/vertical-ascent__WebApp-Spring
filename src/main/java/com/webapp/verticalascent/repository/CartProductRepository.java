@@ -3,6 +3,7 @@ package com.webapp.verticalascent.repository;
 import com.webapp.verticalascent.entity.CartProduct;
 import com.webapp.verticalascent.entity.Product;
 import com.webapp.verticalascent.entity.ShoppingSession;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -17,4 +18,6 @@ public interface CartProductRepository extends JpaRepository<CartProduct, Long> 
 		Product product,
 		Boolean isActive
 	);
+	
+	List<CartProduct> findAllByShoppingSession(ShoppingSession shoppingSession);
 }

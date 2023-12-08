@@ -4,6 +4,7 @@ import com.webapp.verticalascent.dto.ProductDto;
 import com.webapp.verticalascent.entity.CartProduct;
 import com.webapp.verticalascent.entity.Product;
 import com.webapp.verticalascent.entity.ShoppingSession;
+import com.webapp.verticalascent.entity.User;
 import com.webapp.verticalascent.repository.ShoppingSessionRepository;
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -73,6 +74,9 @@ public class ShoppingSessionService {
 		return shoppingSessionRepository.findBySessionId(sessionId);
 	}
 	
+	public ShoppingSession getShoppingSessionByUserAndActive(User user) {
+		return shoppingSessionRepository.findByUserAndIsActive(user, true);
+	}
 	/**
 	 * Active an inactive Shopping Session.
 	 *

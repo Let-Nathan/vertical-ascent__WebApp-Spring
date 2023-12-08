@@ -77,6 +77,16 @@ public class CartProductService {
 	}
 	
 	/**
+	 * Return a list of Cart Product based on Shopping Session
+	 *
+	 * @param shoppingSession ShoppingSession
+	 * @return List of CartProduct
+	 */
+	public List<CartProduct> getCartProductListBySession(ShoppingSession shoppingSession) {
+		return cartProductRepository.findAllByShoppingSession(shoppingSession);
+	}
+	
+	/**
 	 * Save the CarProduct into Database.
 	 *
 	 * @param cartProduct CartProduct
@@ -116,8 +126,6 @@ public class CartProductService {
 		existingCartProductAndSession.setModifiedAt(new Date());
 		savedCartProduct(existingCartProductAndSession);
 	}
-	
-	
 	
 	/**
 	 * Check if the product from the local storage are valid product.
