@@ -47,15 +47,21 @@ public class CartProductService {
 		List<ProductDto> cartItems
 	) {
 		List<CartProduct> newCartProducts = new ArrayList<>();
-		for (ProductDto newCartItem : cartItems) {
-			CartProduct cartProduct = new CartProduct();
-			cartProduct.setShoppingSession(newUserShoppingSess);
-			cartProduct.setProduct(productService.findOneById(newCartItem.getId()).orElseThrow());
-			cartProduct.setCreatedAt(new Date());
-			cartProduct.setQuantity(newCartItem.getQuantity());
-			cartProduct.setTotalPrice(BigDecimal.valueOf(newCartItem.getQuantity() * newCartItem.getPrice()));
-			newCartProducts.add(cartProduct);
+		
+		try {
+			for (ProductDto newCartItem : cartItems) {
+				CartProduct cartProduct = new CartProduct();
+				cartProduct.setShoppingSession(newUserShoppingSess);
+				cartProduct.setProduct(productService.findOneById(newCartItem.getId()).orElseThrow());
+				cartProduct.setCreatedAt(new Date());
+				cartProduct.setQuantity(newCartItem.getQuantity());
+				cartProduct.setTotalPrice(BigDecimal.valueOf(newCartItem.getQuantity() * newCartItem.getPrice()));
+				newCartProducts.add(cartProduct);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
 		}
+		
 		return newCartProducts;
 	}
 	
@@ -77,6 +83,21 @@ public class CartProductService {
 	 */
 	public void savedCartProduct(CartProduct cartProduct) {
 		 cartProductRepository.save(cartProduct);
+	}
+	
+	/**
+	 * Saved a list of Cart Product in database.
+	 *
+	 * @param cartProducts List CartProduct
+	 * @return List of CartProduct
+	 */
+	public List<CartProduct> saveCartProducts(List<CartProduct> cartProducts) {
+		// Save the list of cart products
+		try {
+			return cartProductRepository.saveAll(cartProducts);
+		} catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}
 	}
 	
 	/**

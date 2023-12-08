@@ -87,11 +87,7 @@ public class ShoppingProcessController {
 		String anonymousUserId = (String) requestPayload.get("userId");
 		// Get cart product from local storage & convert them to List<ProductDto>
 		ObjectMapper objectMapper = new ObjectMapper();
-		List<ProductDto> cartItems = objectMapper.convertValue(
-			requestPayload.get("cartItems"),
-			new TypeReference<>() {
-			}
-		);
+		List<ProductDto> cartItems = objectMapper.convertValue(requestPayload.get("cartItems"), new TypeReference<>() {});
 		// Check if product send by user are conventional
 		List<ProductDto> validatedItems = cartProductService.validateCartItems(cartItems);
 		if (validatedItems == null) {
