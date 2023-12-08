@@ -1,9 +1,6 @@
-import bootstrap from 'static/javascript/bootstrap/bootstrap.bundle.min';
-
 document.addEventListener('DOMContentLoaded', function() {
     // Get the add product button.
     const ADD_PRODUCT = document.getElementById('add-product');
-
     // Bootstrap modal initialization.
     const MODAL = new bootstrap.Modal(
         document.getElementById('addToCartModal'),
