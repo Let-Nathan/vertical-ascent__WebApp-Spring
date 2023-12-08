@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
     /**
      * Object representation for a product dto.
      *
-     * @param item cart item from local storage converted in dto representation
-     * @return {{quantity: number, price: number, name: string, id: number}}
+     * @param item Cart item from local storage converted in dto representation.
+     * @return JSON {{quantity: number, price: number, name: string, id: number}}
      */
     function convertToProductDto(item) {
         return {
@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
     /**
      * If Cart Items (from local storage) is empty, we redirect user.
      *
-     * @param cartItems localstorage cart items
-     * @return {boolean}
+     * @param cartItems Localstorage cart items.
+     * @return Boolean boolean.
      */
     function redirectIfEmpty(cartItems) {
         if (!cartItems) {
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     /**
      * Send to endpoint the current user local storage.
      *
-     * @param cartItems a potential list or single product
+     * @param cartItems a potential list or single product.
      */
     function sendCartItems(cartItems) {
         const userId = localStorage.getItem('userId');
