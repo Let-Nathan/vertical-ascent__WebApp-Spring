@@ -134,6 +134,18 @@ public class ShoppingSessionService {
 				}
 			}
 		}
+		updateShoppingSessionTotalPrice(shoppingSessionRepository.findBySessionId(userShoppingSession), cartProductService.getCartProductListBySession(getShoppingSession(userShoppingSession)));
+	}
+	
+	/**
+	 * Update the current Shopping Session total price, sum a List of Cart Product.
+	 *
+	 * @param shoppingSession The current ShoppingSession
+	 * @param cartProductsList A List of CartProduct
+	 */
+	private void updateShoppingSessionTotalPrice(ShoppingSession shoppingSession, List<CartProduct> cartProductsList) {
+		shoppingSession.setTotalPrice(calculateTotalPrice(cartProductsList));
+		shoppingSessionRepository.save(shoppingSession);
 	}
 	
 	/**
@@ -156,8 +168,9 @@ public class ShoppingSessionService {
 		
 		for (CartProduct newCartProduct : newCartProducts) {
 			newCartProduct.setShoppingSession(newUserShoppingSession);
-			cartProductService.savedCartProduct(newCartProduct);
 		}
+		
+		cartProductService.savedListCartProducts(newCartProducts);
 	}
 	
 	/**

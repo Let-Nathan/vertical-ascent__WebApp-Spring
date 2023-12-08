@@ -172,6 +172,17 @@ public class ShoppingProcessController {
 		return  ResponseEntity.ok().body(response);
 	}
 	
+	@GetMapping("/delete-product")
+	public String deleteProduct(
+		HttpServletRequest request,
+		@RequestParam String productId,
+		Model model
+	) {
+		HttpSession session = request.getSession();
+		String sessionId = session.getId();
+		
+		
+	}
 	
 	/**
 	 * Empty shopping cart view.

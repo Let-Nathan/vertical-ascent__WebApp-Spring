@@ -61,7 +61,7 @@ public class CartProductService {
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
-		
+		savedListCartProducts(newCartProducts);
 		return newCartProducts;
 	}
 	
@@ -77,11 +77,22 @@ public class CartProductService {
 	}
 	
 	/**
+	 * Return a list of Cart Product based on Shopping Session.
+	 *
+	 * @param shoppingSession ShoppingSession
+	 * @return List of CartProduct
+	 */
+	public List<CartProduct> getCartProductListBySession(ShoppingSession shoppingSession) {
+		int minQuantity = 1;
+		return cartProductRepository.findAllByShoppingSessionGreaterThan(shoppingSession, minQuantity);
+	}
+	
+	/**
 	 * Save the CarProduct into Database.
 	 *
 	 * @param cartProduct CartProduct
 	 */
-	public void savedCartProduct(CartProduct cartProduct) {
+	public void savedOneCartProduct(CartProduct cartProduct) {
 		 cartProductRepository.save(cartProduct);
 	}
 	
@@ -91,7 +102,7 @@ public class CartProductService {
 	 * @param cartProducts List CartProduct
 	 * @return List of CartProduct
 	 */
-	public List<CartProduct> saveCartProducts(List<CartProduct> cartProducts) {
+	public List<CartProduct> savedListCartProducts(List<CartProduct> cartProducts) {
 		// Save the list of cart products
 		try {
 			return cartProductRepository.saveAll(cartProducts);
@@ -103,18 +114,19 @@ public class CartProductService {
 	/**
 	 * Updated an existing CartProduct (quantity, total price, modified at) and store new value into Database.
 	 *
-	 * @param existingCartProductAndSession CartProduct
+	 * @param existingCartProduct CartProduct
 	 * @param cartItem ProductDto
 	 */
-	public void updateExistingCartProduct(CartProduct existingCartProductAndSession, ProductDto cartItem) {
+	public CartProduct updateExistingCartProduct(CartProduct existingCartProduct, ProductDto cartItem) {
 		if (cartItem.getQuantity() <= 0) {
-			existingCartProductAndSession.setQuantity(0);
+			existingCartProduct.setQuantity(0);
 		} else {
-			existingCartProductAndSession.setQuantity(existingCartProductAndSession.getQuantity() + cartItem.getQuantity());
+			existingCartProduct.setQuantity(cartItem.getQuantity());
 		}
-		existingCartProductAndSession.setTotalPrice(BigDecimal.valueOf(existingCartProductAndSession.getQuantity() * cartItem.getPrice()));
-		existingCartProductAndSession.setModifiedAt(new Date());
-		savedCartProduct(existingCartProductAndSession);
+		existingCartProduct.setTotalPrice(BigDecimal.valueOf(cartItem.getQuantity() * cartItem.getPrice()));
+		existingCartProduct.setModifiedAt(new Date());
+		savedOneCartProduct(existingCartProduct);
+		return existingCartProduct;
 	}
 
 	/**
