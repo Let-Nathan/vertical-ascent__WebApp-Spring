@@ -12,5 +12,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0
  */
 public interface CartProductRepository extends JpaRepository<CartProduct, Long> {
-	CartProduct findByShoppingSessionAndProductAndShoppingSessionIsActive(ShoppingSession shoppingSession, Product product, Boolean isActive);
+	CartProduct findByShoppingSessionAndProductAndShoppingSessionIsActive(
+		ShoppingSession shoppingSession,
+		Product product,
+		Boolean isActive
+	);
 }

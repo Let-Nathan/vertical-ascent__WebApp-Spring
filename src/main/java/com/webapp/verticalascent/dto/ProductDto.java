@@ -1,4 +1,5 @@
 package com.webapp.verticalascent.dto;
+
 import lombok.Data;
 
 /**

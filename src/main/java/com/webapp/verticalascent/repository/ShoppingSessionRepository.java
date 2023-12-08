@@ -11,7 +11,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0
  */
 public interface ShoppingSessionRepository extends JpaRepository<ShoppingSession, Long> {
-	ShoppingSession findBySessionIDAndIsActive(String sessionId, boolean isActive);
-	ShoppingSession findBySessionIDAndIsShoppingProcessEnd(String sessionId, boolean isProcessEnd);
-	ShoppingSession findBySessionID(String sessionId);
+	ShoppingSession findBySessionIdAndIsActive(String sessionId, boolean isActive);
+	
+	ShoppingSession findBySessionIdAndIsShoppingProcessEnd(String sessionId, boolean isProcessEnd);
+	
+	ShoppingSession findBySessionId(String sessionId);
 }
