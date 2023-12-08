@@ -47,13 +47,13 @@ document.addEventListener('DOMContentLoaded', function() {
     /**
      * Send to endpoint the current user local storage.
      *
-     * @param cartItems
+     * @param cartItems a potential list or single product
      */
     function sendCartItems(cartItems) {
         const userId = localStorage.getItem('userId');
 
         const requestBody = {
-            cartItems: cartItems
+            cartItems: cartItems,
         };
 
         if (userId) {
