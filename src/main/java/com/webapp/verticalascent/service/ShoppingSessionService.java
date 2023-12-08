@@ -4,6 +4,7 @@ import com.webapp.verticalascent.dto.ProductDto;
 import com.webapp.verticalascent.entity.CartProduct;
 import com.webapp.verticalascent.entity.Product;
 import com.webapp.verticalascent.entity.ShoppingSession;
+import com.webapp.verticalascent.entity.User;
 import com.webapp.verticalascent.repository.ShoppingSessionRepository;
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -72,6 +73,10 @@ public class ShoppingSessionService {
 	public ShoppingSession getShoppingSession(String sessionId) {
 		return shoppingSessionRepository.findBySessionId(sessionId);
 	}
+
+	public ShoppingSession getShoppingSessionByUserAndActive(User user) {
+		return shoppingSessionRepository.findByUserAndIsActive(user, true);
+	}
 	
 	/**
 	 * Active an inactive Shopping Session.
@@ -129,6 +134,18 @@ public class ShoppingSessionService {
 				}
 			}
 		}
+		updateShoppingSessionTotalPrice(shoppingSessionRepository.findBySessionId(userShoppingSession), cartProductService.getCartProductListBySession(getShoppingSession(userShoppingSession)));
+	}
+	
+	/**
+	 * Update the current Shopping Session total price, sum a List of Cart Product.
+	 *
+	 * @param shoppingSession The current ShoppingSession
+	 * @param cartProductsList A List of CartProduct
+	 */
+	private void updateShoppingSessionTotalPrice(ShoppingSession shoppingSession, List<CartProduct> cartProductsList) {
+		shoppingSession.setTotalPrice(calculateTotalPrice(cartProductsList));
+		shoppingSessionRepository.save(shoppingSession);
 	}
 	
 	/**
@@ -148,11 +165,11 @@ public class ShoppingSessionService {
 		newUserShoppingSession.setTotalPrice(calculateTotalPrice(newCartProducts));
 		// Persist the Anonymous Shopping Sess in database.
 		shoppingSessionRepository.save(newUserShoppingSession);
-		
 		for (CartProduct newCartProduct : newCartProducts) {
 			newCartProduct.setShoppingSession(newUserShoppingSession);
-			cartProductService.savedCartProduct(newCartProduct);
+			cartProductService.savedOneCartProduct(newCartProduct);
 		}
+		
 	}
 	
 	/**

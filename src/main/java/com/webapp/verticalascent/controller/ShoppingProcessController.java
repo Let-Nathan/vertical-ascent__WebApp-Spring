@@ -3,16 +3,22 @@ package com.webapp.verticalascent.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.webapp.verticalascent.dto.ProductDto;
+import com.webapp.verticalascent.entity.CartProduct;
 import com.webapp.verticalascent.entity.ShoppingSession;
+import com.webapp.verticalascent.entity.User;
 import com.webapp.verticalascent.service.CartProductService;
 import com.webapp.verticalascent.service.ShoppingSessionService;
+import com.webapp.verticalascent.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,15 +41,18 @@ public class ShoppingProcessController {
 	
 	private final ShoppingSessionService shoppingSessionService;
 	private final CartProductService cartProductService;
+	private final UserService userService;
 	
 	@Autowired
 	public ShoppingProcessController(
 		ShoppingSessionService shoppingSessionService,
-		CartProductService cartProductService
+		CartProductService cartProductService,
+		UserService userService
 		
 	) {
 		this.shoppingSessionService = shoppingSessionService;
 		this.cartProductService = cartProductService;
+		this.userService = userService;
 	}
 	
 	
@@ -58,17 +67,51 @@ public class ShoppingProcessController {
 	@GetMapping("/pannier")
 	public String showShoppingCart(
 		HttpServletRequest request,
-		@RequestParam String pannierId,
+		@RequestParam(required = false) String pannierId,
 		Model model
 	) {
 		HttpSession session = request.getSession();
 		String sessionId = session.getId();
-		System.out.println("Pannier id ==> " + pannierId);
-		// cartProductService.validateCartItems()
-		model.addAttribute("userProduct");
+		List<CartProduct> userCartProduct = new ArrayList<>();
+		ShoppingSession shoppingSession; // Init shoppingSession to null
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		// Check if the user is connected and has an active session
+		if (principal instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) principal;
+			String userEmail = userDetails.getUsername();
+			User user = userService.isEmailExist(userEmail);
+			
+			if (user != null) {
+				// If the user is connected, look for an active session
+				shoppingSession = shoppingSessionService.getShoppingSessionByUserAndActive(user);
+				if (shoppingSession != null) {
+					userCartProduct.addAll(cartProductService.getCartProductListBySession(shoppingSession));
+				}
+			} else {
+				// If the user is not connected, check for a session related to pannierId
+				if (pannierId != null && shoppingSessionService.isShoppingSessionActive(pannierId)) {
+					shoppingSession = shoppingSessionService.getShoppingSession(pannierId);
+					userCartProduct.addAll(cartProductService.getCartProductListBySession(shoppingSession));
+				} else {
+					return "/shopping-cart-empty";
+				}
+			}
+		} else {
+			// If the user is not connected, check for a session related to pannierId
+			if (pannierId != null && shoppingSessionService.isShoppingSessionActive(pannierId)) {
+				shoppingSession = shoppingSessionService.getShoppingSession(pannierId);
+				userCartProduct.addAll(cartProductService.getCartProductListBySession(shoppingSession));
+			} else {
+				return "/shopping-cart-empty";
+			}
+		}
+		
+		model.addAttribute("userProduct", userCartProduct);
+		model.addAttribute("shoppingSession", shoppingSession); // Add ShoppingSession to model
 		return "/shopping-cart";
 	}
-	
 	
 	/**
 	 * Display shopping cart user if he had one in database.
@@ -90,6 +133,9 @@ public class ShoppingProcessController {
 		List<ProductDto> cartItems = objectMapper.convertValue(requestPayload.get("cartItems"), new TypeReference<>() {});
 		// Check if product send by user are conventional
 		List<ProductDto> validatedItems = cartProductService.validateCartItems(cartItems);
+		
+		Map<String, Object> response = new HashMap<>();
+		
 		if (validatedItems == null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -122,13 +168,24 @@ public class ShoppingProcessController {
 		}
 		// If user is anonymous we send back in resp session to store it in local storage
 		if (anonymousUserId == null) {
-			Map<String, Object> response = new HashMap<>();
 			response.put("sessionId", sessionId);
 			return ResponseEntity.ok().body(response);
 		}
-		return ResponseEntity.ok("ok");
+		response.put("sessionId", anonymousUserId);
+		return  ResponseEntity.ok().body(response);
 	}
 	
+//	@GetMapping("/delete-product")
+//	public String deleteProduct(
+//		HttpServletRequest request,
+//		@RequestParam String productId,
+//		Model model
+//	) {
+//		HttpSession session = request.getSession();
+//		String sessionId = session.getId();
+//
+//
+//	}
 	
 	/**
 	 * Empty shopping cart view.
