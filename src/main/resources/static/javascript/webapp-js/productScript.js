@@ -1,3 +1,5 @@
+import bootstrap from 'static/javascript/bootstrap/bootstrap.bundle.min';
+
 document.addEventListener('DOMContentLoaded', function() {
     // Get the add product button.
     const ADD_PRODUCT = document.getElementById('add-product');
@@ -53,9 +55,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         const CART = JSON.parse(localStorage.getItem('userCart')) || [];
-        const PRODUCTINCART = CART.find((item) => item.productId === productId);
+        const PRODUCTINCART =
+            CART.find((item) => item.productId === productId);
         let quantity = 1;
-
         if (PRODUCTINCART) {
             // If product is already in local storage we increment quantity by 1.
             PRODUCTINCART.quantity += 1;
@@ -80,12 +82,14 @@ document.addEventListener('DOMContentLoaded', function() {
     /**
      * Upate the product quantity in local storage.
      *
-     * @param quantity
+     * @param quantity quantity of a given product from local storage.
      */
     function updateLocalStorageQuantity(quantity) {
-        const productId = ADD_PRODUCT.getAttribute('data-product-id');
+        const productId =
+            ADD_PRODUCT.getAttribute('data-product-id');
         const CART = JSON.parse(localStorage.getItem('userCart')) || [];
-        const PRODUCTINCART = CART.find((item) => item.productId === productId);
+        const PRODUCTINCART =
+            CART.find((item) => item.productId === productId);
 
         if (PRODUCTINCART) {
             PRODUCTINCART.quantity = quantity;
