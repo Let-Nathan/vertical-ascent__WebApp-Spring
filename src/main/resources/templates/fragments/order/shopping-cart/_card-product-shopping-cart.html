@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- Title container -->
-<div class="container-fluid mt-4 col-md-5 d-md-flex flex-md-column">
+<div class="container-fluid mt-4 col- d-md-flex flex-md-column">
     <p class="h1 mb-3 fw-bold">Mon Panier</p>
     <p class="mb-0 fw-semibold">Excellent choix</p>
     <p class="m-0 fw-semibold">voici les produits dans votre panier</p>
@@ -8,7 +8,7 @@
 <!-- Container for product card on desktop -->
 <div class="d-lg-flex justify-content-around flex-lg-wrap">
     <!-- Product shopping -->
-    <div th:each="cartProduct : ${userProduct}" class="container-fluid bg-white d-flex p-2 mt-4 rounded-3 border-4 col-11 col-md-5 col-lg-5 shadow-lg mb-4">
+    <div th:each="cartProduct : ${userCartProducts}" class="container-fluid bg-white d-flex p-2 mt-4 rounded-3 border-4 col-11 col-md-5 col-lg-5 shadow-lg mb-4">
 
         <!-- left-col product img, description and button delete product -->
         <div class="col-5 d-flex flex-column justify-content-around mb-4">
