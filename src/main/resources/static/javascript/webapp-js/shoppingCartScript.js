@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
         viewCartButton.addEventListener('click', function(event) {
             event.preventDefault();
             const USERCART = JSON.parse(localStorage.getItem('userCart'));
-            const CARTITEMDTO = USERCART != null ? USERCART.map(convertToProductDto) : null;
+            const CARTITEMDTO =
+                USERCART != null ? USERCART.map(convertToProductDto) : null;
 
             if (redirectIfEmpty(CARTITEMDTO)) {
                 return;
@@ -14,6 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    /**
+     * Object representation for a product dto.
+     *
+     * @param item
+     * @returns {{quantity: number, price: number, name: string, id: number}}
+     */
     function convertToProductDto(item) {
         return {
             id: parseInt(item.productId),
@@ -23,6 +30,12 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
+    /**
+     * If Cart Items(from local storage)  is empty, we redirect user.
+     *
+     * @param cartItems
+     * @returns {boolean}
+     */
     function redirectIfEmpty(cartItems) {
         if (!cartItems) {
             window.location.href = '/pannier-vide';
@@ -31,6 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return false;
     }
 
+    /**
+     * Send to endpoint the current user local storage.
+     *
+     * @param cartItems
+     */
     function sendCartItems(cartItems) {
         const userId = localStorage.getItem('userId');
 
@@ -44,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('/validate-cart', {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(requestBody),
         })
@@ -55,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then((data) => {
-                if(!localStorage.getItem("userId")) {
+                if(!localStorage.getItem('userId')) {
                     localStorage.setItem("userId", data.sessionId);
                 }
                 window.location.href = '/pannier?pannierId=' + data.sessionId;
