@@ -4,8 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
         viewCartButton.addEventListener('click', function(event) {
             event.preventDefault();
             const USERCART = JSON.parse(localStorage.getItem('userCart'));
-            const CARTITEMDTO =
-                USERCART != null ? USERCART.map(convertToProductDto) : null;
+            const CARTITEMDTO = USERCART != null ? USERCART.map(convertToProductDto) : null;
 
             if (redirectIfEmpty(CARTITEMDTO)) {
                 return;
@@ -16,10 +15,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /**
-     * Object representation for a product dto.
+     * Convert a cart item from local storage to a product DTO representation.
      *
-     * @param item Cart item from local storage converted in dto representation.
-     * @return JSON {{quantity: number, price: number, name: string, id: number}}
+     * @param {Object} item - Cart item from local storage converted to DTO representation.
+     * @returns {{quantity: number, price: number, name: string, id: number}} - JSON representation of the product DTO.
      */
     function convertToProductDto(item) {
         return {
@@ -31,10 +30,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /**
-     * If Cart Items (from local storage) is empty, we redirect user.
+     * Redirects the user if the cart items are empty.
      *
-     * @param cartItems Localstorage cart items.
-     * @return Boolean boolean.
+     * @param {Array|null} cartItems - Local storage cart items.
+     * @returns {boolean} - Boolean indicating if the cart is empty.
      */
     function redirectIfEmpty(cartItems) {
         if (!cartItems) {
@@ -45,9 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /**
-     * Send to endpoint the current user local storage.
+     * Sends the current user's local storage cart items to an endpoint.
      *
-     * @param cartItems a potential list or single product.
+     * @param {Array|Object} cartItems - A potential list or single product.
      */
     function sendCartItems(cartItems) {
         const userId = localStorage.getItem('userId');
@@ -79,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.location.href = '/pannier?pannierId=' + data.sessionId;
             })
             .catch((error) => {
-                console.log('Une erreur est survenue : ' + error);
+                console.log('An error occurred: ' + error);
             });
     }
 });
