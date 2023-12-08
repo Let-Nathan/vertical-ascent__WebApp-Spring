@@ -77,6 +77,7 @@ public class ShoppingSessionService {
 	public ShoppingSession getShoppingSessionByUserAndActive(User user) {
 		return shoppingSessionRepository.findByUserAndIsActive(user, true);
 	}
+	
 	/**
 	 * Active an inactive Shopping Session.
 	 *

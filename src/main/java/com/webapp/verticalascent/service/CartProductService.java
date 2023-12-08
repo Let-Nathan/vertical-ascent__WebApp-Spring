@@ -77,13 +77,14 @@ public class CartProductService {
 	}
 	
 	/**
-	 * Return a list of Cart Product based on Shopping Session
+	 * Return a list of Cart Product based on Shopping Session.
 	 *
 	 * @param shoppingSession ShoppingSession
 	 * @return List of CartProduct
 	 */
 	public List<CartProduct> getCartProductListBySession(ShoppingSession shoppingSession) {
-		return cartProductRepository.findAllByShoppingSession(shoppingSession);
+		int minQuantity = 1;
+		return cartProductRepository.findAllByShoppingSessionGreaterThan(shoppingSession, minQuantity);
 	}
 	
 	/**

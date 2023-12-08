@@ -5,6 +5,9 @@ import com.webapp.verticalascent.entity.Product;
 import com.webapp.verticalascent.entity.ShoppingSession;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 
 /**
  * Access and manage "Addresses" data.
@@ -19,5 +22,7 @@ public interface CartProductRepository extends JpaRepository<CartProduct, Long> 
 		Boolean isActive
 	);
 	
-	List<CartProduct> findAllByShoppingSession(ShoppingSession shoppingSession);
+	@Query("SELECT cp FROM CartProduct cp WHERE cp.shoppingSession = :session AND cp.quantity >= :minQuantity")
+	List<CartProduct> findAllByShoppingSessionGreaterThan(@Param("session") ShoppingSession session, @Param("minQuantity") int minQuantity);
+	
 }

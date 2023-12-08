@@ -73,7 +73,6 @@ public class ShoppingProcessController {
 	) {
 		HttpSession session = request.getSession();
 		String sessionId = session.getId();
-		System.out.println("Pannier id ==> " + pannierId);
 		List<CartProduct> userCartProduct = new ArrayList<>();
 		ShoppingSession shoppingSession; // Init shoppingSession to null
 		
