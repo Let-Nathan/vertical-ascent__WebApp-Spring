@@ -73,7 +73,7 @@ public class ShoppingSessionService {
 	public ShoppingSession getShoppingSession(String sessionId) {
 		return shoppingSessionRepository.findBySessionId(sessionId);
 	}
-	
+
 	public ShoppingSession getShoppingSessionByUserAndActive(User user) {
 		return shoppingSessionRepository.findByUserAndIsActive(user, true);
 	}

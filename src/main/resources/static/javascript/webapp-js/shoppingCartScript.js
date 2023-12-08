@@ -78,7 +78,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!localStorage.getItem('userId')) {
                     localStorage.setItem('userId', data.sessionId);
                 }
+<<<<<<< HEAD
                 console.log('data session id ==> ' + data.sessionId)
+=======
+>>>>>>> dev
                 window.location.href = '/pannier?pannierId=' + data.sessionId;
             })
             .catch((error) => {
