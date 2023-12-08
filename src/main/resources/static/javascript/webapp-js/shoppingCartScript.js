@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
         viewCartButton.addEventListener('click', function(event) {
             event.preventDefault();
             const USERCART = JSON.parse(localStorage.getItem('userCart'));
-            const CARTITEMDTO = USERCART != null ? USERCART.map(convertToProductDto) : null;
+            const CARTITEMDTO =
+                USERCART != null ? USERCART.map(convertToProductDto) : null;
 
             if (redirectIfEmpty(CARTITEMDTO)) {
                 return;
@@ -17,8 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
     /**
      * Convert a cart item from local storage to a product DTO representation.
      *
-     * @param {Object} item - Cart item from local storage converted to DTO representation.
-     * @returns {{quantity: number, price: number, name: string, id: number}} - JSON representation of the product DTO.
+     * @param {Object} item -
+     * Cart item from local storage converted to DTO representation.
+     * @return {{quantity: number, price: number, name: string, id: number}} -
+     * JSON representation of the product DTO.
      */
     function convertToProductDto(item) {
         return {
@@ -33,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
      * Redirects the user if the cart items are empty.
      *
      * @param {Array|null} cartItems - Local storage cart items.
-     * @returns {boolean} - Boolean indicating if the cart is empty.
+     * @return {boolean} - Boolean indicating if the cart is empty.
      */
     function redirectIfEmpty(cartItems) {
         if (!cartItems) {
