@@ -24,15 +24,6 @@
             <div th:include="fragments/order/_step-cirlce-shopping-cart.html"></div>
         </section>
         <section>
-            <!-- Votre contenu -->
-
-                <h2>Panier</h2>
-                <ul>
-                    <li th:each="product : ${validatedItems}">
-                        <span class="display-2" th:text="${product.name}"></span>
-                    </li>
-                </ul>
-
             <div th:include="fragments/order/shopping-cart/_card-product-shopping-cart.html"></div>
         </section>
         <section>
