@@ -77,26 +77,33 @@ public class ShoppingProcessController {
 		ShoppingSession shoppingSession = null; // Initialisation de shoppingSession à null
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
+	
+		// Case where user is connected
 		if (principal instanceof UserDetails) {
 			UserDetails userDetails = (UserDetails) principal;
 			String userEmail = userDetails.getUsername();
 			User user = userService.isEmailExist(userEmail);
 			
-			if (user != null) {
+			if (user != null && shoppingSessionService.getShoppingSessionByUserAndActive(user) != null ) {
+				// User is connected, we find a shopping session linked to it
 				shoppingSession = shoppingSessionService.getShoppingSessionByUserAndActive(user);
+			} else if (user != null && shoppingSessionService.isShoppingSessionExistAndShoppingProcessNotEnd(pannierId) ) {
+				// User is connected, we find a shopping session linked to his localstorage shopping cart
+				shoppingSession = shoppingSessionService.getShoppingSession(pannierId);
 			}
+			
 		}
 		
-		// Si la session utilisateur est inactive ou si l'utilisateur n'est pas connecté
-		if (shoppingSession == null && (pannierId != null && shoppingSessionService.isShoppingSessionActive(sessionId))) {
-			shoppingSession = shoppingSessionService.getShoppingSession(sessionId);
-		} else if (pannierId != null && shoppingSessionService.isShoppingSessionActive(pannierId)) {
-			shoppingSession = shoppingSessionService.getShoppingSession(pannierId);
-		} else if (pannierId == null && shoppingSessionService.isShoppingSessionActive(sessionId)) {
-			shoppingSession = shoppingSessionService.getShoppingSession(sessionId);
-		} else {
-			return "/shopping-cart-empty";
+		// If user is not connect shopping session will be null
+		
+		if(shoppingSession == null) {
+			if (pannierId != null && shoppingSessionService.isShoppingSessionActive(sessionId)) {
+				shoppingSession = shoppingSessionService.getShoppingSession(sessionId);
+			} else if (shoppingSessionService.isShoppingSessionActive(pannierId)) {
+				shoppingSession = shoppingSessionService.getShoppingSession(pannierId);
+			} else {
+				return "/shopping-cart-empty";
+			}
 		}
 		
 		if (shoppingSession != null) {
@@ -175,15 +182,13 @@ public class ShoppingProcessController {
 	 *
 	 * @param request HttpServletRequest
 	 * @param productId Get the product id from url
-	 * @param model View
 	 * @return /pannier
 	 * @throws DataFormatException dataFormatException
 	 */
 	@GetMapping("/delete-product")
 	public String deleteProduct(
 		HttpServletRequest request,
-		@RequestParam int productId,
-		Model model
+		@RequestParam int productId
 	) throws DataFormatException {
 		HttpSession session = request.getSession();
 		String sessionId = session.getId();
@@ -210,7 +215,13 @@ public class ShoppingProcessController {
 	 * @return view
 	 */
 	@GetMapping("/pannier-vide")
-	public final String emptyShoppingCart() {
+	public final String emptyShoppingCart(
+		HttpServletRequest request
+	
+	) {
+		// Store user current session
+		HttpSession session = request.getSession();
+		String sessionId = session.getId();
 		return "shopping-cart-empty";
 	}
 	
@@ -221,6 +232,7 @@ public class ShoppingProcessController {
 	 */
 	@GetMapping("/livraison")
 	public final String delivery() {
+		
 		return "shopping-delivery";
 	}
 }

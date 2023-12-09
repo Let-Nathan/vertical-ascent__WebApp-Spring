@@ -1,19 +1,33 @@
 document.addEventListener('DOMContentLoaded', function() {
     const viewCartButton = document.getElementById('viewCartBtn');
+    const PANNIERICON = document.getElementById('pannierIcon');
+    const USERCART = JSON.parse(localStorage.getItem('userCart'));
+    const CARTITEMDTO =
+        USERCART != null ? USERCART.map(convertToProductDto) : null;
+
+
+    console.log(PANNIERICON);
+    if (redirectIfEmpty(CARTITEMDTO)) {
+        return;
+    }
     if (viewCartButton) {
         viewCartButton.addEventListener('click', function(event) {
             event.preventDefault();
-            const USERCART = JSON.parse(localStorage.getItem('userCart'));
-            const CARTITEMDTO =
-                USERCART != null ? USERCART.map(convertToProductDto) : null;
+            sendCartItems(CARTITEMDTO);
+        });
+    }
+    if (PANNIERICON) {
+        PANNIERICON.addEventListener('click', function(event) {
+            event.preventDefault();
 
-            if (redirectIfEmpty(CARTITEMDTO)) {
-                return;
-            }
+
 
             sendCartItems(CARTITEMDTO);
         });
     }
+});
+
+
 
     /**
      * Convert a cart item from local storage to a product DTO representation.
@@ -84,4 +98,4 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('An error occurred: ' + error);
             });
     }
-});
+
