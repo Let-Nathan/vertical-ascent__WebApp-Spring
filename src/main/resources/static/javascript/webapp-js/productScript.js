@@ -79,7 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
     /**
      * Upate the product quantity in local storage.
      *
-     * @param quantity {number} quantity of a given product from local storage.
+     * @param quantity {number} quantity -
+     * of a given product from local storage.
      */
     function updateLocalStorageQuantity(quantity) {
         const PRODUCTID =
