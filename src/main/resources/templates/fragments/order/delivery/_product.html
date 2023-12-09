@@ -1,139 +1,24 @@
 <!DOCTYPE html>
 <div class="d-flex flex-column align-items-center flex-md-wrap gap-2 gap-md-3 flex-md-row justify-content-around mb-5">
-    <!-- Product container -->
-    <div class="col-11 col-md-3 shadow-lg bg-white rounded-3">
-        <!-- Product row  @todo replace with users product shopping cart info -->
+    <!-- Boucle à travers les produits du panier de l'utilisateur -->
+    <div class="col-11 col-md-3 shadow-lg bg-white rounded-3" th:each="cartProduct : ${userCartProducts}">
+        <!-- Product row -->
         <div class="d-flex justify-content-around ">
             <!-- Product image -->
-            <img class="img-fluid col-4 rounded-3" src="/images/product/drago.jpg" alt="product desc">
+            <!--<img th:src="${product.imageUrl}" class="img-fluid col-4 rounded-3" alt="product desc">-->
 
             <!-- Product info : Brand and product name container -->
             <div class="flex-column  mt-2 col-">
                 <!-- Brand -->
                 <div>
-                    <p class="fw-bold mb-0 fs-5">Marque</p>
-                    <p>Product name</p>
+                    <p class="fw-bold mb-0 fs-5" th:text="${cartProduct.product.category.name}"></p>
+                    <p th:text="${cartProduct.product.name}"></p>
                 </div>
                 <!-- Quantity and price container -->
                 <div class="d-flex">
-                    <p class="fw-light">1</p>
-                    <p>x</p>
-                    <p class="fw-light">99,99€</p>
-                </div>
-                <hr>
-            </div>
-        </div>
-    </div>
-    <div class="col-11 col-md-3 shadow-lg bg-white rounded-3">
-        <!-- Product row  @todo replace with users product shopping cart info -->
-        <div class="d-flex justify-content-around ">
-            <!-- Product image -->
-            <img class="img-fluid col-4 rounded-3" src="/images/product/drago.jpg" alt="product desc">
-
-            <!-- Product info : Brand and product name container -->
-            <div class="flex-column  mt-2 col-">
-                <!-- Brand -->
-                <div>
-                    <p class="fw-bold mb-0 fs-5">Marque</p>
-                    <p>Product name</p>
-                </div>
-                <!-- Quantity and price container -->
-                <div class="d-flex">
-                    <p class="fw-light">1</p>
-                    <p>x</p>
-                    <p class="fw-light">99,99€</p>
-                </div>
-                <hr>
-            </div>
-        </div>
-    </div>
-    <div class="col-11 col-md-3 shadow-lg bg-white rounded-3">
-        <!-- Product row  @todo replace with users product shopping cart info -->
-        <div class="d-flex justify-content-around ">
-            <!-- Product image -->
-            <img class="img-fluid col-4 rounded-3" src="/images/product/drago.jpg" alt="product desc">
-
-            <!-- Product info : Brand and product name container -->
-            <div class="flex-column  mt-2 col-">
-                <!-- Brand -->
-                <div>
-                    <p class="fw-bold mb-0 fs-5">Marque</p>
-                    <p>Product name</p>
-                </div>
-                <!-- Quantity and price container -->
-                <div class="d-flex">
-                    <p class="fw-light">1</p>
-                    <p>x</p>
-                    <p class="fw-light">99,99€</p>
-                </div>
-                <hr>
-            </div>
-        </div>
-    </div>
-    <div class="col-11 col-md-3 shadow-lg bg-white rounded-3">
-        <!-- Product row  @todo replace with users product shopping cart info -->
-        <div class="d-flex justify-content-around ">
-            <!-- Product image -->
-            <img class="img-fluid col-4 rounded-3" src="/images/product/drago.jpg" alt="product desc">
-
-            <!-- Product info : Brand and product name container -->
-            <div class="flex-column  mt-2 col-">
-                <!-- Brand -->
-                <div>
-                    <p class="fw-bold mb-0 fs-5">Marque</p>
-                    <p>Product name</p>
-                </div>
-                <!-- Quantity and price container -->
-                <div class="d-flex">
-                    <p class="fw-light">1</p>
-                    <p>x</p>
-                    <p class="fw-light">99,99€</p>
-                </div>
-                <hr>
-            </div>
-        </div>
-    </div>
-    <div class="col-11 col-md-3 shadow-lg bg-white rounded-3">
-        <!-- Product row  @todo replace with users product shopping cart info -->
-        <div class="d-flex justify-content-around ">
-            <!-- Product image -->
-            <img class="img-fluid col-4 rounded-3" src="/images/product/drago.jpg" alt="product desc">
-
-            <!-- Product info : Brand and product name container -->
-            <div class="flex-column  mt-2 col-">
-                <!-- Brand -->
-                <div>
-                    <p class="fw-bold mb-0 fs-5">Marque</p>
-                    <p>Product name</p>
-                </div>
-                <!-- Quantity and price container -->
-                <div class="d-flex">
-                    <p class="fw-light">1</p>
-                    <p>x</p>
-                    <p class="fw-light">99,99€</p>
-                </div>
-                <hr>
-            </div>
-        </div>
-    </div>
-    <div class="col-11 col-md-3 shadow-lg bg-white rounded-3">
-        <!-- Product row  @todo replace with users product shopping cart info -->
-        <div class="d-flex justify-content-around ">
-            <!-- Product image -->
-            <img class="img-fluid col-4 rounded-3" src="/images/product/drago.jpg" alt="product desc">
-
-            <!-- Product info : Brand and product name container -->
-            <div class="flex-column  mt-2 col-">
-                <!-- Brand -->
-                <div>
-                    <p class="fw-bold mb-0 fs-5">Marque</p>
-                    <p>Product name</p>
-                </div>
-                <!-- Quantity and price container -->
-                <div class="d-flex">
-                    <p class="fw-light">1</p>
-                    <p>x</p>
-                    <p class="fw-light">99,99€</p>
+                    <p th:text="${cartProduct.quantity}" class="fw-light"></p>
+                    <p> x </p>
+                    <p class="fw-light" th:text="${cartProduct.product.price} + ' €'"></p>
                 </div>
                 <hr>
             </div>

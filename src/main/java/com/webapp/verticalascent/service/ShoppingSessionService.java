@@ -150,7 +150,7 @@ public class ShoppingSessionService {
 	 * @param shoppingSession The current ShoppingSession
 	 * @param cartProductsList A List of CartProduct
 	 */
-	private void updateShoppingSessionTotalPrice(ShoppingSession shoppingSession, List<CartProduct> cartProductsList) {
+	public void updateShoppingSessionTotalPrice(ShoppingSession shoppingSession, List<CartProduct> cartProductsList) {
 		shoppingSession.setTotalPrice(calculateTotalPrice(cartProductsList));
 		shoppingSessionRepository.save(shoppingSession);
 	}
