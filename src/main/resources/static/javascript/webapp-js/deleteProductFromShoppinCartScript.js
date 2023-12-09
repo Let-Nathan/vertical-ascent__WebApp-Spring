@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const PRODUCTID = this.getAttribute('data-product-id');
 
             // Supprimer l'élément correspondant du localStorage
-            if(PRODUCTID) {
+            if (PRODUCTID) {
                 removeProductFromLocalStorage(PRODUCTID);
             }
             // Rediriger vers l'URL de suppression du produit
