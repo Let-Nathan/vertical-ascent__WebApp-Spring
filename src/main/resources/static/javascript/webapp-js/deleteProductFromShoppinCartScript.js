@@ -1,21 +1,26 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let deleteButtons = document.querySelectorAll('.deleteProductButton');
-    deleteButtons.forEach(button => {
+    const DELETEBTN = document.querySelectorAll('.deleteProductButton');
+    DELETEBTN.forEach((button) => {
         button.addEventListener('click', function(event) {
             event.preventDefault();
-            let productId = this.getAttribute('data-product-id');
+            const PRODUCTID = this.getAttribute('data-product-id');
 
             // Supprimer l'élément correspondant du localStorage
-            removeProductFromLocalStorage(productId);
+            removeProductFromLocalStorage(PRODUCTID);
 
             // Rediriger vers l'URL de suppression du produit
             window.location.href = this.getAttribute('href');
         });
     });
 
+    /**
+     * Remove the given product id from the user local storage.
+     *
+     * @param productId
+     */
     function removeProductFromLocalStorage(productId) {
-        let userCart = JSON.parse(localStorage.getItem('userCart')) || [];
-        let updatedCart = userCart.filter(item => item.productId !== productId);
-        localStorage.setItem('userCart', JSON.stringify(updatedCart));
+        const USERCART = JSON.parse(localStorage.getItem('userCart')) || [];
+        const UPDATEDCART= USERCART.filter((item) => item.productId !== productId);
+        localStorage.setItem('userCart', JSON.stringify(UPDATEDCART));
     }
 });
