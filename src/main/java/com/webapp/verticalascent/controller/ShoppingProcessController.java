@@ -198,18 +198,29 @@ public class ShoppingProcessController {
 		HttpSession session = request.getSession();
 		String sessionId = session.getId();
 		ShoppingSession shoppingSession;
+		User user = null;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		// Case where user is connected
+		if (principal instanceof UserDetails userDetails) {
+			String userEmail = userDetails.getUsername();
+			user = userService.isEmailExist(userEmail);
+		}
 		
 		if (shoppingSessionService.isShoppingSessionActive(sessionId)) {
 			// Get user active shopping session
 			shoppingSession = shoppingSessionService.getShoppingSession(sessionId);
-		}  else {
+		} else if (!shoppingSessionService.isShoppingSessionActive(sessionId) && user != null) {
+			shoppingSession = shoppingSessionService.getShoppingSessionByUserAndActive(user);
+		} else {
 			return "redirect:/shopping-cart-empty";
 		}
+		
 		// Check if product is link to the current session
 		CartProduct cartProductToDelete = cartProductService.getCartProductBySessionAndProductId(shoppingSession, productId);
 		if (cartProductToDelete != null) {
 			// Update product quantity
 			cartProductService.updateCartProductQuantity(cartProductToDelete, 0);
+			shoppingSessionService.updateShoppingSessionTotalPrice(shoppingSession, cartProductService.getCartProductListBySession(shoppingSession));
 		}
 		return "redirect:/pannier";
 	}
@@ -252,8 +263,12 @@ public class ShoppingProcessController {
 				return "redirect:/address/new-address";
 			}
 			model.addAttribute("userAddress", addressesService.getUserAddresses(user));
-			model.addAttribute("userCartProducts", shoppingSessionService.getShoppingSessionByUserAndActive(user));
-			
+			model.addAttribute(
+				"userCartProducts",
+				cartProductService.getCartProductListBySession(
+					shoppingSessionService.getShoppingSessionByUserAndActive(user))
+			);
+			model.addAttribute("shoppingSession", shoppingSessionService.getShoppingSessionByUserAndActive(user));
 		}
 		return "shopping-delivery";
 	}
