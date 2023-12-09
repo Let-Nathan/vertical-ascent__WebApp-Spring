@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.DataFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -73,43 +74,37 @@ public class ShoppingProcessController {
 		HttpSession session = request.getSession();
 		String sessionId = session.getId();
 		List<CartProduct> userCartProducts = new ArrayList<>();
-		ShoppingSession shoppingSession; // Init shoppingSession to null
+		ShoppingSession shoppingSession = null; // Initialisation de shoppingSession à null
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		// Check if the user is connected and has an active session
 		if (principal instanceof UserDetails) {
 			UserDetails userDetails = (UserDetails) principal;
 			String userEmail = userDetails.getUsername();
 			User user = userService.isEmailExist(userEmail);
 			
 			if (user != null) {
-				// If the user is connected, look for an active session
 				shoppingSession = shoppingSessionService.getShoppingSessionByUserAndActive(user);
-				if (shoppingSession != null) {
-					userCartProducts.addAll(cartProductService.getCartProductListBySession(shoppingSession));
-				}
-			} else {
-				// If the user is not connected, check for a session related to pannierId
-				if (pannierId != null && shoppingSessionService.isShoppingSessionActive(pannierId)) {
-					shoppingSession = shoppingSessionService.getShoppingSession(pannierId);
-					userCartProducts.addAll(cartProductService.getCartProductListBySession(shoppingSession));
-				} else {
-					return "/shopping-cart-empty";
-				}
-			}
-		} else {
-			// If the user is not connected, check for a session related to pannierId
-			if (pannierId != null && shoppingSessionService.isShoppingSessionActive(pannierId)) {
-				shoppingSession = shoppingSessionService.getShoppingSession(pannierId);
-				userCartProducts.addAll(cartProductService.getCartProductListBySession(shoppingSession));
-			} else {
-				return "/shopping-cart-empty";
 			}
 		}
 		
+		// Si la session utilisateur est inactive ou si l'utilisateur n'est pas connecté
+		if (shoppingSession == null && (pannierId != null && shoppingSessionService.isShoppingSessionActive(sessionId))) {
+			shoppingSession = shoppingSessionService.getShoppingSession(sessionId);
+		} else if (pannierId != null && shoppingSessionService.isShoppingSessionActive(pannierId)) {
+			shoppingSession = shoppingSessionService.getShoppingSession(pannierId);
+		} else if (pannierId == null && shoppingSessionService.isShoppingSessionActive(sessionId)) {
+			shoppingSession = shoppingSessionService.getShoppingSession(sessionId);
+		} else {
+			return "/shopping-cart-empty";
+		}
+		
+		if (shoppingSession != null) {
+			userCartProducts.addAll(cartProductService.getCartProductListBySession(shoppingSession));
+		}
+		
 		model.addAttribute("userCartProducts", userCartProducts);
-		model.addAttribute("shoppingSession", shoppingSession); // Add ShoppingSession to model
+		model.addAttribute("shoppingSession", shoppingSession);
 		return "/shopping-cart";
 	}
 	
@@ -175,33 +170,38 @@ public class ShoppingProcessController {
 		return  ResponseEntity.ok().body(response);
 	}
 	
+	/**
+	 * Set quantity to 0 for the given CartProduct linked to user session.
+	 *
+	 * @param request HttpServletRequest
+	 * @param productId Get the product id from url
+	 * @param model View
+	 * @return /pannier
+	 * @throws DataFormatException dataFormatException
+	 */
 	@GetMapping("/delete-product")
 	public String deleteProduct(
 		HttpServletRequest request,
-		@RequestParam String productId,
+		@RequestParam int productId,
 		Model model
-	) {
+	) throws DataFormatException {
 		HttpSession session = request.getSession();
 		String sessionId = session.getId();
+		ShoppingSession shoppingSession;
 		
-		// Vérifie si l'utilisateur a une session active
 		if (shoppingSessionService.isShoppingSessionActive(sessionId)) {
-			// Récupère la session d'achat active de l'utilisateur
-			ShoppingSession shoppingSession = shoppingSessionService.getShoppingSession(sessionId);
-			
-			// Vérifie si le produit à supprimer est lié à la session d'achat de l'utilisateur
-//			CartProduct cartProductToDelete = cartProductService.getCartItemBySessionAndProductId(shoppingSession, productId);
-//			if (cartProductToDelete != null) {
-//				// Modifie la quantité du produit à 0
-//				cartProductService.updateProductQuantity(cartProductToDelete, 0);
-//			}
-			
-			// Redirige vers la page du panier après la suppression du produit
-			return "redirect:/pannier";
-		} else {
-			// Gère le cas où l'utilisateur n'a pas de session active
+			// Get user active shopping session
+			shoppingSession = shoppingSessionService.getShoppingSession(sessionId);
+		}  else {
 			return "redirect:/shopping-cart-empty";
 		}
+		// Check if product is link to the current session
+		CartProduct cartProductToDelete = cartProductService.getCartProductBySessionAndProductId(shoppingSession, productId);
+		if (cartProductToDelete != null) {
+			// Update product quantity
+			cartProductService.updateCartProductQuantity(cartProductToDelete, 0);
+		}
+		return "redirect:/pannier";
 	}
 	
 	/**

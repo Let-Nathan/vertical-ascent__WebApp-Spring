@@ -11,7 +11,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.zip.DataFormatException;
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -83,9 +86,39 @@ public class CartProductService {
 	 * @param shoppingSession ShoppingSession
 	 * @return List of CartProduct
 	 */
-	public List<CartProduct> getCartProductListBySession(ShoppingSession shoppingSession) {
-		int minQuantity = 1;
-		return cartProductRepository.findAllByShoppingSessionGreaterThan(shoppingSession, minQuantity);
+	public List<CartProduct> getCartProductListBySession(ShoppingSession shoppingSession) throws DataRetrievalFailureException {
+		try {
+			int minQuantity = 1;
+			return cartProductRepository.findAllByShoppingSessionGreaterThan(shoppingSession, minQuantity);
+		} catch (DataRetrievalFailureException dataRetrievalFailureException) {
+			throw new DataRetrievalFailureException(dataRetrievalFailureException.getMessage());
+		}
+	}
+	
+	/**
+	 * Update product quantity for a given CartProduct.
+	 *
+	 * @param cartProduct CartProduct object
+	 * @param quantity primitive int
+	 */
+	public void updateCartProductQuantity(CartProduct cartProduct, int quantity) throws DataFormatException {
+		try {
+			cartProduct.setQuantity(quantity);
+			cartProductRepository.save(cartProduct);
+		} catch (DataException dataException) {
+			throw new DataFormatException(dataException.getMessage());
+		}
+	}
+	
+	/**
+	 * Return a given user Cart Product by product id and a ShoppingSession.
+	 *
+	 * @param shoppingSession ShoppingSession
+	 * @param productId ProductId
+	 * @return CartProduct object representation for the given shopping session / product id
+	 */
+	public CartProduct getCartProductBySessionAndProductId(ShoppingSession shoppingSession, int productId) throws DataRetrievalFailureException {
+		return cartProductRepository.getCartProductByShoppingSessionAndProductId(shoppingSession, (long) productId);
 	}
 	
 	/**
@@ -102,13 +135,9 @@ public class CartProductService {
 	 *
 	 * @param cartProducts List CartProduct
 	 */
-	public void savedListCartProducts(List<CartProduct> cartProducts) {
+	public void savedListCartProducts(List<CartProduct> cartProducts) throws DataException {
 		// Save the list of cart products
-		try {
-			cartProductRepository.saveAll(cartProducts);
-		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage());
-		}
+		cartProductRepository.saveAll(cartProducts);
 	}
 	
 	/**
@@ -117,7 +146,7 @@ public class CartProductService {
 	 * @param existingCartProduct CartProduct
 	 * @param cartItem ProductDto
 	 */
-	public CartProduct updateExistingCartProduct(CartProduct existingCartProduct, ProductDto cartItem) {
+	public CartProduct updateExistingCartProduct(CartProduct existingCartProduct, ProductDto cartItem) throws DataException {
 		if (cartItem.getQuantity() <= 0) {
 			existingCartProduct.setQuantity(0);
 		} else {
@@ -135,7 +164,7 @@ public class CartProductService {
 	 * @param cartItems List of product from the local storage.
 	 * @return List ProductDto validatedItems || empty (can be empty).
 	 */
-	public List<ProductDto> validateCartItems(List<ProductDto> cartItems) {
+	public List<ProductDto> validateCartItems(List<ProductDto> cartItems) throws DataException {
 		List<ProductDto> validatedItems = new ArrayList<>();
 		
 		for (ProductDto cartItem : cartItems) {
