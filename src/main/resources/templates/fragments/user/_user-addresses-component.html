@@ -4,20 +4,8 @@
     <div class="rounded-3 shadow-lg col-11">
         <!-- Card body -->
         <div class="card-body m-4">
-            <p class="h3 fw-bold mb-4">Vos Adresses</p>
-            <ul class="p-0">
-                <!-- List of user addresses -->
-                <li class="list-unstyled border border-3 border-opacity-75 p-2">
-                    <a href="#" class="text-decoration-none text-dark">
-                        <p class="mb-0">29 avenue victor hugo</p>
-                        <div class="d-flex">
-                            <p class="mb-0">33310</p>
-                            <p class="text-uppercase mb-0">,lormont</p>
-                        </div>
-                        <p class="mb-1">France</p>
-                    </a>
-                </li>
-            </ul>
+            <p class="h3 fw-bold mb-4">Votre Adresse</p>
+                <div th:replace="fragments/user/_listAddress-component"></div>
             <hr>
             <!-- Btn new addresses -->
             <a href="/address/new-address" class="text-decoration-none">

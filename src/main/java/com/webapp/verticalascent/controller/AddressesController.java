@@ -41,7 +41,7 @@ public class AddressesController {
     }
     
     /**
-     *
+     * Display the new address form
      *
      * @return The view name
      */
@@ -51,34 +51,38 @@ public class AddressesController {
     ) {
         AddressDto addressDto = new AddressDto();
         model.addAttribute("addressDto", addressDto);
+        
         return "user-address";
     }
     
+    /**
+     * Add a new address linked to the current user.
+     *
+     * @param addressDto AddessDto perform address validation
+     * @param bindingResult return errors to the user
+     * @param userDetails check if the user is register
+     * @return view
+     */
     @PostMapping("/add-address")
     public String addAddress(
         @Valid @ModelAttribute AddressDto addressDto,
         BindingResult bindingResult,
-        HttpServletRequest request,
-        @AuthenticationPrincipal UserDetails userDetails,
-        RedirectAttributes redirectAttributes
+        @AuthenticationPrincipal UserDetails userDetails
     ) {
+        
         if (bindingResult.hasErrors()) {
             return "user-address"; // Rediriger vers le formulaire avec les erreurs
         } else if (userService.isEmailExist(userDetails.getUsername()) == null) {
             return "redirect:/login";
         } else {
-            String userEmail = userDetails.getUsername();
-            User user = userService.isEmailExist(userEmail);
-            // Si aucune erreur, traiter l'ajout de l'adresse et rediriger vers une page appropriée
-            Address address = addressesService.convertAddresseDtoToAddresse(addressDto);
-            addressesService.saveAddress(addressesService.linkAddresseToUser(address, user));
-            String referer = request.getHeader("Referer");
-            if (referer != null && !referer.isEmpty()) {
-                return "redirect:" + referer;
-            } else {
+                String userEmail = userDetails.getUsername();
+                User user = userService.isEmailExist(userEmail);
+                // Si aucune erreur, traiter l'ajout de l'adresse et rediriger vers une page appropriée
+                Address address = addressesService.convertAddresseDtoToAddresse(addressDto);
+                addressesService.saveAddress(addressesService.linkAddresseToUser(address, user));
                 return "redirect:/account";
-            }
         }
+        
     }
     
 }
