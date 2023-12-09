@@ -10,8 +10,6 @@
         </div>
         <!-- Form container -->
         <div class="container">
-            <label for="enterprise">Société</label>
-            <input class="form-control mb-2" id="enterprise" name="enterprise" type="text">
             <label for="street">Voie</label>
             <input class="form-control mb-2" id="street" name="street" type="text" required>
             <label for="country">Pays</label>
@@ -22,16 +20,15 @@
             <input class="form-control mb-2" id="postalCode" name="postalCode" required type="text">
             <label for="city" class="col-">Ville</label>
             <input class="form-control mb-2" id="city" required type="text" name="city">
-            <label for="phoneNumber">Téléphone</label>
-            <input class="form-control mb-2" type="tel" required id="phoneNumber" name="phoneNumber">
-        </div>
-        <div class="container-fluid d-flex justify-content-between mt-3">
-            <a href="/account" class="text-decoration-none">
-                <button class="btn btn-dark text-uppercase fw-bold">Annuler</button>
-            </a>
-            <a href="#" class="text-decoration-none">
-                <button class="btn btn-danger fw-bold text-uppercase">Valider</button>
-            </a>
+            <div class="container-fluid d-flex justify-content-around mt-3 mb-3">
+                <a href="javascript:history.back()" class="text-decoration-none">
+                    <button class="btn btn-dark text-uppercase fw-bold">Annuler</button>
+                </a>
+
+                <a href="#" class="text-decoration-none">
+                    <button class="btn btn-danger fw-bold text-uppercase">Valider</button>
+                </a>
+            </div>
         </div>
     </div>
 </div>

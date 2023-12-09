@@ -50,6 +50,7 @@ public class SecurityConfig {
 			)
 			.authorizeHttpRequests(authorize -> authorize
 				.requestMatchers("/account").hasRole("USER")
+				.requestMatchers("/livraison").hasRole("USER")
 				.requestMatchers("/**", "/logout").permitAll()
 				.requestMatchers(HttpMethod.POST, "/validate-cart").permitAll()
 				.requestMatchers(

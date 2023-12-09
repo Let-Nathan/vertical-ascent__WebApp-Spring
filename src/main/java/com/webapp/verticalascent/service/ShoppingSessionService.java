@@ -51,6 +51,17 @@ public class ShoppingSessionService {
 	}
 	
 	/**
+	 * Link User to Shopping Session.
+	 *
+	 * @param user User
+	 * @param shoppingSession ShoppingSession
+	 */
+	public void linkedUserToShoopingSess(User user, ShoppingSession shoppingSession) {
+		shoppingSession.setUser(user);
+		shoppingSessionRepository.save(shoppingSession);
+	}
+	
+	/**
 	 * Return true if we find a shopping session and the shopping process is not completed.
 	 *
 	 * @param sessionId The id of user's session.
