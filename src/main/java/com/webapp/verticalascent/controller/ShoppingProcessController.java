@@ -251,7 +251,7 @@ public class ShoppingProcessController {
 				return "shopping-cart-empty";
 			}
 			if (addressesService.getUserAddresses(user) == null) {
-				return "redirect:/nouvelle-adresse";
+				return "redirect:/adresse/nouvelle-adresse";
 			}
 			model.addAttribute("userAddresse", addressesService.getUserAddresses(user));
 			model.addAttribute("userCartProducts", shoppingSessionService.getShoppingSessionByUserAndActive(user));
