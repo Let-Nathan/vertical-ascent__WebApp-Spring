@@ -12,5 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0
  */
 public interface AddressesRepository extends JpaRepository<Addresses, Long> {
-	List<Addresses> findByUser(User user);
+	Addresses findByUser(User user);
 }

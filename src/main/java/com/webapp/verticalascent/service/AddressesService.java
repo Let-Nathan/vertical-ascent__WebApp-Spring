@@ -28,7 +28,7 @@ public class AddressesService {
 	 *
 	 * @return List Addresses Addresses
 	 */
-	public List<Addresses> getAllUserAddresses(User user) {
+	public Addresses getlUserAddresses(User user) {
 		return addressesRepository.findByUser(user);
 	}
 	
