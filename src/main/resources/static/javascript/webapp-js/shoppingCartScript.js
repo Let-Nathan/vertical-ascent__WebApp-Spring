@@ -17,15 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (PANNIERICON) {
         PANNIERICON.addEventListener('click', function(event) {
             event.preventDefault();
-
-
-
             sendCartItems(CARTITEMDTO);
         });
     }
 });
-
-
 
     /**
      * Convert a cart item from local storage to a product DTO representation.

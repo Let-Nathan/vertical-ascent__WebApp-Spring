@@ -6,8 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const PRODUCTID = this.getAttribute('data-product-id');
 
             // Supprimer l'élément correspondant du localStorage
-            removeProductFromLocalStorage(PRODUCTID);
-
+            if(PRODUCTID) {
+                removeProductFromLocalStorage(PRODUCTID);
+            }
             // Rediriger vers l'URL de suppression du produit
             window.location.href = this.getAttribute('href');
         });
@@ -16,11 +17,13 @@ document.addEventListener('DOMContentLoaded', function() {
     /**
      * Remove the given product id from the user local storage.
      *
-     * @param productId
+     * @param productId {productId} data id product for removal
      */
     function removeProductFromLocalStorage(productId) {
-        const USERCART = JSON.parse(localStorage.getItem('userCart')) || [];
-        const UPDATEDCART= USERCART.filter((item) => item.productId !== productId);
+        const USERCART =
+            JSON.parse(localStorage.getItem('userCart')) || [];
+        const UPDATEDCART=
+            USERCART.filter((item) => item.productId !== productId);
         localStorage.setItem('userCart', JSON.stringify(UPDATEDCART));
     }
 });
