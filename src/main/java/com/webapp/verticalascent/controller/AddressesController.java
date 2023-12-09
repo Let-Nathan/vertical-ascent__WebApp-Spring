@@ -1,17 +1,17 @@
 package com.webapp.verticalascent.controller;
 
-import com.webapp.verticalascent.entity.Addresses;
+import com.webapp.verticalascent.entity.Address;
 import com.webapp.verticalascent.entity.User;
 import com.webapp.verticalascent.service.UserService;
-import jakarta.validation.Valid;
-import com.webapp.verticalascent.dto.AddressesDto;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+import com.webapp.verticalascent.dto.AddressDto;
 import com.webapp.verticalascent.service.AddressesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,7 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @version 1.0
  *
  */
-@RequestMapping("/adresse")
+@RequestMapping("/address")
 @Controller
 public class AddressesController {
     
@@ -45,35 +45,38 @@ public class AddressesController {
      *
      * @return The view name
      */
-    @GetMapping("/nouvelle-adresse")
-    public final String home() {
-       return "user-addresses";
+    @GetMapping("/new-address")
+    public final String home(
+        Model model
+    ) {
+        AddressDto addressDto = new AddressDto();
+        model.addAttribute("addressDto", addressDto);
+        return "user-address";
     }
     
     @PostMapping("/add-address")
-    public String ajouterAdresse(
-        @Valid @ModelAttribute AddressesDto addressesDto,
+    public String addAddress(
+        @Valid @ModelAttribute AddressDto addressDto,
         BindingResult bindingResult,
         HttpServletRequest request,
-        @AuthenticationPrincipal UserDetails userDetails
+        @AuthenticationPrincipal UserDetails userDetails,
+        RedirectAttributes redirectAttributes
     ) {
         if (bindingResult.hasErrors()) {
-            // If there is errors in addresses dto, we return them to user to make him correct and submit again
-            return "user-addresses";
+            return "user-address"; // Rediriger vers le formulaire avec les erreurs
         } else if (userService.isEmailExist(userDetails.getUsername()) == null) {
             return "redirect:/login";
         } else {
             String userEmail = userDetails.getUsername();
             User user = userService.isEmailExist(userEmail);
-            // If there is no errors, we convert addressesDto to Addresse and associated it to the user
-            Addresses addresses = addressesService.convertAddresseDtoToAddresse(addressesDto);
-            addressesService.linkAddresseToUser(addresses, user);
-            // Redirect
+            // Si aucune erreur, traiter l'ajout de l'adresse et rediriger vers une page appropriée
+            Address address = addressesService.convertAddresseDtoToAddresse(addressDto);
+            addressesService.saveAddress(addressesService.linkAddresseToUser(address, user));
             String referer = request.getHeader("Referer");
             if (referer != null && !referer.isEmpty()) {
                 return "redirect:" + referer;
             } else {
-                return "redirect:/";
+                return "redirect:/account";
             }
         }
     }

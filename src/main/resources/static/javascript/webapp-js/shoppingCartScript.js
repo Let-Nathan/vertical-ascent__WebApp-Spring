@@ -5,8 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const CARTITEMDTO =
         USERCART != null ? USERCART.map(convertToProductDto) : null;
 
-
-    console.log(PANNIERICON);
     if (redirectIfEmpty(CARTITEMDTO)) {
         return;
     }

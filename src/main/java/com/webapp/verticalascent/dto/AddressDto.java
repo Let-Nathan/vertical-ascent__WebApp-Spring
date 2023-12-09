@@ -12,13 +12,13 @@ import lombok.Data;
  *
  */
 @Data
-public class AddressesDto {
+public class AddressDto {
 	
 	private Long id;
 	
 	@Pattern(regexp = "^\\d+$", message = "Le champ 'numéro' doit contenir uniquement des chiffres")
 	@NotBlank(message = "Le champ 'numéro' est obligatoire")
-	private int number;
+	private String numberStreet;
 	
 	@NotBlank(message = "Le champ 'Voie' est obligatoire")
 	@Pattern(regexp = "^[a-zA-ZÀ-ÿ\\s]*$", message = "Le champ 'Voie' doit contenir uniquement des lettres")

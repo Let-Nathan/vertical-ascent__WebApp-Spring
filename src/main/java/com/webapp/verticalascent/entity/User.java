@@ -60,10 +60,10 @@ public class User {
     private Timestamp inscriptionDate;
     
     @Column(nullable = false)
-    private Boolean isActive = false;
+    private Boolean isActive = true;
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Addresses> addresses;
+    private List<Address> addresses;
     
     @ManyToOne
     @JoinColumn(name = "role_id")

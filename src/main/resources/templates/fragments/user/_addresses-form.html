@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- User form addresses component -->
-<form action="/add-address" method="post" th:object="${AddressesDto}">
+<form action="/address/add-address" method="POST" th:object="${addressDto}">
     <div class="container-fluid form-group d-flex flex-column align-items-center mb-5">
         <div class="card-body shadow-lg rounded-3 col-11 p-2">
             <!-- Title container -->
@@ -11,20 +11,35 @@
             </div>
             <!-- Form container -->
             <div class="container">
-                <label for="number">Numéro de voie</label>
-                <input class="form-control mb-2" id="number" name="number" type="text" required>
+                <div th:if="${#fields.hasErrors('numberStreet')}">
+                    <p th:text="${#fields.errors('numberStreet')}"></p>
+                </div>
+                <label for="number">Numéro</label>
+                <input class="form-control mb-2" th:field="*{numberStreet}" id="number" name="number" type="text" required>
+
+                <div th:if="${#fields.hasErrors('street')}">
+                    <p th:text="${#fields.errors('street')}"></p>
+                </div>
                 <label for="street">Voie</label>
-                <input class="form-control mb-2" id="street" name="street" type="text" required>
+                <input class="form-control mb-2" th:field="*{street}" id="street" name="street" type="text" required>
                 <label for="postalCode" class="col-">Code postal</label>
-                <input class="form-control mb-2" id="postalCode" name="postalCode" required type="text">
+
+                <div th:if="${#fields.hasErrors('postalCode')}">
+                    <p th:text="${#fields.errors('postCode')}"></p>
+                </div>
+                <input class="form-control mb-2" th:field="*{postalCode}" id="postalCode" name="postalCode" required type="text">
                 <label for="city" class="col-">Ville</label>
-                <input class="form-control mb-2" id="city" required type="text" name="city">
+
+                <div th:if="${#fields.hasErrors('city')}">
+                    <p th:text="${#fields.errors('city')}"></p>
+                </div>
+                <input class="form-control mb-2" th:field="*{city}" id="city" required type="text" name="city">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <div class="container-fluid d-flex justify-content-around mt-3 mb-3">
                     <a href="javascript:history.back()" class="text-decoration-none">
                         <button class="btn btn-dark text-uppercase fw-bold">Annuler</button>
                     </a>
                     <button type="submit" class="btn btn-danger fw-bold text-uppercase">Valider</button>
-
                 </div>
             </div>
         </div>

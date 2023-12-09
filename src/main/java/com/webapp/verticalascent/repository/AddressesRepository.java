@@ -1,8 +1,7 @@
 package com.webapp.verticalascent.repository;
 
-import com.webapp.verticalascent.entity.Addresses;
+import com.webapp.verticalascent.entity.Address;
 import com.webapp.verticalascent.entity.User;
-import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -11,6 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Nathan L
  * @version 1.0
  */
-public interface AddressesRepository extends JpaRepository<Addresses, Long> {
-	Addresses findByUser(User user);
+public interface AddressesRepository extends JpaRepository<Address, Long> {
+	Address findByUser(User user);
 }

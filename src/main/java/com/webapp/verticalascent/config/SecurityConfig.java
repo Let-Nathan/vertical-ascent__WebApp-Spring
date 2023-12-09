@@ -51,13 +51,14 @@ public class SecurityConfig {
 			.authorizeHttpRequests(authorize -> authorize
 				.requestMatchers("/account").hasRole("USER")
 				.requestMatchers("/livraison").hasRole("USER")
-				.requestMatchers("/addr").hasRole("USER")
+				.requestMatchers("/address/**").hasRole("USER")
 				.requestMatchers("/**", "/logout").permitAll()
 				.requestMatchers(HttpMethod.POST, "/validate-cart").permitAll()
+				.requestMatchers(HttpMethod.POST, "/address/add-address").hasRole("USER")
 				.requestMatchers(
 					"/css/**", "/javascript/**", "/images/**"
 				).permitAll()
-				
+			
 			)
 			
 			.formLogin(form ->
@@ -72,10 +73,7 @@ public class SecurityConfig {
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/login")
 			);
-		
-			
-			
-		
+
 		return http.build();
 	}
 	

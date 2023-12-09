@@ -238,9 +238,7 @@ public class ShoppingProcessController {
 	@GetMapping("/livraison")
 	public final String delivery (
 		Model model
-	
 	) {
-		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		// Case where user is connected
 		if (principal instanceof UserDetails userDetails) {
@@ -251,9 +249,9 @@ public class ShoppingProcessController {
 				return "shopping-cart-empty";
 			}
 			if (addressesService.getUserAddresses(user) == null) {
-				return "redirect:/adresse/nouvelle-adresse";
+				return "redirect:/address/new-address";
 			}
-			model.addAttribute("userAddresse", addressesService.getUserAddresses(user));
+			model.addAttribute("userAddress", addressesService.getUserAddresses(user));
 			model.addAttribute("userCartProducts", shoppingSessionService.getShoppingSessionByUserAndActive(user));
 			
 		}

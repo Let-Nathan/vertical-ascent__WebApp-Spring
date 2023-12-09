@@ -30,6 +30,6 @@ public class UserController {
 	 */
 	@GetMapping("/new-addresses")
 	public final String newAddresses() {
-		return "user-addresses";
+		return "user-address";
 	}
 }
