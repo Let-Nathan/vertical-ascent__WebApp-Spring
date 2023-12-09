@@ -1,10 +1,9 @@
 package com.webapp.verticalascent.service;
 
-import com.webapp.verticalascent.dto.AddressesDto;
-import com.webapp.verticalascent.entity.Addresses;
+import com.webapp.verticalascent.dto.AddressDto;
+import com.webapp.verticalascent.entity.Address;
 import com.webapp.verticalascent.entity.User;
 import com.webapp.verticalascent.repository.AddressesRepository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +28,7 @@ public class AddressesService {
 	 *
 	 * @return List Addresses Addresses
 	 */
-	public Addresses getUserAddresses(User user) {
+	public Address getUserAddresses(User user) {
 		return addressesRepository.findByUser(user);
 	}
 	
@@ -39,11 +38,12 @@ public class AddressesService {
 	 * @param addressesDto AddressesDto
 	 * @return addresses Addresses
 	 */
-	public Addresses convertAddresseDtoToAddresse(AddressesDto addressesDto) {
-		Addresses addresses = new Addresses();
-		addresses.setNumber(addressesDto.getNumber());
+	public Address convertAddresseDtoToAddresse(AddressDto addressesDto) {
+		Address addresses = new Address();
+		addresses.setNumber(Integer.parseInt(addressesDto.getNumberStreet()));
 		addresses.setPostalCode(addressesDto.getPostalCode());
 		addresses.setStreet(addressesDto.getStreet());
+		addresses.setCity(addressesDto.getCity());
 		return addresses;
 	}
 	
@@ -53,9 +53,13 @@ public class AddressesService {
 	 * @param user User
 	 * @return addresses Addresses
 	 */
-	public Addresses linkAddresseToUser(Addresses addresses, User user) {
+	public Address linkAddresseToUser(Address addresses, User user) {
 		addresses.setUser(user);
 		return addresses;
+	}
+	
+	public void saveAddress(Address address) {
+		addressesRepository.save(address);
 	}
 	
 }
