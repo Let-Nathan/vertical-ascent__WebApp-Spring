@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
             CART.find((item) => item.productId === productId);
         let quantity = 1;
         if (PRODUCTINCART) {
-            // If product is already in local storage we increment quantity by 1.
+            // If product is already in local storage we increment quantity.
             PRODUCTINCART.quantity += 1;
             quantity = PRODUCTINCART.quantity;
         } else {
@@ -82,11 +82,11 @@ document.addEventListener('DOMContentLoaded', function() {
      * @param quantity quantity of a given product from local storage.
      */
     function updateLocalStorageQuantity(quantity) {
-        const productId =
+        const PRODUCTID =
             ADD_PRODUCT.getAttribute('data-product-id');
         const CART = JSON.parse(localStorage.getItem('userCart')) || [];
         const PRODUCTINCART =
-            CART.find((item) => item.productId === productId);
+            CART.find((item) => item.productId === PRODUCTID);
 
         if (PRODUCTINCART) {
             PRODUCTINCART.quantity = quantity;
