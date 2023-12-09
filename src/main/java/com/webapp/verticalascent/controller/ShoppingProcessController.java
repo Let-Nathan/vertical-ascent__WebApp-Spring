@@ -88,20 +88,20 @@ public class ShoppingProcessController {
 			String userEmail = userDetails.getUsername();
 			User user = userService.isEmailExist(userEmail);
 			
-			if (user != null && shoppingSessionService.getShoppingSessionByUserAndActive(user) != null ) {
+			if (user != null && shoppingSessionService.getShoppingSessionByUserAndActive(user) != null) {
 				// User is connected, we find a shopping session linked to it
 				shoppingSession = shoppingSessionService.getShoppingSessionByUserAndActive(user);
-			} else if (user != null && shoppingSessionService.isShoppingSessionExistAndShoppingProcessNotEnd(pannierId) ) {
+			} else if (user != null && shoppingSessionService.isShoppingSessionExistAndShoppingProcessNotEnd(pannierId)) {
 				// User is connected, we find a shopping session linked to his localstorage shopping cart
 				shoppingSessionService.linkedUserToShoopingSess(user, shoppingSessionService.getShoppingSession(pannierId));
-				shoppingSession = shoppingSessionService.getShoppingSessionByUserAndActive(user) ;
+				shoppingSession = shoppingSessionService.getShoppingSessionByUserAndActive(user);
 			}
 			
 		}
 		
 		// If user is not connect shopping session will be null
 		
-		if(shoppingSession == null) {
+		if (shoppingSession == null) {
 			if (pannierId != null && shoppingSessionService.isShoppingSessionActive(sessionId)) {
 				shoppingSession = shoppingSessionService.getShoppingSession(sessionId);
 			} else if (shoppingSessionService.isShoppingSessionActive(pannierId)) {
@@ -247,7 +247,7 @@ public class ShoppingProcessController {
 	 * @return view
 	 */
 	@GetMapping("/livraison")
-	public final String delivery (
+	public final String delivery(
 		Model model
 	) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -256,7 +256,7 @@ public class ShoppingProcessController {
 			String userEmail = userDetails.getUsername();
 			User user = userService.isEmailExist(userEmail);
 			// In case there is no shopping sess link to the current user but still try to access page
-			if(shoppingSessionService.getShoppingSessionByUserAndActive(user)  == null) {
+			if (shoppingSessionService.getShoppingSessionByUserAndActive(user)  == null) {
 				return "shopping-cart-empty";
 			}
 			if (addressesService.getUserAddresses(user) == null) {
