@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <!-- User form addresses component -->
-<div class="container-fluid form-group d-flex flex-column align-items-center mb-5">
-    <div class="card-body shadow-lg rounded-3 col-11 p-2">
-        <!-- Title container -->
-        <div class="container">
-            <p class="h2 fw-bold">Mon carnet d'adresses</p>
-            <p class="fst-italic text-muted">Ajouter une adresse</p>
-            <hr>
-        </div>
-        <!-- Form container -->
-        <div class="container">
-            <label for="street">Voie</label>
-            <input class="form-control mb-2" id="street" name="street" type="text" required>
-            <label for="country">Pays</label>
-            <select class="form-control mb-2" id="country" name="country">
-                <option selected>France</option>
-            </select>
-            <label for="postalCode" class="col-">Code postal</label>
-            <input class="form-control mb-2" id="postalCode" name="postalCode" required type="text">
-            <label for="city" class="col-">Ville</label>
-            <input class="form-control mb-2" id="city" required type="text" name="city">
-            <div class="container-fluid d-flex justify-content-around mt-3 mb-3">
-                <a href="javascript:history.back()" class="text-decoration-none">
-                    <button class="btn btn-dark text-uppercase fw-bold">Annuler</button>
-                </a>
+<form action="/add-address" method="post" th:object="${AddressesDto}">
+    <div class="container-fluid form-group d-flex flex-column align-items-center mb-5">
+        <div class="card-body shadow-lg rounded-3 col-11 p-2">
+            <!-- Title container -->
+            <div class="container">
+                <p class="h2 fw-bold">Mon carnet d'adresses</p>
+                <p class="fst-italic text-muted">Ajouter une adresse</p>
+                <hr>
+            </div>
+            <!-- Form container -->
+            <div class="container">
+                <label for="number">Numéro de voie</label>
+                <input class="form-control mb-2" id="number" name="number" type="text" required>
+                <label for="street">Voie</label>
+                <input class="form-control mb-2" id="street" name="street" type="text" required>
+                <label for="postalCode" class="col-">Code postal</label>
+                <input class="form-control mb-2" id="postalCode" name="postalCode" required type="text">
+                <label for="city" class="col-">Ville</label>
+                <input class="form-control mb-2" id="city" required type="text" name="city">
+                <div class="container-fluid d-flex justify-content-around mt-3 mb-3">
+                    <a href="javascript:history.back()" class="text-decoration-none">
+                        <button class="btn btn-dark text-uppercase fw-bold">Annuler</button>
+                    </a>
+                    <button type="submit" class="btn btn-danger fw-bold text-uppercase">Valider</button>
 
-                <a href="#" class="text-decoration-none">
-                    <button class="btn btn-danger fw-bold text-uppercase">Valider</button>
-                </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
