@@ -6,6 +6,7 @@ import com.webapp.verticalascent.dto.ProductDto;
 import com.webapp.verticalascent.entity.CartProduct;
 import com.webapp.verticalascent.entity.ShoppingSession;
 import com.webapp.verticalascent.entity.User;
+import com.webapp.verticalascent.service.AddressesService;
 import com.webapp.verticalascent.service.CartProductService;
 import com.webapp.verticalascent.service.ShoppingSessionService;
 import com.webapp.verticalascent.service.UserService;
@@ -43,17 +44,20 @@ public class ShoppingProcessController {
 	private final ShoppingSessionService shoppingSessionService;
 	private final CartProductService cartProductService;
 	private final UserService userService;
+	private final AddressesService addressesService;
 	
 	@Autowired
 	public ShoppingProcessController(
 		ShoppingSessionService shoppingSessionService,
 		CartProductService cartProductService,
-		UserService userService
+		UserService userService,
+		AddressesService addressesService
 		
 	) {
 		this.shoppingSessionService = shoppingSessionService;
 		this.cartProductService = cartProductService;
 		this.userService = userService;
+		this.addressesService = addressesService;
 	}
 	
 	
@@ -89,7 +93,8 @@ public class ShoppingProcessController {
 				shoppingSession = shoppingSessionService.getShoppingSessionByUserAndActive(user);
 			} else if (user != null && shoppingSessionService.isShoppingSessionExistAndShoppingProcessNotEnd(pannierId) ) {
 				// User is connected, we find a shopping session linked to his localstorage shopping cart
-				shoppingSession = shoppingSessionService.getShoppingSession(pannierId);
+				shoppingSessionService.linkedUserToShoopingSess(user, shoppingSessionService.getShoppingSession(pannierId));
+				shoppingSession = shoppingSessionService.getShoppingSessionByUserAndActive(user) ;
 			}
 			
 		}
@@ -231,8 +236,27 @@ public class ShoppingProcessController {
 	 * @return view
 	 */
 	@GetMapping("/livraison")
-	public final String delivery() {
+	public final String delivery (
+		Model model
+	
+	) {
 		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		// Case where user is connected
+		if (principal instanceof UserDetails userDetails) {
+			String userEmail = userDetails.getUsername();
+			User user = userService.isEmailExist(userEmail);
+			// In case there is no shopping sess link to the current user but still try to access page
+			if(shoppingSessionService.getShoppingSessionByUserAndActive(user)  == null) {
+				return "shopping-cart-empty";
+			}
+			if (addressesService.getUserAddresses(user) == null) {
+				return "redirect:/nouvelle-adresse";
+			}
+			model.addAttribute("userAddresse", addressesService.getUserAddresses(user));
+			model.addAttribute("userCartProducts", shoppingSessionService.getShoppingSessionByUserAndActive(user));
+			
+		}
 		return "shopping-delivery";
 	}
 }
