@@ -48,7 +48,8 @@ public class AddressesService {
 	}
 	
 	/**
-	 * Linked an Addresses to User
+	 * Linked an Addresses to User.
+	 *
 	 * @param addresses Addresses
 	 * @param user User
 	 * @return addresses Addresses

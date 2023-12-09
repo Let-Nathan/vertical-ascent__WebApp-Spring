@@ -1,12 +1,11 @@
 package com.webapp.verticalascent.controller;
 
+import com.webapp.verticalascent.dto.AddressDto;
 import com.webapp.verticalascent.entity.Address;
 import com.webapp.verticalascent.entity.User;
-import com.webapp.verticalascent.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
-import com.webapp.verticalascent.dto.AddressDto;
 import com.webapp.verticalascent.service.AddressesService;
+import com.webapp.verticalascent.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Controller class for Home path.
@@ -41,7 +39,7 @@ public class AddressesController {
     }
     
     /**
-     * Display the new address form
+     * Display the new address form.
      *
      * @return The view name
      */
