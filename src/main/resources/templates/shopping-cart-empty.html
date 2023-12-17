@@ -17,7 +17,7 @@
         <div th:replace="fragments/_navbar.html"></div>
         <!-- Empty storage display empty shopping cart fragments -->
         <section id="empty-shopping-cart" class="container-fluid p-0">
-            <div th:include="/fragments/order/_empty-shopping-cart"></div>
+            <div th:replace="fragments/order/_empty-shopping-cart"></div>
         </section>
         <section id="popular-product">
             <div class="container-fluid m-0 p-0 popular-product-container" th:include="fragments/section/_popular-product-section.html"></div>

@@ -210,7 +210,7 @@ public class ShoppingProcessController {
 		} else if (!shoppingSessionService.isShoppingSessionActive(sessionId) && user != null) {
 			shoppingSession = shoppingSessionService.getShoppingSessionByUserAndActive(user);
 		} else {
-			return "redirect:/shopping-cart-empty";
+			return "redirect:/_empty-cart-empty";
 		}
 		
 		// Check if product is link to the current session
