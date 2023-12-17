@@ -4,6 +4,8 @@ import com.webapp.verticalascent.config.SecurityConfig;
 import com.webapp.verticalascent.entity.ProductCategory;
 import com.webapp.verticalascent.service.ProductCategoryService;
 import java.util.List;
+
+import com.webapp.verticalascent.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
     
     private final ProductCategoryService productCategoryService;
+    private final ProductService productService;
    
     /**
      * Dependency injection for userRepository ==> @Todo to userDTO.
@@ -38,8 +41,12 @@ public class HomeController {
      * @param productCategoryService (ProductCategoryService)
      */
     @Autowired
-    public HomeController(ProductCategoryService productCategoryService) {
+    public HomeController(
+        ProductCategoryService productCategoryService,
+        ProductService productService
+    ) {
         this.productCategoryService = productCategoryService;
+        this.productService = productService;
     }
     
     /**
@@ -55,7 +62,7 @@ public class HomeController {
         if (user != null) {
             model.addAttribute("username", user.getUsername());
         }
-
+        model.addAttribute("products", productService.getRandomProduct());
         model.addAttribute("productCategories", productCategories);
         return "home";
     }

@@ -19,6 +19,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 		+ "(SELECT c FROM ProductCategory c WHERE c.name = :categoryName)")
 	List<Product> findByCategoryName(@Param("categoryName") String categoryName);
 	
-	@Query("SELECT p FROM Product p WHERE p.price BETWEEN 50 AND 100 ORDER BY p.price ASC LIMIT 9")
+	@Query("SELECT p FROM Product p WHERE p.price BETWEEN 50 AND 100 ORDER BY p.price ASC LIMIT 8")
 	List<Product> getAllByTotalPriceWithin();
 }
