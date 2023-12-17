@@ -18,7 +18,7 @@ import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.stereotype.Service;
 
 /**
- * Service implementation with logic for Shopping Session.
+ * Service implementation with logic for user Cart Product.
  *
  * @author Nathan L.
  * @version 1.0
@@ -61,8 +61,6 @@ public class CartProductService {
 				cartProduct.setTotalPrice(BigDecimal.valueOf(newCartItem.getQuantity() * newCartItem.getPrice()));
 				newCartProducts.add(cartProduct);
 			}
-			
-			// Maintenant, on retourne simplement la liste des CartProduct créés
 			return newCartProducts;
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
@@ -193,4 +191,5 @@ public class CartProductService {
 			&& Objects.equals(cartItem.getPrice(), product.getPrice())
 			&& cartItem.getQuantity() <= product.getQuantity();
 	}
+	
 }

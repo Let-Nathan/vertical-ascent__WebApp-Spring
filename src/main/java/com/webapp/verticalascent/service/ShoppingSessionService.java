@@ -7,10 +7,8 @@ import com.webapp.verticalascent.entity.ShoppingSession;
 import com.webapp.verticalascent.entity.User;
 import com.webapp.verticalascent.repository.ShoppingSessionRepository;
 import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -118,7 +116,9 @@ public class ShoppingSessionService {
 	 * @param cartItems List of product dto.
 	 */
 	public void handleExistingShoppingSession(String userShoppingSession, List<ProductDto> cartItems) {
-	
+		
+		List<ProductDto> productNotInSess = new ArrayList<>();
+		
 		for (ProductDto cartItem : cartItems) {
 			// We store one Product DTO to an Optional Product Object, to verify that is matching a product in Database.
 			Optional<Product> productOptional = productService.findOneById(cartItem.getId());
@@ -135,12 +135,12 @@ public class ShoppingSessionService {
 					cartProductService.updateExistingCartProduct(existingCartProductAndSession, cartItem);
 				} else {
 					// User hase no Cart Product associated to the Shopping Session, so we creat one.
-					cartProductService.createNewCartProducts(
-						getShoppingSession(userShoppingSession),
-						cartItems);
+					productNotInSess.add(cartItem);
 				}
 			}
 		}
+		
+		cartProductService.savedListCartProducts(cartProductService.createNewCartProducts(getShoppingSession(userShoppingSession), productNotInSess));
 		updateShoppingSessionTotalPrice(shoppingSessionRepository.findBySessionId(userShoppingSession), cartProductService.getCartProductListBySession(getShoppingSession(userShoppingSession)));
 	}
 	

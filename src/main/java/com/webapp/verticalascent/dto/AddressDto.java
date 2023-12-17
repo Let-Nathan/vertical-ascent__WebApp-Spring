@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 /**
- * Data transfer object for Product.
+ * Data transfer object for Address.
  *
  * @author Nathan L.
  * @version 1.0

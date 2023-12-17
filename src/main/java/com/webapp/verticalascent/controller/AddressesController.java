@@ -45,8 +45,15 @@ public class AddressesController {
      */
     @GetMapping("/new-address")
     public final String home(
-        Model model
+        Model model,
+        @AuthenticationPrincipal UserDetails userDetails
+    
     ) {
+        String userEmail = userDetails.getUsername();
+        User user = userService.isEmailExist(userEmail);
+        if(addressesService.getUserAddresses(user) != null) {
+            return "redirect:/account";
+        }
         AddressDto addressDto = new AddressDto();
         model.addAttribute("addressDto", addressDto);
         
@@ -69,14 +76,14 @@ public class AddressesController {
     ) {
         
         if (bindingResult.hasErrors()) {
-            return "user-address"; // Rediriger vers le formulaire avec les erreurs
+            return "user-address";
         } else if (userService.isEmailExist(userDetails.getUsername()) == null) {
             return "redirect:/login";
         } else {
                 String userEmail = userDetails.getUsername();
                 User user = userService.isEmailExist(userEmail);
                 // Si aucune erreur, traiter l'ajout de l'adresse et rediriger vers une page appropriée
-                Address address = addressesService.convertAddresseDtoToAddresse(addressDto);
+                Address address = addressesService.convertAddressDtoToAddress(addressDto);
                 addressesService.saveAddress(addressesService.linkAddresseToUser(address, user));
                 return "redirect:/account";
         }

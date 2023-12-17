@@ -1,25 +1,32 @@
 document.addEventListener('DOMContentLoaded', function() {
+    let viewCartClicked = false;
     const viewCartButton = document.getElementById('viewCartBtn');
-    const PANNIERICON = document.getElementById('pannierIcon');
-    const USERCART = JSON.parse(localStorage.getItem('userCart'));
-    const CARTITEMDTO =
-        USERCART != null ? USERCART.map(convertToProductDto) : null;
-
-    if (redirectIfEmpty(CARTITEMDTO)) {
-        return;
-    }
     if (viewCartButton) {
         viewCartButton.addEventListener('click', function(event) {
             event.preventDefault();
+            const USERCART = JSON.parse(localStorage.getItem('userCart'));
+            console.log('User cart ===>' + USERCART);
+            const CARTITEMDTO =
+                USERCART != null ? USERCART.map(convertToProductDto) : null;
+
+            if (redirectIfEmpty(CARTITEMDTO)) {
+                return;
+            }
+
             sendCartItems(CARTITEMDTO);
         });
     }
-    if (PANNIERICON) {
-        PANNIERICON.addEventListener('click', function(event) {
-            event.preventDefault();
-            sendCartItems(CARTITEMDTO);
-        });
-    }
+
+    //@Todo Fix bug when add shopping icon redirect with js
+    // if (PANNIERICON) {
+    //     PANNIERICON.addEventListener('click', function(event) {
+    //         event.preventDefault();
+    //         if (!viewCartClicked) {
+    //             sendCartItems(CARTITEMDTO);
+    //             viewCartClicked = true;
+    //         }
+    //     });
+    // }
 });
 
     /**
@@ -68,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (userId) {
             requestBody.userId = userId;
         }
+        console.log('Request body ==>' +  requestBody);
         fetch('/validate-cart', {
             method: 'POST',
             headers: {
@@ -82,7 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then((data) => {
-                if (!localStorage.getItem('userId')) {
+                const USERID = localStorage.getItem('userId');
+                if (USERID == null || !USERID || USERID === 'null' || USERID === 'undefined') {
                     localStorage.setItem('userId', data.sessionId);
                 }
                 window.location.href = '/pannier?pannierId=' + data.sessionId;

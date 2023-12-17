@@ -77,7 +77,7 @@
                         <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
                         <input th:field="*{password}" name="password" type="password" id="input-password" class="form-control mb-2" required="required" autofocus="">
                         <label for="input-confirmPassword" class="sr-only mb-2 mt-3">Confirmer le mot de passe</label>
-                        <input type="password" id="input-confirmPassword" class="form-control mb-2" required="required" data-match="#input-confirmPassword">
+                        <input type="password" id="input-confirmPassword" class="form-control mb-2" required="required" data-match="#input-password">
                     </div>
                 </div>
             </div>

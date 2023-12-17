@@ -3,10 +3,10 @@
 <ul class="p-0">
     <li class="list-unstyled border border-3 border-opacity-75 p-2">
         <a href="#" class="text-decoration-none text-dark">
-            <p class="mb-0">29 avenue victor hugo</p>
+            <p th:text="${userAddress.number} + ' ' + ${userAddress.street}" class="mb-0"></p>
             <div class="d-flex">
-                <p class="mb-0">33310</p>
-                <p class="text-uppercase mb-0">,lormont</p>
+                <p th:text="${userAddress.postalCode}" class="mb-0"></p>
+                <p th:text="', ' + ${userAddress.city}" class="text-uppercase mb-0"></p>
             </div>
             <p class="mb-1">France</p>
         </a>

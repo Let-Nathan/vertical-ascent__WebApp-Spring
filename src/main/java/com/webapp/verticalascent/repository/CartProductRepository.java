@@ -22,7 +22,12 @@ public interface CartProductRepository extends JpaRepository<CartProduct, Long> 
 	);
 	
 	@Query("SELECT cp FROM CartProduct cp WHERE cp.shoppingSession = :session AND cp.quantity >= :minQuantity")
-	List<CartProduct> findAllByShoppingSessionGreaterThan(@Param("session") ShoppingSession session, @Param("minQuantity") int minQuantity);
+	List<CartProduct> findAllByShoppingSessionGreaterThan(
+		@Param("session") ShoppingSession session,
+		@Param("minQuantity") int minQuantity
+	);
 	
 	CartProduct getCartProductByShoppingSessionAndProductId(ShoppingSession shoppingSession, Long productId);
+	
+	
 }

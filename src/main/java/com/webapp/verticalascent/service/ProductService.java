@@ -1,5 +1,6 @@
 package com.webapp.verticalascent.service;
 
+import com.webapp.verticalascent.entity.CartProduct;
 import com.webapp.verticalascent.entity.Product;
 import com.webapp.verticalascent.repository.ProductRepository;
 import java.util.List;
@@ -46,6 +47,15 @@ public class ProductService {
 	 */
 	public boolean isInStock(Product product) {
 		return product.getQuantity() > 0;
+	}
+	
+	/**
+	 * A list of Product based on price range between 50 and 100 €.
+	 *
+	 * @return List of product
+	 */
+	public List<Product> getRandomProduct() {
+		return productRepository.getAllByTotalPriceWithin();
 	}
 	
 	

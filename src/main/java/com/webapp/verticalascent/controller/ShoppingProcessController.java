@@ -6,10 +6,7 @@ import com.webapp.verticalascent.dto.ProductDto;
 import com.webapp.verticalascent.entity.CartProduct;
 import com.webapp.verticalascent.entity.ShoppingSession;
 import com.webapp.verticalascent.entity.User;
-import com.webapp.verticalascent.service.AddressesService;
-import com.webapp.verticalascent.service.CartProductService;
-import com.webapp.verticalascent.service.ShoppingSessionService;
-import com.webapp.verticalascent.service.UserService;
+import com.webapp.verticalascent.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -45,19 +42,22 @@ public class ShoppingProcessController {
 	private final CartProductService cartProductService;
 	private final UserService userService;
 	private final AddressesService addressesService;
+	private final ProductService productService;
 	
 	@Autowired
 	public ShoppingProcessController(
 		ShoppingSessionService shoppingSessionService,
 		CartProductService cartProductService,
 		UserService userService,
-		AddressesService addressesService
+		AddressesService addressesService,
+		ProductService productService
 		
 	) {
 		this.shoppingSessionService = shoppingSessionService;
 		this.cartProductService = cartProductService;
 		this.userService = userService;
 		this.addressesService = addressesService;
+		this.productService = productService;
 	}
 	
 	
@@ -81,7 +81,7 @@ public class ShoppingProcessController {
 		ShoppingSession shoppingSession = null; // Initialisation de shoppingSession à null
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	
+		
 		// Case where user is connected
 		if (principal instanceof UserDetails) {
 			UserDetails userDetails = (UserDetails) principal;
@@ -100,14 +100,13 @@ public class ShoppingProcessController {
 		}
 		
 		// If user is not connect shopping session will be null
-		
 		if (shoppingSession == null) {
 			if (pannierId != null && shoppingSessionService.isShoppingSessionActive(sessionId)) {
 				shoppingSession = shoppingSessionService.getShoppingSession(sessionId);
 			} else if (shoppingSessionService.isShoppingSessionActive(pannierId)) {
 				shoppingSession = shoppingSessionService.getShoppingSession(pannierId);
 			} else {
-				return "/shopping-cart-empty";
+				return "redirect:/pannier-vide";
 			}
 		}
 		
@@ -146,25 +145,18 @@ public class ShoppingProcessController {
 		if (validatedItems == null) {
 			return ResponseEntity.notFound().build();
 		}
-		
 		try {
 			if (
-				anonymousUserId != null
-				&& shoppingSessionService.isShoppingSessionActive(anonymousUserId)
+				shoppingSessionService.isShoppingSessionExistAndShoppingProcessNotEnd(anonymousUserId)
 			) {
 				// Anonymous user have an active session & local storage id
 				shoppingSessionService.handleExistingShoppingSession(
 					anonymousUserId,
 					validatedItems
 				);
-			} else if (
-				anonymousUserId != null
-				&& shoppingSessionService
-					.isShoppingSessionExistAndShoppingProcessNotEnd(anonymousUserId)
+			} else if (shoppingSessionService.isShoppingSessionExistAndShoppingProcessNotEnd(sessionId)
 			) {
-				// Anonymous user have not active Session but have one who exist and shopping process not end.
-				// So we activated back the session, and handle cart items with service.
-				ShoppingSession shoppingSession = shoppingSessionService.activeShoppingSession(anonymousUserId);
+				ShoppingSession shoppingSession = shoppingSessionService.getShoppingSession(sessionId);
 				shoppingSessionService.handleExistingShoppingSession(shoppingSession.getSessionId(), cartItems);
 			} else {
 				// Anonymous user have no session, so we created one with cart product.
@@ -174,8 +166,13 @@ public class ShoppingProcessController {
 			return ResponseEntity.ofNullable(e.getMessage());
 		}
 		// If user is anonymous we send back in resp session to store it in local storage
-		if (anonymousUserId == null) {
+		if (
+			shoppingSessionService.isShoppingSessionExistAndShoppingProcessNotEnd(sessionId)
+		) {
 			response.put("sessionId", sessionId);
+			return ResponseEntity.ok().body(response);
+		} else if (shoppingSessionService.isShoppingSessionExistAndShoppingProcessNotEnd(anonymousUserId)){
+			response.put("sessionId", shoppingSessionService.getShoppingSession(anonymousUserId));
 			return ResponseEntity.ok().body(response);
 		}
 		response.put("sessionId", anonymousUserId);
@@ -198,6 +195,7 @@ public class ShoppingProcessController {
 		HttpSession session = request.getSession();
 		String sessionId = session.getId();
 		ShoppingSession shoppingSession;
+		
 		User user = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		// Case where user is connected
@@ -232,12 +230,9 @@ public class ShoppingProcessController {
 	 */
 	@GetMapping("/pannier-vide")
 	public final String emptyShoppingCart(
-		HttpServletRequest request
-	
+		Model model
 	) {
-		// Store user current session
-		HttpSession session = request.getSession();
-		String sessionId = session.getId();
+		model.addAttribute("products", productService.getRandomProduct());
 		return "shopping-cart-empty";
 	}
 	
@@ -257,7 +252,7 @@ public class ShoppingProcessController {
 			User user = userService.isEmailExist(userEmail);
 			// In case there is no shopping sess link to the current user but still try to access page
 			if (shoppingSessionService.getShoppingSessionByUserAndActive(user)  == null) {
-				return "shopping-cart-empty";
+				return "redirect:/pannier-vide";
 			}
 			if (addressesService.getUserAddresses(user) == null) {
 				return "redirect:/address/new-address";
