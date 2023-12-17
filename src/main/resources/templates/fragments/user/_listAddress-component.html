@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- List of user addresses -->
-<ul class="p-0">
+<ul class="p-0" th:if="${userAddress != null}">
     <li class="list-unstyled border border-3 border-opacity-75 p-2">
         <a href="#" class="text-decoration-none text-dark">
             <p th:text="${userAddress.number} + ' ' + ${userAddress.street}" class="mb-0"></p>

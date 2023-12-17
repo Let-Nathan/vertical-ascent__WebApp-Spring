@@ -53,7 +53,9 @@ public class UserController {
 				UserDetails userDetails = (UserDetails) principal;
 				String userEmail = userDetails.getUsername();
 				User user = userService.isEmailExist(userEmail);
-				model.addAttribute("userAddress", addressesService.getUserAddresses(user));
+				if(addressesService.getUserAddresses(user) != null ) {
+					model.addAttribute("userAddress", addressesService.getUserAddresses(user));
+				}
 				model.addAttribute("user", user);
 			}
 		}
