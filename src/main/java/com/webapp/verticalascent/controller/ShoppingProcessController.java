@@ -116,7 +116,7 @@ public class ShoppingProcessController {
 		
 		model.addAttribute("userCartProducts", userCartProducts);
 		model.addAttribute("shoppingSession", shoppingSession);
-		return "/shopping-cart";
+		return "shopping-cart";
 	}
 	
 	/**
@@ -210,7 +210,7 @@ public class ShoppingProcessController {
 		} else if (!shoppingSessionService.isShoppingSessionActive(sessionId) && user != null) {
 			shoppingSession = shoppingSessionService.getShoppingSessionByUserAndActive(user);
 		} else {
-			return "redirect:/_empty-cart-empty";
+			return "redirect:/pannier-vide";
 		}
 		
 		// Check if product is link to the current session
