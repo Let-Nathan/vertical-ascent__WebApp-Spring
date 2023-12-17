@@ -243,8 +243,10 @@ public class ShoppingProcessController {
 	 */
 	@GetMapping("/livraison")
 	public final String delivery(
+		@RequestParam(name = "pannierId") String pannierId,
 		Model model
 	) {
+		String pannierID = pannierId;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		// Case where user is connected
 		if (principal instanceof UserDetails userDetails) {
@@ -252,7 +254,7 @@ public class ShoppingProcessController {
 			User user = userService.isEmailExist(userEmail);
 			// In case there is no shopping sess link to the current user but still try to access page
 			if (shoppingSessionService.getShoppingSessionByUserAndActive(user)  == null) {
-				return "redirect:/pannier-vide";
+				shoppingSessionService.linkedUserToShoopingSess(user, shoppingSessionService.getShoppingSession(pannierId));
 			}
 			if (addressesService.getUserAddresses(user) == null) {
 				return "redirect:/address/new-address";
