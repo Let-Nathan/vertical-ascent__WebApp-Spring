@@ -53,7 +53,7 @@ function menuContainer(productCategory) {
     // Todo implement an image collection
     //  (images name != category name = empty container)
     DIV_CONTAINER.style.backgroundImage =
-        `url("../images/navbar_category/${productCategory.name}${JPG}")`;
+        `url("/images/navbar_category/${productCategory.name}${JPG}")`;
     // -------------------------------- //
 
     // <span> element with category name
