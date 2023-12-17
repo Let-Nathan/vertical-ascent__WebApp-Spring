@@ -24,26 +24,26 @@ public class AddressesService {
 	}
 	
 	/**
-	 * Get all the addresses link to a user.
+	 * Get the addresses link to a user.
 	 *
-	 * @return List Addresses Addresses
+	 * @return Addresses Addresses object.
 	 */
 	public Address getUserAddresses(User user) {
 		return addressesRepository.findByUser(user);
 	}
 	
 	/**
-	 * Convert an AddresseDto to Addresse Object.
+	 * Convert an AddressDto to Address Object.
 	 *
-	 * @param addressesDto AddressesDto
+	 * @param addressDto AddressDto
 	 * @return addresses Addresses
 	 */
-	public Address convertAddresseDtoToAddresse(AddressDto addressesDto) {
+	public Address convertAddressDtoToAddress(AddressDto addressDto) {
 		Address addresses = new Address();
-		addresses.setNumber(Integer.parseInt(addressesDto.getNumberStreet()));
-		addresses.setPostalCode(addressesDto.getPostalCode());
-		addresses.setStreet(addressesDto.getStreet());
-		addresses.setCity(addressesDto.getCity());
+		addresses.setNumber(Integer.parseInt(addressDto.getNumberStreet()));
+		addresses.setPostalCode(addressDto.getPostalCode());
+		addresses.setStreet(addressDto.getStreet());
+		addresses.setCity(addressDto.getCity());
 		return addresses;
 	}
 	

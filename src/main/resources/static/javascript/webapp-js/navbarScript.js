@@ -48,7 +48,7 @@ function menuContainer(productCategory) {
     // <div> element with background image //
     DIV_CONTAINER.className =
         'nav-menu-container shadow-sm p-2 mb-3 ' +
-        'flex-row col-lg-12 shadow-lg bg-body opacity-75';
+        'flex-row col-lg-12 shadow-lg bg-body opacity-100';
 
     // Todo implement an image collection
     //  (images name != category name = empty container)

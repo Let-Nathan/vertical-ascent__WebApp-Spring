@@ -8,22 +8,25 @@ document.addEventListener('DOMContentLoaded', function() {
             // Supprimer l'élément correspondant du localStorage
             if (PRODUCTID) {
                 removeProductFromLocalStorage(PRODUCTID);
+                // Continuer avec la requête fetch après avoir mis à jour le local storage
+                setTimeout(() => {
+                    fetch(this.getAttribute('href'), {
+                        method: 'DELETE',
+                    })
+                        .then(response => {
+                            // Gérer la réponse
+                        })
+                        .catch(error => {
+                            // Gérer les erreurs
+                        });
+                }, 100); // Ajoutez un délai pour garantir la mise à jour du local storage
             }
-            // Rediriger vers l'URL de suppression du produit
-            window.location.href = this.getAttribute('href');
         });
     });
 
-    /**
-     * Remove the given product id from the user local storage.
-     *
-     * @param productId {productId} data id product for removal
-     */
     function removeProductFromLocalStorage(productId) {
-        const USERCART =
-            JSON.parse(localStorage.getItem('userCart')) || [];
-        const UPDATEDCART=
-            USERCART.filter((item) => item.productId !== productId);
+        const USERCART = JSON.parse(localStorage.getItem('userCart')) || [];
+        const UPDATEDCART = USERCART.filter((item) => item.productId !== productId);
         localStorage.setItem('userCart', JSON.stringify(UPDATEDCART));
     }
 });

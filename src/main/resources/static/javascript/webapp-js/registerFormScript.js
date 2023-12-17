@@ -1,13 +1,27 @@
-document.getElementById('input-confirmPassword')
-        .addEventListener('input', function() {
-    const PASSWORD = document.getElementById('input-password').value;
-    const CONFIRM_PASSWORD = this.value;
-    const ERROR_SPAN = document.getElementById('passwordError');
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('votre-formulaire-id');
+    const confirmPasswordField = document.getElementById('input-confirmPassword');
+    const errorSpan = document.getElementById('passwordError');
+    let passwordMatch = true;
 
-    if (PASSWORD === CONFIRM_PASSWORD) {
-        ERROR_SPAN.textContent = '';
-    } else {
-        ERROR_SPAN.textContent = 'Les mots de passe ne correspondent pas';
-        ERROR_SPAN.class = 'text-danger';
-    }
+    confirmPasswordField.addEventListener('input', function() {
+        const PASSWORD = document.getElementById('input-password').value;
+        const CONFIRM_PASSWORD = this.value;
+
+        if (PASSWORD === CONFIRM_PASSWORD) {
+            errorSpan.textContent = '';
+            errorSpan.classList.remove('text-danger');
+            passwordMatch = true;
+        } else {
+            errorSpan.textContent = 'Les mots de passe ne correspondent pas';
+            errorSpan.classList.add('text-danger');
+            passwordMatch = false;
+        }
+    });
+
+    form.addEventListener('submit', function(event) {
+        if (!passwordMatch) {
+            event.preventDefault();
+        }
+    });
 });

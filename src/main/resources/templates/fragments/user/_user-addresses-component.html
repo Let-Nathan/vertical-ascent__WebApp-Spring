@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <!-- Addresses component -->
 <div class="container-fluid d-flex justify-content-center mt-3 mb-5">
+    <div th:if="${alertMessage}" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Attention !</strong> <span th:text="${alertMessage}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <div class="rounded-3 shadow-lg col-11">
         <!-- Card body -->
         <div class="card-body m-4">

@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<!-- Static banner img -->
 <div id="banner-image" class="d-flex flex-column justify-content-center mb-4">
     <p class="display-4 text-white col-md-3 ms-3 ms-md-3 ms-lg-3">Nos produits</p>
-    <p class="display-4 text-white col-md-4 ms-3 ms-md-3 ms-lg-3">aussi populaire</p>
+    <p class="display-4 text-white col-md-4 ms-3 ms-md-3 ms-lg-3">aussi populaires</p>
     <p class="display-4 text-white col-md-6 ms-3 ms-md-3 ms-lg-3">que les frères Mawen</p>
 </div>
-<!-- Whole popular product container -->
-<div class="container-fluid d-flex justify-content-around">
-    <!-- Card product -->
-    <div class="container-card card mt-5 mb-5 col-6 col-sm-4 col-md-4 col-lg-3 shadow bg-body rounded border-0">
-        <!-- @Todo implement product link -->
-        <a href="#" class="text-decoration-none text-5 text-md-">
-            <!-- @Todo implement product img from controller -->
-            <div class="card-image">
-                <img class="img-fluid rounded-top-2" src="/images/popular_product/drago.jpg" alt="Image d'un produit populaire">
+<div class="container-fluid">
+    <div class="row">
+        <!-- Assuming 'products' is the variable sent from the controller -->
+        <div th:each="product : ${products}" class="col-5 col-sm-4 col-md-4 col-lg-3 mb-4">
+            <div class="card shadow bg-body rounded border-0">
+                <a th:href="@{'/product/' + ${product.id}}" class="text-decoration-none text-5 text-md-">
+                    <div class="card-image">
+                        <!-- Assuming 'product' has 'imagePath' property -->
+                        <img src="/images/product/drago.jpg" class="img-fluid rounded-top-2" alt="Image d'un produit populaire">
+                    </div>
+                    <div class="card-body">
+                        <!-- Assuming 'product' has 'price' and 'name' properties -->
+                        <p id="product-price" class="d-flex justify-content-end text-danger text-uppercase fw-bold" th:text="${product.price} + ' €'"></p>
+                        <h5 class="card-title text-dark" th:text="${product.name}"></h5>
+                    </div>
+                </a>
             </div>
-            <!-- @Todo implement product info / image from product path db-->
-            <div class="card-body ">
-                <p id="product-price" class="d-flex justify-content-end text-danger text-uppercase fw-bold">155,50€</p>
-                <h5 class="card-title text-dark">Product title</h5>
-            </div>
-        </a>
+        </div>
     </div>
 </div>
